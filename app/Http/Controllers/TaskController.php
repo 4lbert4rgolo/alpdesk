@@ -18,5 +18,20 @@ class TaskController extends Controller
         public function create(){
             return view('tasks.create');
         }
+
+        public function store(Request $request){
+           
+            $task = new Task;
+
+            $task->title = $request->title;
+            $task->description = $request->description;
+            $task->deadline = $request->deadline;
+            $task->priority = $request->priority;
+
+            $task->save();
+
+            return redirect('/');
+
+        }
     }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/',[TaskController::class, 'index']);
 Route::get('/tasks/create',[TaskController::class, 'create']);
+Route::post('/tasks', [TaskController::class, 'store']);
 
 Route::get('/contact', function () {
     return view('contact');

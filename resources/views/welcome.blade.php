@@ -14,12 +14,12 @@
     <h2>Tarefas em andamentos</h2>
     <p class="subtitle">Verifique as tarefas que ainda não foram finalizadas</p>
     <div id="card-container" class="row">
-        @foreach($tasks as $tasks)
+        @foreach($tasks as $task)
         <div class="card col-md-3">
             <img src="img\placeholder.png" alt="{{ $task->title}}">
             <div class="card-body">
                 <p class="card-date">10/04/2026</p>
-                <h5 class="card-title">{{ $event->title }}</h5>
+                <h5 class="card-title">{{ $task->title }}</h5>
                 <p class="card-responsible">Responsável</p>
                 <a href="#" class="btn btn-primary">Visualizar</a>
             </div>
