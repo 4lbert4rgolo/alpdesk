@@ -30,7 +30,7 @@ class TaskController extends Controller
 
             $task->save();
 
-            return redirect('/');
+            return redirect('/')->with('msg', 'Tarefa criada com sucesso!');
 
         }
     }

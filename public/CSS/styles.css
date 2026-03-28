@@ -1,6 +1,6 @@
 /* General */
 
-*{
+* {
     font-family: 'Roboto';
 }
 
@@ -8,6 +8,7 @@ body {
     min-height: 100vh;
     padding: 100px;
     position: relative;
+    background-color: #f8f9fa; /* leve fundo cinza */
 }
 
 header {
@@ -20,64 +21,105 @@ header {
 }
 
 .container-fluid {
-    padding:0;
+    padding: 0;
 }
 
 .btn-primary {
     background-color: #0fe;
     border: 2px solid #0f9;
+    border-radius: 6px;
 }
 
 .btn-primary:hover {
     background-color: #00fffc;
-    border: #0f9c;
 }
 
-/* navbar */
+/* Mensagem */
 
+.msg {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Navbar */
 
 #navbar img {
     width: 50px;
 }
 
 #navbar {
+    display: flex;
     justify-content: space-between;
     background-color: #fff;
-    padding: 5px 0;
+    padding: 10px 20px;
+    align-items: center;
 }
 
 #navbar a {
     font-size: 14px;
     color: #727272;
+    margin-left: 15px;
 }
 
 #navbar a:hover {
     color: #0f9;
 }
 
-/* Search container */
+/* Search container (BANNER) */
 
 #search-container {
     background-image: url("../img/helpdesk.jpeg");
     background-size: cover;
     background-position: center;
-    height: 400px;
-    padding: 50px;
+    height: 300px;
+    padding: 20px;
     text-align: center;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Overlay escuro */
+#search-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+/* Conteúdo acima do overlay */
+#search-container h1,
+#search-container form {
+    position: relative;
+    z-index: 1;
 }
 
 #search-container h1 {
-    color: #0fe;
-    margin-bottom: 30px;
-    font-weight: 900    ;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 900;
+    font-size: 36px;
 }
 
-#search-container form {
-    width: 50%;
-    margin: 0 auto;
+/* Input */
+
+#search-container input {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+    max-width: 500px;
 }
 
-/* Tasks list */ 
+/* Tasks */
 
 #events-container {
     padding: 50px;
@@ -92,23 +134,30 @@ header {
     margin-bottom: 30px;
 }
 
+/* Cards */
+
 #cards-container {
     display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
-#events-container card {
-    flex: 1 1 0;
-    max-width: 25%;
+#events-container .card {
+    flex: 1 1 calc(25% - 15px);
+    max-width: calc(25% - 15px);
     border-radius: 10px;
     padding: 0;
-    margin: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 #events-container img {
     max-height: 150px;
+    width: 100%;
+    object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-}  
+}
 
 .card .card-date {
     font-size: 12px;
@@ -116,10 +165,10 @@ header {
 }
 
 .card .card-title {
-    color: #727272;
-    font-size: 20px;
+    color: #333;
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .card-responsible {
@@ -127,13 +176,13 @@ header {
     color: #727272;
 }
 
-/* Event create page */
+/* Event create */
 
 #event-create-container {
     padding: 30px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #event-create-container h1 {
@@ -155,18 +204,17 @@ header {
     margin-top: 10px;
 }
 
-/* footer */
+/* Footer */
 
 footer {
     text-align: center;
     background-color: #757575;
     color: #fff;
-    padding: 30px;
-    position: absolute;
-    bottom: 0;
+    padding: 20px;
     width: 100%;
+    margin-top: 40px;
 }
 
-footer p{
+footer p {
     margin-bottom: 0;
 }
