@@ -28,6 +28,22 @@ class TaskController extends Controller
             $task->deadline = $request->deadline;
             $task->priority = $request->priority;
 
+            // Image Upload
+
+            if($request->hasFile('image') && $request->file('image')->isValid()){
+
+                $requestImage = $request->image;   
+
+                $extension = $requestImage->extension();
+
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime('now') . "." . $extension);
+
+                $requestImage->move(public_path('img/tasks'), $imageName);
+
+                $task->image = $imageName;    
+
+            }
+
             $task->save();
 
             return redirect('/')->with('msg', 'Tarefa criada com sucesso!');

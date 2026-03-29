@@ -16,7 +16,7 @@
     <div id="card-container" class="row">
         @foreach($tasks as $task)
         <div class="card col-md-3">
-            <img src="img\placeholder.png" alt="{{ $task->title}}">
+            <img src="img\tasks\{{ $task->image }}" alt="{{ $task->title}}">
             <div class="card-body">
                 <p class="card-date">10/04/2026</p>
                 <h5 class="card-title">{{ $task->title }}</h5>
