@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Eix Desk')
+@section('title', 'AlpDesk Solutions')
 
 @section('content')
 
@@ -11,7 +11,7 @@
     </form>
 </div>
 <div id="tasks-container" class="col-md-12">
-    <h2>Tarefas em andamentos</h2>
+    <h2>Tarefas em andamento</h2>
     <p class="subtitle">Verifique as tarefas que ainda não foram finalizadas</p>
     <div id="card-container" class="row">
         @foreach($tasks as $task)
