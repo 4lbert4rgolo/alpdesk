@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title', 60);
             $table->text('description');
-            $table->datetime('deadline');
+            $table->date('deadline');
             $table->boolean('priority');
    
             

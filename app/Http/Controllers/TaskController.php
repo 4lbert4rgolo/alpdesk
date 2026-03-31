@@ -49,5 +49,13 @@ class TaskController extends Controller
             return redirect('/')->with('msg', 'Tarefa criada com sucesso!');
 
         }
+
+        public function show($id){
+
+            $task = Task::findOrFail($id);
+
+            return view('tasks.show', ['task' => $task]);
+
+        }
     }
 
