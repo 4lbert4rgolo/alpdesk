@@ -33,6 +33,24 @@
             </select>
         </div>
 
+          <div class="form-group mb-3">
+            <label for="title">Contexto do problema:</label>
+           <div class="form-group">
+            <input type="checkbox" name="items[]" value="Problema afeta todo o setor">Problema afeta todo o setor
+           </div>
+           <div class="form-group">
+            <input type="checkbox" name="items[]" value="Máquina não liga / está inoperante"> Máquina não liga / está inoperante
+           </div>
+           <div class="form-group">
+            <input type="checkbox" name="items[]" value="Autorizo acesso remoto">Autorizo acesso remoto
+           </div> <div class="form-group">
+            <input type="checkbox" name="items[]" value="Contém dados sensíveis / sigilosos">Contém dados sensíveis / sigilosos
+           </div>
+           <div class="form-group">
+            <input type="checkbox" name="items[]" value="Pode ser retirado do local">Pode ser retirado do local
+           </div>
+        </div>
+
         <div class="form-group mb-4">
             <label for="image" class="form-label">Anexar imagem da solicitação:</label>
             <input type="file" id="image" name="image" class="form-control">

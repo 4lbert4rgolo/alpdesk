@@ -27,6 +27,7 @@ class TaskController extends Controller
             $task->description = $request->description;
             $task->deadline = $request->deadline;
             $task->priority = $request->priority;
+            $task->items = $request->items;
 
             // Image Upload
 

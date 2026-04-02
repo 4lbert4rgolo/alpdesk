@@ -192,6 +192,29 @@ header {
 }
 
 
+.items-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.items-list li {
+    display: flex;
+    align-items: center; /* Alinha o ícone verticalmente ao centro do texto */
+    margin-bottom: 8px;   /* Espaçamento entre os itens */
+    gap: 10px;           /* Espaço entre o ícone e o texto */
+    color: #cbd5e0;      /* Cor cinza claro para combinar com o tema dark */
+}
+
+.items-list li ion-icon {
+    font-size: 1.2rem;   /* Tamanho do ícone */
+    color: #4fd1c5;      /* Cor verde água (Teal) para destaque */
+    flex-shrink: 0;      /* Impede que o ícone diminua se o texto for grande */
+}
+
+.items-list li span {
+    line-height: 1.4;    /* Melhora a leitura de textos longos */
+}
+
 /* ==========================================================================
    Footer Profissional
    ========================================================================== */
