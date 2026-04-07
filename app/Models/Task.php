@@ -10,10 +10,12 @@ class Task extends Model
     use HasFactory;
 
     protected $casts = [
-        'items' => 'array'
+        'items' => 'array',
+        'deadline' => 'datetime',
     ];
 
-    protected $dates = ['deadline'];
+    protected $guarded = [];
+
 
     public function user() {
         return $this->belongsTo('App\Models\User');

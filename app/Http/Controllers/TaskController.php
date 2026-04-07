@@ -92,5 +92,39 @@ class TaskController extends Controller
             return redirect('/dashboard')->with('msg', 'Tarefa excluída com sucesso!');
 
         }
-    }
 
+        public function edit($id) {
+
+           $task = Task::findOrFail($id);
+
+           return view ('tasks.edit', ['task' => $task]);
+
+        }
+
+        public function update(Request $request, $id) {
+
+            $data = $request->all();
+
+            // Image Upload
+
+            if($request->hasFile('image') && $request->file('image')->isValid()){
+
+                $requestImage = $request->image;   
+
+                $extension = $requestImage->extension();
+
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime('now') . "." . $extension);
+
+                $requestImage->move(public_path('img/tasks'), $imageName);
+
+                $data['image'] = $imageName;  
+
+            } 
+
+            Task::findOrFail($request->id)->update($data);
+
+            return redirect('/dashboard')->with('msg', 'Tarefa atualizada com sucesso!');
+
+        }
+
+    }

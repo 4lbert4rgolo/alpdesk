@@ -25,7 +25,7 @@
                     <td><a href="/tasks/{{ $task->id }}"> {{ $task->title }}</a></td>
                     <td>0</td>
                     <td>
-                        <a href="#" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon> Editar</a>
+                        <a href="tasks/edit/{{ $task->id }}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon> Editar</a>
                         <form action="tasks/{{ $task->id }}" method="POST">
                             @csrf
                             @method('DELETE')
