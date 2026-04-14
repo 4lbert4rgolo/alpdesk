@@ -72,7 +72,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function tasksAsParticipants() {
+    public function tasksAsParticipant() {
         return $this->belongsToMany('App\Models\Task');
     }
 }
