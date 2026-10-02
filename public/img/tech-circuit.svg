@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMid slice" fill="none">
+<g stroke="#1eb39a" stroke-opacity="0.32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="0,50 200,50 260,110 470,110"/>
+<polyline points="0,120 120,120 190,190 380,190"/>
+<polyline points="0,205 90,205 150,265 300,265 350,315 520,315"/>
+<polyline points="0,295 160,295 230,365 430,365"/>
+<polyline points="0,375 70,375 110,415 260,415"/>
+<polyline points="200,50 200,0"/>
+<polyline points="300,265 300,230"/>
+<polyline points="1600,50 1400,50 1340,110 1130,110"/>
+<polyline points="1600,120 1480,120 1410,190 1220,190"/>
+<polyline points="1600,205 1510,205 1450,265 1300,265 1250,315 1080,315"/>
+<polyline points="1600,295 1440,295 1370,365 1170,365"/>
+<polyline points="1400,50 1400,0"/>
+<polyline points="1300,265 1300,230"/>
+</g>
+<g stroke="#1eb39a" stroke-opacity="0.7" stroke-width="2" fill="#243032">
+<circle cx="470" cy="110" r="6"/>
+<circle cx="380" cy="190" r="6"/>
+<circle cx="520" cy="315" r="6"/>
+<circle cx="430" cy="365" r="6"/>
+<circle cx="260" cy="415" r="6"/>
+<circle cx="200" cy="0" r="6"/>
+<circle cx="300" cy="230" r="6"/>
+<circle cx="1130" cy="110" r="6"/>
+<circle cx="1220" cy="190" r="6"/>
+<circle cx="1080" cy="315" r="6"/>
+<circle cx="1170" cy="365" r="6"/>
+<circle cx="1400" cy="0" r="6"/>
+<circle cx="1300" cy="230" r="6"/>
+</g>
+<g fill="#1eb39a" fill-opacity="0.55">
+<circle cx="260" cy="110" r="2.5"/>
+<circle cx="190" cy="190" r="2.5"/>
+<circle cx="150" cy="265" r="2.5"/>
+<circle cx="350" cy="315" r="2.5"/>
+<circle cx="230" cy="365" r="2.5"/>
+<circle cx="1340" cy="110" r="2.5"/>
+<circle cx="1410" cy="190" r="2.5"/>
+<circle cx="1450" cy="265" r="2.5"/>
+<circle cx="1250" cy="315" r="2.5"/>
+<circle cx="1370" cy="365" r="2.5"/>
+</g>
+</svg>
