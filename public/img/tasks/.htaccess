@@ -1,0 +1,11 @@
+# Nenhum arquivo desta pasta pode ser executado.
+# (As imagens novas ficam em storage/app/private; esta pasta só guarda arquivos antigos até a migração.)
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+<FilesMatch "\.(php|phtml|phar|php[0-9]*|pl|py|cgi|sh)$">
+    Require all denied
+</FilesMatch>
+
+Options -Indexes -ExecCGI

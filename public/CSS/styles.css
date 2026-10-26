@@ -663,3 +663,270 @@ footer strong {
     padding: 15px;
     margin-bottom: 0;
 }
+
+/* ==========================================================================
+   Menu lateral: título de seção
+   ========================================================================== */
+.sidebar-section {
+    margin: 16px 14px 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #636e72;
+}
+
+/* ==========================================================================
+   Administração (usuários e grupos de acesso)
+   ========================================================================== */
+#admin-page { max-width: 1100px; margin: 0 auto; padding: 36px 20px 60px; }
+#admin-page.admin-narrow { max-width: 680px; }
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    margin-bottom: 20px;
+}
+.admin-header h1 { margin: 0; font-size: 30px; font-weight: 900; }
+.admin-header .subtitle { margin: 4px 0 0; color: #636e72; }
+.admin-title { margin: 0 0 20px; font-size: 30px; font-weight: 900; }
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #eef1f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.admin-form .field { margin: 0; padding: 0; border: 0; min-width: 0; }
+.admin-form .field label,
+.admin-form .field legend {
+    display: block;
+    float: none;
+    width: auto;
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d3436;
+}
+.admin-form .field input[type="text"],
+.admin-form .field input[type="email"],
+.admin-form .field input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #cfd8d6;
+    border-radius: 8px;
+    font-size: 16px;
+}
+.admin-form .field input[readonly] { background: #f4f7f6; color: #636e72; }
+.admin-form .field input:focus {
+    outline: none;
+    border-color: #1eb39a;
+    box-shadow: 0 0 0 3px rgba(30, 179, 154, 0.2);
+}
+.field-hint { margin: 6px 0 0; font-size: 13px; color: #636e72; }
+.field-error { margin: 6px 0 0; font-size: 13px; color: #b3261e; }
+
+.admin-form .field .check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 8px;
+    padding: 10px 12px;
+    border: 1px solid #eef1f0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.admin-form .field .check:hover { background: #f9fbfa; }
+.admin-form .field .check input {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #0f7a68;
+}
+.admin-form .field .check span { display: flex; flex-direction: column; }
+.admin-form .field .check small { color: #636e72; font-size: 13px; font-weight: 400; }
+
+.form-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.admin-danger { margin: 16px 0 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #e8f6f3;
+    color: #0b5f51;
+    font-size: 13px;
+    font-weight: 500;
+}
+.chip-muted { margin-left: 8px; background: #eef1f0; color: #4b5557; }
+
+/* ==========================================================================
+   Equipamentos (inventário)
+   ========================================================================== */
+.store-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.store-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: #fff;
+    border: 1px solid #cfd8d6;
+    border-radius: 999px;
+    color: #2d3436;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.store-tab span {
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: #eef1f0;
+    color: #4b5557;
+    font-size: 12px;
+}
+.store-tab:hover { background: #f4faf8; border-color: #1eb39a; }
+.store-tab.is-active { background: #0f7a68; border-color: #0f7a68; color: #fff; }
+.store-tab.is-active span { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+.filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 16px; }
+.filter-bar input[type="search"],
+.filter-bar select {
+    padding: 9px 12px;
+    background: #fff;
+    border: 1px solid #cfd8d6;
+    border-radius: 8px;
+    font-size: 15px;
+}
+.filter-bar input[type="search"] { flex: 1 1 260px; min-width: 0; }
+.filter-bar select { flex: 0 1 auto; max-width: 100%; }
+.filter-bar input:focus,
+.filter-bar select:focus {
+    outline: none;
+    border-color: #1eb39a;
+    box-shadow: 0 0 0 3px rgba(30, 179, 154, 0.2);
+}
+
+.list-count { margin: 0 0 10px; font-size: 14px; color: #636e72; }
+.pager { margin-top: 20px; display: flex; justify-content: center; }
+.pagination {
+    --bs-pagination-color: #0f7a68;
+    --bs-pagination-hover-color: #0b5f51;
+    --bs-pagination-focus-color: #0b5f51;
+    --bs-pagination-active-bg: #0f7a68;
+    --bs-pagination-active-border-color: #0f7a68;
+}
+
+.admin-form .field select,
+.admin-form .field textarea {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #cfd8d6;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 16px;
+}
+.admin-form .field textarea { line-height: 1.5; resize: vertical; }
+.admin-form .field select:focus,
+.admin-form .field textarea:focus {
+    outline: none;
+    border-color: #1eb39a;
+    box-shadow: 0 0 0 3px rgba(30, 179, 154, 0.2);
+}
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.note-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    padding: 12px 14px;
+    background: #fff4e5;
+    border-radius: 8px;
+    color: #8a4b00;
+    font-size: 14px;
+}
+.note-alert ion-icon { flex-shrink: 0; margin-top: 1px; font-size: 20px; }
+
+@media (max-width: 576px) {
+    .field-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Importar e exportar equipamentos / tarefas do equipamento
+   ========================================================================== */
+.admin-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.admin-form .field input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #cfd8d6;
+    border-radius: 8px;
+    font-size: 15px;
+}
+.admin-form .field-hint a { color: #0f7a68; font-weight: 500; }
+
+.import-report {
+    margin-top: 24px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #eef1f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.import-report h2 { margin: 0 0 6px; font-size: 20px; font-weight: 700; }
+.import-report h3 { margin: 20px 0 6px; font-size: 16px; font-weight: 700; }
+.report-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.report-stats li {
+    padding: 12px 14px;
+    background: #f4f7f6;
+    border-radius: 8px;
+    color: #4b5557;
+    font-size: 14px;
+}
+.report-stats strong { display: block; color: #2d3436; font-size: 24px; }
+.report-stats li.is-bad strong { color: #b3261e; }
+.report-list { margin: 8px 0 0; padding-left: 18px; font-size: 14px; }
+.report-list li { margin-bottom: 4px; }
+
+.related-tasks {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #eef1f0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.related-tasks li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eef1f0;
+}
+.related-tasks li:last-child { border-bottom: 0; }
+.related-tasks a { color: #2d3436; font-weight: 500; text-decoration: none; }
+.related-tasks a:hover { color: #0f7a68; text-decoration: underline; }

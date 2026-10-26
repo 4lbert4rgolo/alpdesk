@@ -8,8 +8,10 @@
     $responsaveis = $task->users->unique('id');
     $ehResponsavel = $usuario && $responsaveis->contains('id', $usuario->id);
     $ehDono = $usuario && $usuario->id === (int) $task->user_id;
+    $podeGerenciar = $ehDono || ($usuario && $usuario->can('tarefas.gerenciar_todas'));
+    $podeAssumir = $usuario && $usuario->can('tarefas.assumir');
     $vencida = $task->deadline->lt(today());
-    $temImagem = $task->image && file_exists(public_path('img/tasks/'.$task->image));
+    $temImagem = $task->hasImage();
     $itens = is_array($task->items) ? $task->items : [];
     $palavrasDeAlerta = ['sensíveis', 'inoperante'];
 @endphp
@@ -74,6 +76,23 @@
                         <dt>Aberta em</dt>
                         <dd>{{ $task->created_at->format('d/m/Y') }}</dd>
                     </div>
+                    @auth
+                        <div>
+                            <dt>Equipamento</dt>
+                            <dd>
+                                @if($task->equipment)
+                                    @can('equipamentos.ver')
+                                        <a href="{{ route('equipamentos.show', $task->equipment) }}">{{ $task->equipment->name }}</a>
+                                    @else
+                                        {{ $task->equipment->name }}
+                                    @endcan
+                                    <small class="muted d-block">{{ $task->equipment->asset_tag ? 'Patrimônio '.$task->equipment->asset_tag.' · ' : '' }}{{ $task->equipment->store->name ?? 'Sem loja' }}</small>
+                                @else
+                                    <span class="muted">Nenhum</span>
+                                @endif
+                            </dd>
+                        </div>
+                    @endauth
                     <div>
                         <dt>Responsáveis</dt>
                         <dd>
@@ -99,14 +118,14 @@
                             <p class="task-note">
                                 <ion-icon name="checkmark-circle-outline"></ion-icon> Você é responsável por esta tarefa.
                             </p>
-                        @else
+                        @elseif($podeAssumir)
                             <form action="/tasks/join/{{ $task->id }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary" id="task-submit">Assumir tarefa</button>
                             </form>
                         @endif
 
-                        @if($ehDono)
+                        @if($podeGerenciar)
                             <div class="task-owner-actions">
                                 <a href="/tasks/edit/{{ $task->id }}" class="btn btn-outline-secondary">Editar</a>
                                 <form action="/tasks/{{ $task->id }}" method="POST"
@@ -124,8 +143,8 @@
             </div>
 
             @if($temImagem)
-                <a href="/img/tasks/{{ $task->image }}" target="_blank" rel="noopener" class="task-image">
-                    <img src="/img/tasks/{{ $task->image }}" alt="Anexo da tarefa: {{ $task->title }}">
+                <a href="{{ route('tasks.image', $task->id) }}" target="_blank" rel="noopener" class="task-image">
+                    <img src="{{ route('tasks.image', $task->id) }}" alt="Anexo da tarefa: {{ $task->title }}">
                     <span>Abrir em tamanho real</span>
                 </a>
             @endif

@@ -14,7 +14,17 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                // Identidade AlpDesk
+                brand: {
+                    DEFAULT: '#0f7a68', // texto/botões (contraste ~5:1 com branco)
+                    dark: '#0b5f51',
+                    light: '#1eb39a',   // detalhes e foco
+                    soft: '#e8f6f3',
+                },
+                graphite: '#2d3436',
             },
         },
     },

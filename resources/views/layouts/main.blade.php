@@ -48,14 +48,36 @@
                 <a href="/" class="sidebar-link {{ request()->is('/') ? 'active' : '' }}">
                     <ion-icon name="home-outline"></ion-icon> Tarefas
                 </a>
-                <a href="/tasks/create" class="sidebar-link {{ request()->is('tasks/create') ? 'active' : '' }}">
-                    <ion-icon name="add-circle-outline"></ion-icon> Criar Tarefas
-                </a>
+                @can('tarefas.criar')
+                    <a href="/tasks/create" class="sidebar-link {{ request()->is('tasks/create') ? 'active' : '' }}">
+                        <ion-icon name="add-circle-outline"></ion-icon> Criar Tarefas
+                    </a>
+                @endcan
                 @auth
                     <a href="/dashboard" class="sidebar-link {{ request()->is('dashboard') ? 'active' : '' }}">
                         <ion-icon name="list-outline"></ion-icon> Minhas Tarefas
                     </a>
                 @endauth
+
+                @can('equipamentos.ver')
+                    <a href="/equipamentos" class="sidebar-link {{ request()->is('equipamentos*') ? 'active' : '' }}">
+                        <ion-icon name="hardware-chip-outline"></ion-icon> Equipamentos
+                    </a>
+                @endcan
+
+                @canany(['usuarios.gerenciar', 'grupos.gerenciar'])
+                    <p class="sidebar-section">Administração</p>
+                    @can('usuarios.gerenciar')
+                        <a href="/admin/usuarios" class="sidebar-link {{ request()->is('admin/usuarios*') ? 'active' : '' }}">
+                            <ion-icon name="people-outline"></ion-icon> Usuários
+                        </a>
+                    @endcan
+                    @can('grupos.gerenciar')
+                        <a href="/admin/grupos" class="sidebar-link {{ request()->is('admin/grupos*') ? 'active' : '' }}">
+                            <ion-icon name="shield-checkmark-outline"></ion-icon> Grupos de acesso
+                        </a>
+                    @endcan
+                @endcanany
             </nav>
 
             <div class="sidebar-footer">
@@ -71,9 +93,11 @@
                     <a href="/login" class="sidebar-link {{ request()->is('login') ? 'active' : '' }}">
                         <ion-icon name="log-in-outline"></ion-icon> Entrar
                     </a>
-                    <a href="/register" class="sidebar-link {{ request()->is('register') ? 'active' : '' }}">
-                        <ion-icon name="person-add-outline"></ion-icon> Cadastrar
-                    </a>
+                    @if(Route::has('register'))
+                        <a href="/register" class="sidebar-link {{ request()->is('register') ? 'active' : '' }}">
+                            <ion-icon name="person-add-outline"></ion-icon> Cadastrar
+                        </a>
+                    @endif
                 @endguest
             </div>
         </aside>

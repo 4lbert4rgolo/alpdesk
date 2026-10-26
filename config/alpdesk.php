@@ -19,4 +19,29 @@ return [
         explode(',', (string) env('REGISTRATION_ALLOWED_DOMAINS', ''))
     ))),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Visibilidade das tarefas
+    |--------------------------------------------------------------------------
+    |
+    | true: quem não pode assumir tarefas (por exemplo, o grupo Solicitante) vê
+    | somente as tarefas que criou ou em que é responsável. Quem tem as permissões
+    | "tarefas.assumir" ou "tarefas.gerenciar_todas" continua vendo todas.
+    | false: todos os usuários logados veem todas as tarefas.
+    |
+    */
+
+    'visibilidade_restrita' => (bool) env('TASKS_VISIBILITY_RESTRICTED', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Forçar HTTPS
+    |--------------------------------------------------------------------------
+    |
+    | Em produção atrás de um proxy HTTPS, use FORCE_HTTPS=true no .env.
+    |
+    */
+
+    'force_https' => (bool) env('FORCE_HTTPS', false),
+
 ];

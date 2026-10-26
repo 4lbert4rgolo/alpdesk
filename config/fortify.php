@@ -144,7 +144,8 @@ return [
     */
 
     'features' => [
-        Features::registration(),
+        // O cadastro público fica DESLIGADO por padrão. Para ligar: REGISTRATION_ENABLED=true no .env
+        ...(env('REGISTRATION_ENABLED', false) ? [Features::registration()] : []),
         Features::resetPasswords(),
         Features::emailVerification(),
         Features::updateProfileInformation(),

@@ -22,3 +22,11 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# AlpDesk: dados que nunca devem ir para o repositório
+/public/img/tasks/*
+!/public/img/tasks/.htaccess
+*.sql
+*.sql.gz
+/backups
+.env.production

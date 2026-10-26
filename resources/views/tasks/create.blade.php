@@ -9,6 +9,17 @@
     
     <form action="/tasks" method="POST" enctype="multipart/form-data">
         @csrf
+
+        @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <strong>Confira os campos abaixo:</strong>
+                <ul class="mb-0">
+                    @foreach($errors->all() as $erro)
+                        <li>{{ $erro }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         
         <div class="form-group mb-3">
             <label for="title">Tarefa:</label>
@@ -51,9 +62,11 @@
            </div>
         </div>
 
+        @include('tasks._equipamento')
+
         <div class="form-group mb-4">
             <label for="image" class="form-label">Anexar imagem da solicitação:</label>
-            <input type="file" id="image" name="image" class="form-control">
+            <input type="file" accept="image/jpeg,image/png,image/webp" id="image" name="image" class="form-control">
         </div>
 
         <div class="d-grid gap-2">

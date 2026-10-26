@@ -75,4 +75,19 @@ class User extends Authenticatable implements MustVerifyEmail
     public function tasksAsParticipant() {
         return $this->belongsToMany('App\Models\Task');
     }
+
+    public function accessGroups()
+    {
+        return $this->belongsToMany(AccessGroup::class, 'access_group_user')->withTimestamps();
+    }
+
+    public function isAdministrator(): bool
+    {
+        return $this->accessGroups->contains(fn (AccessGroup $grupo) => $grupo->isAdministrator());
+    }
+
+    public function hasPermission(string $permissao): bool
+    {
+        return $this->accessGroups->contains(fn (AccessGroup $grupo) => $grupo->grants($permissao));
+    }
 }

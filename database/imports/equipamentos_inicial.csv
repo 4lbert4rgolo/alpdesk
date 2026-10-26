@@ -1,0 +1,1410 @@
+legacy_id,loja,setor,tipo,nome,usuario,hostname,numero_serie,anydesk,patrimonio,especificacoes,observacoes
+5,Yamotos,Caixa,Desktop,COMPUTADOR PC DIGITAL I5-3 256GB SSD 4GB RAM,Carla Fernandes - Caixa,DESKTOP-QBJ56FC,,1703387532,01465,"Nome do dispositivo DESKTOP-QBJ56FC
+
+ Processador Intel(R) Core(TM) i5-3330 CPU @ 3.00GHz 3.00 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,88 GB)
+
+ ID do dispositivo 475FC2BC-4438-4610-BA3A-0731F1F15390
+
+ ID do Produto 00331-10000-00001-AA557
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+9,Yamotos,Vendas,Notebook,Notebook Lenovo - IdeaPad 3,TAILANE,Supervisor-SSA,,1015406897,01630,"Nome do dispositivo Supervisor-SSA
+
+ Processador 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz 3.00 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,79 GB)
+
+ ID do dispositivo 8D06C136-60BE-46D2-9415-2A66634E6CA3
+
+ ID do Produto 00327-70000-00001-AA363
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+13,Yamotos,,Notebook,Notebook Acer Aspire A314-35,JEFFERSON EVANGELISTA,Yamotos,,1838436987,01360,"Nome do dispositivo Yamotos
+
+ Processador Intel(R) Celeron(R) N4500 @ 1.10GHz 1.11 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,81 GB)
+
+ ID do dispositivo 67C523F3-ECCA-43D0-AC58-003A5D2E7AC9
+
+ ID do Produto 00379-24822-83117-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+17,Yamotos,Pós-venda,Desktop,Desktop Intel 7400 4GB 500HD,ADALBERTO FERNANDES,KOFFER-PC,,1239898876,,"Nome do host: KOFFER-PC
+
+ Nome do sistema operacional: Microsoft Windows 7 Ultimate
+
+ Versão do sistema operacional: 6.1.7601 Service Pack 1 compilação 76
+
+ 01
+
+ Fabricante do sistema operacional: Microsoft Corporation
+
+ Configuração do SO: Estação de trabalho autônoma
+
+ Tipo de compilação do sistema operacional: Multiprocessor Free
+
+ Proprietário registrado: KOFFER
+
+ Organização registrada:
+
+ Identificação do produto: 00426-OEM-8992662-00400
+
+ Data da instalação original: 14/09/2023, 06:03:21
+
+ Tempo de Inicialização do Sistema: 15/04/2025, 08:23:33
+
+ Fabricante do sistema: PCDIGIT
+
+ Modelo do sistema: G31T-M7
+
+ Tipo de sistema: x64-based PC
+
+ Processador(es): 1 processador(es) instalado(s).
+
+ [01]: Intel64 Family 6 Model 23",
+21,Yamotos,,Desktop,"Desktop E7400 - 4GB, 500GB HD",SYDNEY DE CARVALHO SILVA,KOFFERJURIDICO,,431617752,01434,"Nome do host: KOFFERJURIDICO
+
+ Nome do sistema operacional: Microsoft Windows 7 Lite 3.0
+
+ Versão do sistema operacional: 6.1.7601 Service Pack 1 compilação 76
+
+ 01
+
+ Fabricante do sistema operacional: Microsoft Corporation
+
+ Configuração do SO: Estação de trabalho autônoma
+
+ Tipo de compilação do sistema operacional: Multiprocessor Free
+
+ Proprietário registrado: KOFFER JURIDICO
+
+ Organização registrada:
+
+ Identificação do produto: 00371-OEM-8992671-00524
+
+ Data da instalação original: 05/11/2019, 08:16:25
+
+ Tempo de Inicialização do Sistema: 15/04/2025, 08:02:18
+
+ Fabricante do sistema: LOGIN
+
+ Modelo do sistema: Digitron
+
+ Tipo de sistema: X86-based PC
+
+ Processador(es): 1 processador(es) instalado(s).
+
+ [01]: x64 Family 6 Model 23",
+25,Yamotos,Pós-venda,Notebook,Notebook Lenovo - IdeaPad 3 I3-11,ADALBERTO FERNANDES,YAMOTOS,,1910785779,01489,"Nome do dispositivo YAMOTOS
+
+ Processador 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz 3.00 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,79 GB)
+
+ ID do dispositivo 13A1360F-EB3D-4905-8432-97E513F97873
+
+ ID do Produto 00327-70000-00001-AA532
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+29,Yamotos,,Tablet,TABLET POSITIVO TWIST T780F,,,,,01447,"Memória RAM: 2 GB
+ Tamanho da tela: 7 ""
+ Capacidade: 64 GB
+ Sistema operacional: Android 14 GO.
+ Com processador 4x ARM Cortex-A55 1.8 GHz de 1.8GHz.
+ Resolução da tela de 1024px x 600px.",
+237,Yamotos,Pós-venda,Desktop,DEKSTOP LENOVO IDEAPAD I3-11 4GB RAM 256GB SSD,RODRIGO NEVES,,,1261814167,,,
+309,Yamotos,Pós-venda,Mobiliário,CADEIRA ESCRITÓRIO - ESTOQUE,,,,,01498,,
+313,Yamotos,Pós-venda,Climatização,VENTILADOR DE COLUNA VENTISOL,ESTOQUE,,,,01506,,
+317,Yamotos,Pós-venda,Mobiliário,CADEIRA DE ESCRITÓRIO,RECEPÇÃO OFICINA,,,,01344,CADEIRA LOCALIZADA NA RECEPÇÃO DA OFICINA PARA O CLIENTE,
+321,Yamotos,Pós-venda,Mobiliário,CADEIRA ESCRITÓRIO,,,,,01521,"CADEIRA GIRATÓRIA LOCALIZADA NO BALCÃO DE PEÇAS, CONSULTOR",
+325,Yamotos,Pós-venda,Impressora,IMPRESSORA EPSON L3250 SERIES,RECEPÇÃO DE PEÇAS E SERVIÇOS,,,,01584,,
+329,Yamotos,Caixa,Mobiliário,CADEIRA ESCRITÓRIO,,,,,01359,CADEIRA GIRATÓRIA LOCALIZADA NA SALA DO CAIXA,
+333,Yamotos,Pós-venda,Climatização,VENTILADOR DE COLUNA VENTISOL,BALCÃO DE PEÇAS E SERVIÇOS,,,,01283,,
+337,Yamotos,Caixa,Monitor,"MONITOR AOC e970Swnl LED 18,5 POL.",Carla Fernandes - Caixa,,,,01614,,
+341,Yamotos,Caixa,Teclado,TECLADO MULTILASER TC 213,,,,,,,
+345,Yamotos,Caixa,Mouse,MOUSE MICROSOFT BASIC OPTICAL,Caixa,,,,,,
+349,Yamotos,Caixa,Impressora,IIMPRESSORA HP DESKJET INK ADVANTAGE 2874,,,,,01541,,
+353,Yamotos,Caixa,Energia,ESTABILIZADOR SMS,,,,,01636,,
+365,Yamotos,E-commerce,Climatização,Ar condicionado Midea 42AFVCI09S5,Rodrigo Neves,,,,01402,Ar condicionado localizado no setor de vendas e-commerce,
+369,Yamotos,E-commerce,Mobiliário,CADEIRA DE ESCRITÓRIO GIRATÓRIA,RODRIGO NEVES,,,,01404,LOCALIZADA NO SETOR DE VENDAS E-COMMERCE,
+373,Yamotos,E-commerce,Mobiliário,CADEIRA DE ESCRITÓRIO,RODRIGO NEVES,,,,,LOCALIZADA NO SETOR DE VENDAS E-COMMERCE,Patrimônio 01404 estava repetido na planilha original (também usado pelo ID 369). Confirmar o número correto.
+377,Yamotos,Vendas,Teclado,Teclado APPTECH,Sydney,,,,,,
+1357,Yamotos,Vendas,Monitor,MONITOR PHILIPS 193V5LSB23/57 19°,SYDNEY - VENDEDORES,,FX0A134005454788,,01555,NS: FX0A134005454788,
+161,Litiz - Ilheús,Vendas,Desktop,COMPUTADOR HAYOM I5-3 16GB RAM 447GB SSD,VENDEDORES,DESKTOP-KP219JL,,1186707749,01750,"Nome do Dispositivo DESKTOP-KP219JL
+
+ Processador Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 16,0 GB (utilizável: 15,9 GB)
+
+ Armazenamento 447 GB SSD SSD1902
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo 9DE094F5-A3C8-4219-8A7B-3F158686F2CA
+
+ ID do Produto 00330-80000-00000-AA427
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+165,Litiz - Ilheús,Caixa,Desktop,COMPUTADOR HAYOM I5-3 16GB RAM 447GB SSD,EDUARDA ARAÚJO MENDES,DESKTOP-KP219JL,,1365333253,01923,"Nome do Dispositivo DESKTOP-KP219JL
+
+ Processador Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 16,0 GB (utilizável: 15,9 GB)
+
+ Armazenamento 447 GB SSD HS-SSD-WAVE(S) 480G
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo 9DE094F5-A3C8-4219-8A7B-3F158686F2CA
+
+ ID do Produto 00330-80000-00000-AA709
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+169,Litiz - Ilheús,Administrativo,Tablet,TABLET POSITIVO TWIST 64 4 GB,,,,,01944,,
+189,Litiz - Ilheús,Pós-venda,Notebook,NOTEBOOK DELL INSPIRON 5570 8GB 240GB SSD,THIAGO SANTOS FROES SA,,,629767029,,,
+245,Litiz - Ilheús,Vendas,Notebook,NOTEBOOK LENOVO IDEAPAD I3-11 4GB RAM 240GB SSD,PEDRO PAULO SANTANA,,PE0DLN9J,,01239,NS: PE0DLN9J,
+1273,Litiz - Ilheús,Caixa,Teclado,TECLADO K-MEX 3728U,EDUARDA - CAIXA,,BR2408V220,,,NS: BR2408V220,
+1277,Litiz - Ilheús,Caixa,Mouse,MOUSE CBTECH MS-31BK,EDUARDA - CAIXA,,,,,,
+1281,Litiz - Ilheús,Caixa,Monitor,MONITOR MRP MP190001 19°,EDUARDA - CAIXA,,19000124111578,,01955,NS: 19000124111578,
+1285,Litiz - Ilheús,Vendas,Monitor,MONITOR MRP MP190001 19°,VENDEDORES,,19000124111766,,01374,NS: 19000124111766,
+1289,Litiz - Ilheús,Vendas,Monitor,MONITOR MRP MP190001 19°,VENDEDORES,,19000124112352,,01442,NS: 19000124112352,
+1293,Litiz - Ilheús,Vendas,Desktop,COMPUTADOR HAYOM I5-3 16GB RAM 447GB SSD,VENDEDORES,,,,01647,"Processador Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 16,0 GB (utilizável: 15,9 GB)
+
+ Armazenamento 447 GB SSD SSD1902
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)",
+1297,Litiz - Ilheús,Vendas,Teclado,TECLADO KB-MB10BK,VENDEDORES,,102429019054004844,,,NS: 102429019054004844,
+1301,Litiz - Ilheús,Vendas,Teclado,TECLADO KB-MB10BK,VENDEDORES,,102429019054004845,,,NS: 102429019054004845,
+1305,Litiz - Ilheús,Vendas,Mouse,MOUSE CBTECH MS-31BK,VENDEDORES,,,,,,
+1309,Litiz - Ilheús,Pós-venda,Monitor,MONITOR MRP MP190001 19°,PECISTA,,,,01246,MP19000124111216,
+1313,Litiz - Ilheús,Pós-venda,Monitor,MONITOR MRP MP190001 19°,CAUANNE - RECEPÇÃO DE SERVIÇOS,,,,01831,MP19000124111572,
+1317,Litiz - Ilheús,Pós-venda,Teclado,TECLADO KB-MB10BK,PECISTA,,,,,,
+1321,Litiz - Ilheús,Pós-venda,Teclado,TECLADO KB-MB10BK,CAUANNE - RECEPÇÃO OFICINA,,,,,,
+1325,Litiz - Ilheús,Pós-venda,Mouse,MOUSE CBTECH MS-31BK,CAUANNE - RECEPÇÃO OFICINA,,,,,,
+1329,Litiz - Ilheús,Pós-venda,Desktop,COMPUTADOR HAYOM I5-3 16GB RAM 447GB SSD,MECÂNICOS,DESKTOP-KP219JL,,1686102921,01967,"Nome do Dispositivo DESKTOP-KP219JL
+
+ Processador Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 16,0 GB (utilizável: 15,9 GB)
+
+ Armazenamento 447 GB SSD HS-SSD-WAVE(S) 480G
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo 9DE094F5-A3C8-4219-8A7B-3F158686F2CA
+
+ ID do Produto 00330-80000-00000-AA944
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+1333,Litiz - Ilheús,Pós-venda,Monitor,MONITOR MRP MP190001 19°,MECÂNICOS,,,,01882,MP19000124111213,
+105,Litiz - Brumado,Caixa,Desktop,DESKTOP I3-2 4GB RAM 120GB SSD,LUISA - CAIXA,PECAS-PC,,432859454,01659,"Nome do dispositivo PECAS-PC
+
+ Processador Intel(R) Core(TM) i3-2100 CPU @ 3.10GHz 3.10 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,89 GB)
+
+ ID do dispositivo 62673670-4C53-4B41-A9B9-DC25F27B7514
+
+ ID do Produto 00331-10000-00001-AA167
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+129,Litiz - Brumado,Pós-venda,Notebook,NOTEBOOK ASUS I3-11 4GB RAM 240GB SSD,FABIO - CONSULTOR,gerente-brumado,,701715205,01080,"Nome do dispositivo gerente-brumado
+
+ Processador 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz 3.00 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,70 GB)
+
+ ID do dispositivo 580A92FF-25C6-407A-A84A-5470F4422165
+
+ ID do Produto 00342-43299-57579-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+ 
+
+NS:",
+241,Litiz - Brumado,Vendas,Notebook,NOTEBOOK LENOVO I3 -11 4GB RAM 256GB SSD,MARLON MACHADO DA SILVA,MarlonMachado12,PE0DL9LD,1781852801,01908,"Nome do dispositivo MarlonMachado12
+
+ Processador 12th Gen Intel(R) Core(TM) i3-1215U (1.20 GHz)
+
+ RAM instalada 4,00 GB (utilizável: 3,73 GB)
+
+ ID do dispositivo 342ED988-623B-4612-9F82-2883174E974E
+
+ ID do Produto 00342-43517-16266-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+ 
+
+ NS: PE0DL9LD",
+913,Litiz - Brumado,Vendas,Mouse,MOUSE CBTECH MS-31,MARLON - SUPERVISOR,,,,,,
+917,Litiz - Brumado,Caixa,Impressora,IMPRESSORA BROTHER DCP 1617NW,,,,,00796,,
+921,Litiz - Brumado,Caixa,Mouse,MOUSE LOGITECH M-U0026,LUISA - CAIXA,,810-002182,,,NS: 810-002182,
+925,Litiz - Brumado,Caixa,Teclado,TECLADO MULTI CF50,LUISA - CAIXA,,,,,PN TC309,
+929,Litiz - Brumado,Caixa,Monitor,MONITOR VALIANTY DXM19C 19º,LUISA - CAIXA,,,,01353,,
+933,Litiz - Brumado,Caixa,Áudio,HEADSET ESCRITÓRIO,LUISA - CAIXA,,,,,,
+937,Litiz - Brumado,Caixa,Energia,AUTOTRANSFORMADOR BIVOLT,,,,,01097,"MODELO: 0131200006 
+
+1050VA
+
+CONECTADO A IMPRESSORA BROTHER DCP",
+941,Litiz - Brumado,Vendas,Monitor,MONITOR LG 20MK400H-B 20°,THALITA - VENDEDORES,,505AZJT4V556,,01494,NS: 505AZJT4V556,
+945,Litiz - Brumado,Vendas,Teclado,TECLADO 5+,THALITA - VENDEDORES,,69-00033411A,,,SN 69-00033411A,
+949,Litiz - Brumado,Vendas,Teclado,TECLADO 5+,THALITA - VENDEDORES,,69-00033411A,,,SN 69-00033411A,
+953,Litiz - Brumado,Vendas,Mouse,MOUSE 5+,THALITA - VENDEDORES,,69-00033411A,,,NS: 69-00033411A,
+957,Litiz - Brumado,Vendas,Desktop,COMPUTADOR HP I5-3 8 GB RAM 224GB SSD,THALITA - VENDEDRES,DESKTOP-MOKEVI9,,274458550,01972,"Nome do Dispositivo DESKTOP-MOKEVI9
+
+ Processador Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,88 GB)
+
+ Armazenamento 224 GB SSD Bestoss S201 240GB
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo A1BD964C-303C-4BE9-97F9-A7362A539FAF
+
+ ID do Produto 00331-10000-00001-AA259
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+961,Litiz - Brumado,Pós-venda,Mouse,MOUSE INTELBRAS RTM 019,FABIO - CONSULTOR,,180538931,,,NS: 180538931,
+969,Litiz - Brumado,Vendas,Teclado,TECLADO LOGITECH K120,MAILTON - VENDEDORES,,2335SC312U08,,,NS: 2335SC312U08,
+973,Litiz - Brumado,Vendas,Mouse,MOUSE MULTI CF50,MAILTON - VENDEDORES,,,,,PN TC309,
+977,Litiz - Brumado,Vendas,Energia,ESTABILIZADOR FORCE LINE ETERNITY,,,,,01783,"ESTABILIZADOR COM DEFEITO, APRESENTANDO FALHA AO LIGAR
+
+ESTRALOS E FORÇANDO PARADA",
+981,Litiz - Brumado,,TV,TV SAMSUNG UN32J4290AG,,,Y2X63X1M554048L,,01764,NS: Y2X63X1M554048L,
+985,Litiz - Brumado,Pós-venda,Tablet,TABLET SAMSUNG S06 P620 LITE 4GB 64GB RAM,FABIO - CONSULTOR,,RX2Y20085EA,,01871,NS: RX2Y20085EA,
+989,Litiz - Brumado,,Áudio,CAIXA DE SOM AMVOX ACA 189 MONTANHA,,,CA189MCARG01I001097,,01902,NS: CA189MCARG01I001097,
+1201,Litiz - Brumado,,Celular,GALAXY A03 CORE 32GB 3GB RAM,,,R9XW1007NDV,,01276,NS: R9XW1007NDV,
+73,Litiz - Vitória da Conquista,Pós-venda,Notebook,NOTEBOOK LENOVO I3 -11 4GB RAM 256GB SSD,TAYNAN SIMÕES SILVA,,,1676865229,,,
+77,Litiz - Vitória da Conquista,Pós-venda,Notebook,NOTEBOOK LENOVO I3-11 256GB SSD 4GB RAM,ANDRESSA PINHEIRO NOVAIS,,82MD000ABR,1704695833,01809,NS: 82MD000ABR,
+81,Litiz - Vitória da Conquista,Caixa,Desktop,COMPUTADOR CBTECH 1TB HD 120GB SSD,NELMA FERRAZ DA SILVA PAIXÃO LIMA,DESKTOP-HCGOT7L,,1482693948,01829,"Nome do dispositivo DESKTOP-HCGOT7L
+
+ Processador Intel(R) Core(TM) i3-3240 CPU @ 3.40GHz 3.40 GHz
+
+ RAM instalada 12,0 GB (utilizável: 11,9 GB)
+
+ ID do dispositivo C92333F3-D85B-49ED-B0BD-CBFDDBEBE6DE
+
+ ID do Produto 00331-10000-00001-AA480
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64",
+85,Litiz - Vitória da Conquista,Vendas,Desktop,COMPUTADOR CBTECH I5-4 240GB 8GB RAM,CÁSSIO EMANUEL SILVA GOMES,DESKTOP-6VIKJQC,,1620643289,01338,"Nome do dispositivo DESKTOP-6VIKJQC
+
+ Processador Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 8,00 GB
+
+ ID do dispositivo 012E5297-DD18-48F4-8FE4-79C7F000FA01
+
+ ID do Produto 00331-10000-00001-AA006
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64",
+89,Litiz - Vitória da Conquista,Administrativo,Notebook,"NOTEBOOK LENOVO I3-11 4GB RAM, 256GB SSD",STHEFANE ALVES DE JESUS,LENOVO,,1422045971,01228,"Nome do dispositivo 
+
+ LENOVO
+
+ Processador 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz 3.00 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,79 GB)
+
+ ID do dispositivo 41E06FF6-3317-4EAC-AD56-897FA3E1B874
+
+ ID do Produto 00342-43407-89378-AAOEM
+
+ NÚMERO DE SÉRIE PE08HTNJ",
+93,Litiz - Vitória da Conquista,Pós-venda,Notebook,"NOTEBOOK LENOVO I3-11 4GB RAM, 256GB SSD",ALEXANDRE GOMES BRITO,,PE0BJ5VH,1442309898,01936,NS: PE0BJ5VH,
+97,Litiz - Vitória da Conquista,Pós-venda,Desktop,DESKTOP I3-3 4GB RAM 120GB SSD 500GB HD,ALINE SILVA SOUSA BRITO,TERMINAL,,1084480389,01801,"Nome do dispositivo TERMINAL
+
+ Processador Intel(R) Core(TM) i3-3220 CPU @ 3.30GHz 3.30 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,89 GB)
+
+ ID do dispositivo 49BCAEC8-5975-47EC-912C-1A40C7C5A686
+
+ ID do Produto 00331-10000-00001-AA131
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64",
+101,Litiz - Vitória da Conquista,Vendas,Desktop,DESKTOP I5-4 8GB RAM 240GB SSD,PATRICIA - VENDEDORES,TERMINAL,,1587475960,01939,"Nome do dispositivo TERMINAL
+
+ Processador Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 8,00 GB
+
+ ID do dispositivo A00B0A77-6110-416B-8B0D-08B45774A1B3
+
+ ID do Produto 00331-10000-00001-AA111
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64",
+181,Litiz - Vitória da Conquista,Vendas,Desktop,COMPUTADOR CBTECH I5-4 8GB RAM 240GB SSD,ROMARIO - VENDEDORES,DESKTOP-1MUL6RI,,1308164863,01214,"Nome do dispositivo DESKTOP-1MUL6RI
+
+ Processador Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz 3.30 GHz
+
+ RAM instalada 8,00 GB
+
+ ID do dispositivo C76A5064-1188-4EAF-B2A5-C1913949F583
+
+ ID do Produto 00331-10000-00001-AA243
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+193,Litiz - Vitória da Conquista,Vendas,Notebook,NOTEBOOK LENOVO I3 -11 4GB RAM 256GB SSD,BRUNO FELIPHE DOS SANTOS CHAVES,,PE08CGV0,1635630728,00402,NS:PE08CGV0,
+209,Litiz - Vitória da Conquista,Vendas,Desktop,COMPUTADOR CBTECH I5-4 8GB 222GB SSD,VENDEDORES - SHOWROOM,DESKTOP-6VIKJQC,,1931147607,01879,"Nome do dispositivo DESKTOP-6VIKJQC
+
+ Processador Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 8,00 GB
+
+ ID do dispositivo 012E5297-DD18-48F4-8FE4-79C7F000FA01
+
+ ID do Produto 00331-10000-00001-AA006
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+213,Litiz - Vitória da Conquista,Vendas,Desktop,COMPUTADOR CBTECH I3-4 4GB RAM 120GB SSD,RUDIVAN - VENDEDORES,VDC-VENDAS02,,130353095,00014,"Nome do Dispositivo VDC-VENDAS02
+
+ Processador Intel(R) Core(TM) i3-4160 CPU @ 3.60GHz 3.60 GHz
+
+ RAM instalada 4,00 GB
+
+ Armazenamento 112 GB SSD S3SSDC120
+
+ Placa de vídeo Intel(R) HD Graphics 4400 (113 MB)
+
+ ID do dispositivo 442AA710-069E-4690-8F41-E237A7FAD61C
+
+ ID do Produto 00330-80000-00000-AA409
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+217,Litiz - Vitória da Conquista,Vendas,Desktop,COMPUTADOR LIKETEC I5-2 16GB RAM 240GB SSD,VENDAS,,,1854467161,01799,,
+221,Litiz - Vitória da Conquista,Vendas,Desktop,DESKTOP I5-2 16GB RAM 240GB SSD,EVELLYN LARISSA CARDOSO SOARES,,,1528360458,01780,,
+225,Litiz - Vitória da Conquista,Pós-venda,Desktop,COMPUTADOR LIKETEC I5-2 16GB RAM 240GB SSD,MECÂNICOS,DESKTOP-1L20O0H,,1049795119,01878,"Nome do Dispositivo DESKTOP-1L20O0H
+
+ Processador Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz 3.10 GHz
+
+ RAM instalada 16,0 GB (utilizável: 15,9 GB)
+
+ Armazenamento 224 GB SSD HS-SSD-WAVE(S) 240G
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo 52101707-AA97-46E6-B5AE-196690B779BC
+
+ ID do Produto 00330-80000-00000-AA819
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+297,Litiz - Vitória da Conquista,Pós-venda,Tablet,TABLET SAMSUNG S6 4GB RAM 64GB,ALINE SILVA BRITTO,,,,01615,,
+389,Litiz - Vitória da Conquista,Caixa,Monitor,MONITOR VXPRO,CAIXA,,,,01817,"Monitor Vxpro 19 Polegadas Hd, 5ms, Bivolt, Hdmi/vga Vx190Z Preto
+ NÚMERO DE SÉRIE: VXZ19000006350",
+393,Litiz - Vitória da Conquista,Caixa,Energia,ESTABILIZADOR SMS,,,,,00022,,
+397,Litiz - Vitória da Conquista,Caixa,Telefone,TELEFONE INTELBRAS TI 730I,,,,,00029,,
+401,Litiz - Vitória da Conquista,Caixa,Teclado,Teclado BR,Nelma,,,,,,
+405,Litiz - Vitória da Conquista,Caixa,Mouse,MOUSE MULTILASER TC309,NELMA,,,,,,
+409,Litiz - Vitória da Conquista,Administrativo,Monitor,MONITOR VXPRO,ASSISTENTE DE VENDAS,,,,01925,"Monitor Vxpro 19 Polegadas Hd, 5ms, Bivolt, Hdmi/vga Vx190Z Preto
+ NÚMERO DE SÉRIE: VXZ190CZ400005",
+413,Litiz - Vitória da Conquista,Administrativo,Teclado,TECLADO CBTECH KB-M40BK,ASSISTENTE DE VENDAS,,,,,CÓDIGO DE BARRAS: 102329019046002366,
+417,Litiz - Vitória da Conquista,Administrativo,Mouse,OPTICAL MOUSE 5+,ASSISTENTE DE VENDAS,,,,,CÓDIGO: 4300190633A,
+421,Litiz - Vitória da Conquista,Pós-venda,Monitor,MONITOR 3Green Technology,ALINE,,,,01826,"Modelo: 2003G-LED
+
+ 
+
+
+ Serial No.: 2003GLED1907042402344",
+425,Litiz - Vitória da Conquista,Pós-venda,Teclado,TECLADO LOGITECH K230,ALINE,,,,,,
+429,Litiz - Vitória da Conquista,Pós-venda,Mouse,MOUSE CBTECH MS-31BK,ALINE,,,,,SÉRIE: 092229006013009728,
+433,Litiz - Vitória da Conquista,Pós-venda,Energia,ESTABILIZADOR SMS,ALINE,,,,00023,,Patrimônio informado como 0023 e padronizado para 00023.
+437,Litiz - Vitória da Conquista,Pós-venda,Notebook,NOTEBOOK LENOVO - IdeaPad 3 15IML05 8GB RAM 256GB SSD,JHERFHESSON,,,,00400,NÚMERO DE SÉRIE: PF809VVL,
+441,Litiz - Vitória da Conquista,Pós-venda,Energia,ESTABILIZADOR SMS,IAGO,,,,01897,,
+445,Litiz - Vitória da Conquista,Pós-venda,Monitor,"MONITOR LOGIN 20"" Modelo: BL-2000",Pecista,,,,00010,Número de série: 12689343,
+453,Litiz - Vitória da Conquista,Pós-venda,Mouse,MOUSE ÓPTICO USB 5+,PECISTA,,,,,Série: 4300190643A,
+457,Litiz - Vitória da Conquista,Pós-venda,Teclado,TECLADO BASIC OEX TC10,IAGO,,,,,NÚMERO DE SÉRIE TC1020210925000,
+461,Litiz - Vitória da Conquista,Pós-venda,TV,TV AIWA 20,,,,,01926,,
+465,Litiz - Vitória da Conquista,Administrativo,Tablet,TABLET MULTILASER M7 32GB 4GB RAM,,,,,01306,Tablet para registro de ponto,
+469,Litiz - Vitória da Conquista,Pós-venda,Energia,ESTABILIZADOR SMS,MECÂNICOS,,,,01753,,
+473,Litiz - Vitória da Conquista,Pós-venda,Monitor,MONITOR HQ SCRREEN 20º,MECÂNICOS,,,,01946,NÚMERO DE SÉRIE: 195HQLED16840323588,
+477,Litiz - Vitória da Conquista,Pós-venda,Mouse,MOUSE OPTICAL BASIC,MECÂNICOS,,,,,,
+481,Litiz - Vitória da Conquista,Pós-venda,Teclado,TECLADO KB-3728,MECÂNICOS,,,,,"MODELO: KB3728U0001CBOX
+
+SÉRIE: BR2408V220",
+485,Litiz - Vitória da Conquista,Pós-venda,Telefone,TELEFONE SEM FIO INTELBRAS TS-40 ID,PECISTA,,H8ZF4018547WL,,01390,NS: H8ZF4018547WL,
+489,Litiz - Vitória da Conquista,Pós-venda,Notebook,NOTEBOOK POSITIVO VISION C8256AI - 14,GUSTAVO TRINDADE,DESKTOP-8LQ619D,4AJ31T59Y,1049734513,01954,"Nome do Dispositivo DESKTOP-8LQ619D
+
+ Processador Intel(R) Celeron(R) N4020 CPU @ 1.10GHz 1.10 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,83 GB)
+
+ Armazenamento 233 GB SSD VID:F4 AKJ41X
+
+ Placa de vídeo Intel(R) UHD Graphics 600 (512 MB)
+
+ ID do dispositivo D18566AD-5473-4F79-9032-371E718F1F8D
+
+ ID do Produto 00326-30000-00001-AA848
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+ 
+
+ 
+
+NS: 4AJ31T59Y",
+493,Litiz - Vitória da Conquista,Vendas,Energia,ESTABILIZADOR TS SHARA,VENDAS,,,,01820,"ESTABILIZADOR LOCALIZADO NA SALA DA ADMINISTRAÇÃO,
+
+
+
+DESATIVADO",
+497,Litiz - Vitória da Conquista,Vendas,Energia,ESTABILIZADOR TS SHARA,VENDAS,,,,01920,ESTABILIZADOR LOCALIZADO NA SALA DA ADMINISTRAÇÃO,
+501,Litiz - Vitória da Conquista,Pós-venda,Tablet,TABLET SAMSUNG S6 4GB RAM 64GB,JHEFERSSON,,,,01875,Tablet com tela danificada,
+505,Litiz - Vitória da Conquista,Pós-venda,Áudio,FONE C/ FIO MULTI,AGENDAMENTO,,,,,,
+509,Litiz - Vitória da Conquista,Pós-venda,Mouse,MOUSE HP,ANDRESSA,,,,,,
+513,Litiz - Vitória da Conquista,Vendas,Monitor,MONITOR WIDESCREEN 19°,VENDAS DIGITAL,,131CW241112654,,01811,NS:131CW241112654,
+517,Litiz - Vitória da Conquista,Vendas,Teclado,TECLADO K-MEX 3728U,VENDAS DIGITAL,,,,,COD: 01240902000463,
+521,Litiz - Vitória da Conquista,Vendas,Mouse,OPTICAL MOUSE,VENDAS DIGITAL,,,,,,
+525,Litiz - Vitória da Conquista,Pós-venda,Mouse,MOUSE INTELBRAS RTM 019,SUPORTE PÓS-VENDAS,,,,,,
+533,Litiz - Vitória da Conquista,Vendas,Notebook,NOTEBOOK POSITIVO VISION C14,SUPERVISOR DE VENDAS,DESKTOP-FDLUK2R,4AJ09XK71,1249721168,01894,"SN: 4AJ09XK71
+
+ 
+
+ Nome do dispositivo DESKTOP-FDLUK2R
+
+ Processador Intel(R) Celeron(R) N4020 CPU @ 1.10GHz (1.10 GHz)
+
+ RAM instalada 4,00 GB (utilizável: 3,83 GB)
+
+ ID do dispositivo F186455E-D88C-475C-94B0-BC6B3B650931
+
+ ID do Produto 00342-43555-85141-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+537,Litiz - Vitória da Conquista,Vendas,Mouse,MOUSE OPTICO USB MAX,SUPERVISOR DE VENDAS,,DPE08160615710899,,,NS: DPE08160615710899,
+541,Litiz - Vitória da Conquista,Vendas,Tablet,TABLET MULTILASER M8 64GB 6GB RAM,VENDAS,,,,01665,"ENDEREÇO IP 192.168.100.70
+
+ENDEREÇO MAC 74:58:89:2C:E2:C6",
+545,Litiz - Vitória da Conquista,Vendas,Desktop,COMPUTADOR EFETIVA I5-3 8GB RAM 240GB SSD,VENDAS,consorcio-vdc,,764656995,01634,"Nome do Dispositivo consorcio-vdc
+
+ Processador Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz 3.20 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,89 GB)
+
+ Armazenamento 224 GB SSD SSD WIN MEMORY 2 5 240 GB
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo F442C1FA-77D2-428D-B3C4-BC22CE71F08C
+
+ ID do Produto 00331-10000-00001-AA052
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+549,Litiz - Vitória da Conquista,Vendas,Energia,ESTABILIZADOR REVOLUTION SPEED,VENDAS,,,,01959,,
+553,Litiz - Vitória da Conquista,Vendas,Teclado,TECLADO MULTI TF100,VENDAS,,,,,,
+557,Litiz - Vitória da Conquista,Vendas,Mouse,OPTICAL MOUSE,VENDAS,,,,,,
+561,Litiz - Vitória da Conquista,Vendas,Monitor,MONITOR WIDESCREEN 19°,VENDAS,,131CW241110765,,01749,NS:131CW241110765,
+565,Litiz - Vitória da Conquista,Vendas,Áudio,FONE C/ FIO MULTI,VENDAS,,,,,,
+569,Litiz - Vitória da Conquista,TI,Câmeras e DVR,DVR - INTELBRAS,TI,,EWVK2504543KT,,01883,NS: EWVK2504543KT,
+573,Litiz - Vitória da Conquista,TI,Câmeras e DVR,DVR - INTELBRAS,TI,,J2AG1103369RF,,00114,NS: J2AG1103369RF,
+577,Litiz - Vitória da Conquista,,Monitor,MONITOR PHILIPS 183vl5lHSB 18.5°,TI,,FX0A1536063646,,00005,"MODELO ID: 183V5LHSB2/57
+
+NS: FX0A1536063646",
+581,Litiz - Vitória da Conquista,TI,Telefone,CENTRAL PABX INTELBRAS MODULARE I,TI,,,,00414,,
+585,Litiz - Vitória da Conquista,TI,Energia,NOBREAK TSSHARA 1200VA,TI,,,,01922,,
+589,Litiz - Vitória da Conquista,Administrativo,Climatização,AR CONDICIONADO SPRING MIDEA,ADMINISTRATIVO,,3923B12845761,,01934,"MODELO - 424FFC11885
+
+NS: 3923B12845761",
+821,Litiz - Vitória da Conquista,,Monitor,"MONITOR AOC E970WNL 18,5º",RUDIVAN - VENDEDORES,,TBEW142QALK67NY,,00008,NS: TBEW142QALK67NY,
+825,Litiz - Vitória da Conquista,Vendas,Energia,NOBREAK SWS,RUDIVAN SWS,,,,00117,,
+829,Litiz - Vitória da Conquista,Vendas,Mouse,MOUSE HP,RUDIVAN - VENDEDORES,,7CH4301WMJ,,,NS: 7CH4301WMJ,
+833,Litiz - Vitória da Conquista,Vendas,Teclado,TECLADO KB007,RUDIVAN,,13076480,,00577,NS: 13076480,
+837,Litiz - Vitória da Conquista,Vendas,Monitor,MONITOR AOC E970S WNL,ANDRESSA - VENDEDORES,,KCYI2XA001671,,00002,"T8IWV42QALAUNNB
+
+NS: KCYI2XA001671",
+841,Litiz - Vitória da Conquista,Vendas,Energia,ESTABILIZADOR SMS,ANDRESSA - VENDEDORES,,,,01407,,
+845,Litiz - Vitória da Conquista,Vendas,Mouse,MOUSE USB,ANDRESSA - VENDAS,,,,,,
+849,Litiz - Vitória da Conquista,Vendas,Teclado,TECLADO DUEX,ANDRESSA - VENDAS,,2540343,,00597,NS: 2540343,
+853,Litiz - Vitória da Conquista,Vendas,Monitor,MONITOR 3GREEN TECHNOLOGY 20°,ROMARIO - VENDEDORES,,2003GLED179711231825,,01208,NS: 2003GLED179711231825,
+857,Litiz - Vitória da Conquista,Vendas,Teclado,TECLADO MULTI CF50,ROMARIO - VENDEDORES,,,,,PN TC309,
+861,Litiz - Vitória da Conquista,Vendas,Mouse,MOUSE MULTI CF50,ROMARIO - VENDEDORES,,,,,PN TC309,
+865,Litiz - Vitória da Conquista,Vendas,Energia,ESTABILIZADOR TS SHARA,ROMARIO - VENDEDORES,,,,01870,,
+869,Litiz - Vitória da Conquista,Vendas,Monitor,"MONITOR 3GREEN TECHNOLOGY 19,5°",VENDEDORES - SHOWROOM,,1953GLED1870032400148,,01884,NS: 1953GLED1870032400148,
+873,Litiz - Vitória da Conquista,Vendas,Teclado,TECLADO CBTECH KB-M40BK,VENDEDORES SHOWROOM,,102329019046002361,,,NS: 102329019046002361,
+877,Litiz - Vitória da Conquista,Vendas,Mouse,MOUSE MUTI MF100,VENDEDORES SHOWROOM,,,,,PN M0300,
+881,Litiz - Vitória da Conquista,Vendas,Energia,ESTABILIZADOR FORCE LINE ETERNITY,VENDEDORES SHOWROOM,,,,01916,,
+885,Litiz - Vitória da Conquista,Vendas,Desktop,COMPUTADOR LENOVO I3-6 4GB RAM 500HD,ANDRESSA - VENDEDORES,VDC-VENDAS01,,996568998,00013,"Nome do host: VDC-VENDAS01
+
+ Nome do sistema operacional: Microsoft Windows 7 Professional
+
+ Versão do sistema operacional: 6.1.7601 Service Pack 1 compilação 76
+
+ 01
+
+ Fabricante do sistema operacional: Microsoft Corporation
+
+ Configuração do SO: Estação de trabalho autônoma
+
+ Tipo de compilação do sistema operacional: Multiprocessor Free
+
+ Proprietário registrado: Litiz02
+
+ Organização registrada:
+
+ Identificação do produto: 00371-OEM-8992671-00004
+
+ Data da instalação original: 23/05/2017, 11:51:00
+
+ Tempo de Inicialização do Sistema: 06/10/2025, 07:52:55
+
+ Fabricante do sistema: LENOVO
+
+ Modelo do sistema: 10KY0061BR
+
+ Tipo de sistema: x64-based PC
+
+ Processador(es): 1 processador(es) instalado(s).
+
+ [01]: Intel64 Family 6 Model 94 Stepp
+
+ ing 3 GenuineIntel ~999 Mhz
+
+ Versão do BIOS: LENOVO M0UKT24A, 01/09/2016
+
+ Pasta do Windows: C:\Windows
+
+ Pasta do sistema: C:\Windows\system32
+
+ Inicializar dispositivo: \Device\HarddiskVolume1
+
+ Localidade do sistema: pt-br;Português (Brasil)
+
+ Localidade de entrada: pt-br;Português (Brasil)
+
+ Fuso horário: (UTC-03:00) Brasília
+
+ Memória física total: 4.007 MB
+
+ Memória física disponível: 1.038 MB
+
+ Memória Virtual: Tamanho Máximo: 8.012 MB
+
+ Memória Virtual: Disponível: 1.668 MB
+
+ Memória Virtual: Em Uso: 6.344 MB
+
+ Local(is) de arquivo de paginação: C:\pagefile.sys
+
+ Domínio: LITIZMOTOS
+
+ Servidor de Logon: \\VDC-VENDAS01
+
+ Hotfix(es): 6 hotfix(es) instalado(s).
+
+ [01]: KB2685811
+
+ [02]: KB2999226
+
+ [03]: KB4019990
+
+ [04]: KB4474419
+
+ [05]: KB976902
+
+ [06]: KB976932
+
+ Placa(s) de Rede: 1 NIC(s) instalado(s).
+
+ [01]: Realtek PCIe GbE Family Control
+
+ ler
+
+ Nome da conexão: Conexão local
+
+ DHCP ativado: Sim
+
+ Servidor DHCP: 192.168.100.1
+
+ Endereço(es) IP
+
+ [01]: 192.168.100.61
+
+ [02]: fe80::f45d:ccfd:a60c:47ed
+
+ 
+
+ [03]: 2804:1b94:680:3e00:313a:2
+
+ 5ca:8788:235a
+
+ [04]: 2804:1b94:680:3e00:f45d:c
+
+ cfd:a60c:47ed",
+889,Litiz - Vitória da Conquista,Vendas,Notebook,NOTEBOOK ACER ASPIRE 5 I5-10 8GB RAM,LUCAS - VENDAS,,NXA4LAL0081388A4A49501,,00589,"NS: NXA4LAL0081388A4A49501
+
+ SNID: 13856643695
+
+ID DISPOSITIVO:F36FA77F-7056-4777-A73F-E1035195D38F
+
+ID DO PRODUTO: 00327-31069-58773-AAOEM",
+893,Litiz - Vitória da Conquista,Vendas,Mouse,MOUSE MULTI MO300,PATRICIA - VENDEDORES,,,,,PN R00375,
+897,Litiz - Vitória da Conquista,Vendas,Teclado,TECLADO HP PR1101U,PATRICIA - VENDEDORES,,BCYTAOAHH8R3A9,,00445,NS: BCYTAOAHH8R3A9,
+901,Litiz - Vitória da Conquista,Vendas,Energia,ESTABILIZADOR FORCE LINE ETERNITY,PATRICIA - VENDEDORES,,,,01195,,
+905,Litiz - Vitória da Conquista,Vendas,Monitor,"MONITOR 3GREEN TECHNOLOGY 19,5°",PATRICIA - VENDEDORES,,1953GLED1941062400294,,01731,NS: 1953GLED1941062400294,
+909,Litiz - Vitória da Conquista,,Áudio,CAIXA DE SOM ACÚSTICA BRITÂNIA BCX12100,,,3211140867A270A,,01814,NS 3211140867A270A,
+1173,Litiz - Vitória da Conquista,Pós-venda,Energia,ESTABILIZADOR TS SHARA,MANUELA - PECISTA,,,,,,Patrimônio 01875 estava repetido na planilha original (também usado pelo ID 501). Confirmar o número correto.
+33,Litiz - Porto Seguro,Vendas,Tablet,"Multilaser M7 64GB, 4GB",,,,,,,
+257,Litiz - Porto Seguro,Vendas,Notebook,Notebook Positivo Vision C14 Celeron 8GB 256GB,VENDEDORES,DESKTOP-53DEKI9,,1457463804,01900,"Nome do dispositivo DESKTOP-53DEKI9
+
+ Processador Intel(R) Celeron(R) N4020 CPU @ 1.10GHz (1.10 GHz)
+
+ RAM instalada 8,00 GB (utilizável: 7,83 GB)
+
+ ID do dispositivo 0B758A39-6005-4CCF-9D09-7EBCBBDFA29C
+
+ ID do Produto 00326-30000-00001-AA654
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+261,Litiz - Porto Seguro,Vendas,Notebook,Notebook Positivo Vision C14 Lumina BAR Celeron 4GB 128GB,VENDEDORES,DESKTOP-F3O1891,,1228064346,01739,"Nome do Dispositivo DESKTOP-F3O1891
+
+ Processador Intel(R) Celeron(R) CPU N3350 @ 1.10GHz 1.10 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,83 GB)
+
+ Armazenamento 119 GB SSD SATA CV8-CE128
+
+ Placa de vídeo Intel(R) HD Graphics 500 (128 MB)
+
+ ID do dispositivo 6EA06455-4283-455E-9616-AC5E183687EC
+
+ ID do Produto 00330-53092-03800-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+265,Litiz - Porto Seguro,Caixa,Desktop,COMPUTADOR CBTECH -BIBISD2 I3-2 4GB RAM 120GB SSD,VANESSA JESUS DOS SANTOS,DESKTOP-BIBISD2,,493433014,01115,"Nome do dispositivo DESKTOP-BIBISD2
+
+ Processador Intel(R) Core(TM) i3-2120 CPU @ 3.30GHz 3.30 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,89 GB)
+
+ ID do dispositivo F616EED0-5C7B-45BE-A971-8F54402E5C55
+
+ ID do Produto 00331-10000-00001-AA427
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+269,Litiz - Porto Seguro,Pós-venda,Tablet,TABLET SAMSUNG S6 LITE 4GB RAM 64GB,KAROLAINE PORTO RAMOS,,RX2XA020HRE,,01833,"NS: RX2XA020HRE
+
+ ENDEREÇO IP 192.168.15.19
+
+ 
+
+TABLET APRESENTA TRINCADO NA PARTE INFERIIOR DIREITA DA TELA",
+273,Litiz - Porto Seguro,Vendas,Tablet,TABLET MULTILASER M8 64GB 6GB RAM,VENDEDORES EXTERNOS,,,,,,
+277,Litiz - Porto Seguro,Pós-venda,Desktop,COMPUTADOR FAVORITO I3-4 4GB RAM 240GB SSD,KAROLAINE PORTO RAMOS,DESKTOP-6TRVL19,,1732787163,01378,"Nome do Dispositivo DESKTOP-6TRVL19
+
+ Processador Intel(R) Core(TM) i3-3240 CPU @ 3.40GHz 3.40 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,71 GB)
+
+ Armazenamento 238 GB SSD ATKSSDS256
+
+ Placa de vídeo Intel(R) HD Graphics (224 MB)
+
+ ID do dispositivo 5944E69C-04C5-44B3-A5B8-27CD5D95F9CF
+
+ ID do Produto 00331-10000-00001-AA372
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+
+
+REALIZADO MANUTENÇÃO:
+
+
+
+TROCA DA FONTE E DO COOLER E TROCA DE HD 500 GB POR SSD 240GB",
+281,Litiz - Porto Seguro,Pós-venda,Notebook,NOTEBOOK ASUS I3-11 4GB RAM 240GB SSD,GERÊNCIA,consorcio-super,,890978315,00591,"Nome do dispositivo consorcio-super
+
+ Processador 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz (3.00 GHz)
+
+ RAM instalada 4,00 GB (utilizável: 3,70 GB)
+
+ ID do dispositivo 9D8163E5-ED70-455D-B3A1-D0A63C5F93C4
+
+ ID do Produto 00327-70000-00001-AA979
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+285,Litiz - Porto Seguro,Vendas,Notebook,NOTEBOOK HP G9 I3-11 8GB RAM 256GB SSD,THADEU LEÃO,U5CMRR7V0DLUL,,1848350667,01910,"Nome do dispositivo U5CMRR7V0DLUL
+
+ Processador 13th Gen Intel(R) Core(TM) i3-1315U (1.20 GHz)
+
+ RAM instalada 8,00 GB (utilizável: 7,70 GB)
+
+ ID do dispositivo 6A63D48B-8816-4DFF-963E-A5A70C97A975
+
+ ID do Produto 00327-70000-00001-AA173
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+381,Litiz - Porto Seguro,Vendas,Notebook,NOTEBOOK POSITIVO VISION C14 4GB 128GB SSD,VENDEDOR APS,LTZ-Vendas-PTS,,1989370432,01853,"Nome do dispositivo LTZ-Vendas-PTS
+
+ Processador Intel(R) Celeron(R) N4020 CPU @ 1.10GHz 1.10 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,83 GB)
+
+ ID do dispositivo DF148199-CB91-490A-AD82-EEAB42CF7B1F
+
+ ID do Produto 00342-43565-27974-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+ 
+
+ Senha de acesso: Litiz25@
+
+Número de serial: 4AJ28WC4W",
+385,Litiz - Porto Seguro,Administrativo,Notebook,NOTEBOOK POSITIVO VISION C14 4GB 128GB SSD,Assistente de Vendas PTS,Litiz-Adm-PTS,,487268139,01778,"Nome do dispositivo Litiz-Adm-PTS
+
+ Processador Intel(R) Celeron(R) N4020 CPU @ 1.10GHz (1.10 GHz)
+
+ RAM instalada 4,00 GB (utilizável: 3,83 GB)
+
+ ID do dispositivo 048ADB04-7E6E-43FF-85E2-DD06EEAB7B0C
+
+ ID do Produto 00342-43564-79301-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+ 
+
+Senha de acesso: Litiz25@
+
+Número de serial: 4AJ28WC4W",
+593,Litiz - Porto Seguro,Caixa,Monitor,MONITOR LG E11941SX 19.5°,VANESSA,,404SPED0Y140,,00817,NS: 404SPED0Y140,
+597,Litiz - Porto Seguro,Caixa,Teclado,TECLADO MULTILASER TC065,VANESSA,,,,00814,,
+601,Litiz - Porto Seguro,Caixa,Mouse,OPTICAL MOUSE QC PASS,VANESSA,,,,,,
+605,Litiz - Porto Seguro,Caixa,Áudio,FONE HEADSET,VANESSA,,,,,,
+609,Litiz - Porto Seguro,Caixa,Energia,ESTABILIZADOR SMS,VANESSA,,,,01114,,
+613,Litiz - Porto Seguro,Caixa,Energia,ESTABILIZADOR SMS,VANESSA,,19121792,,00797,NS: 19121792,
+617,Litiz - Porto Seguro,Pós-venda,Monitor,MONITOR PHILIPS 193V5LSB 23/57 8.5°,KAROLAYNE,,FX0A1340054762,,00812,"MODELO ID: 193V5LSB/57
+
+NS: FX0A1340054762",
+621,Litiz - Porto Seguro,Pós-venda,Energia,ESTABILIZDOR FORCE LINE ETERNITY,KAROLAYNE,,,,01251,REF: 7995,
+625,Litiz - Porto Seguro,TI,TV,SMART TV SAMSUNG 32°,SALA DE ESPERA,,,,00784,,
+629,Litiz - Porto Seguro,Administrativo,Tablet,TABLET MULTILASER M7 32GB 4GB RAM,,,,,01769,Tablet para registro de ponto,
+633,Litiz - Porto Seguro,Pós-venda,Teclado,TECLADO KP808,KAROLAYNE,,,,,ID: VIZPKP807,
+637,Litiz - Porto Seguro,Pós-venda,Mouse,MOUSE MULTI MF200,KAROLAYNE,,,,,PN: MO255,
+641,Litiz - Porto Seguro,Pós-venda,Desktop,COMPUTADOR CBTECH 120GB SSD 8GB RAM,,TERMINAL-01,,1576133199,01500,"Nome do Dispositivo TERMINAL-01
+
+ Processador Intel(R) Core(TM) i3-3240 CPU @ 3.40GHz 3.40 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,89 GB)
+
+ Armazenamento 112 GB SSD Patriot Burst Elite 120GB
+
+ ID do dispositivo F442C1FA-77D2-428D-B3C4-BC22CE71F08C
+
+ ID do Produto 00331-10000-00001-AA052
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+645,Litiz - Porto Seguro,Pós-venda,Monitor,MONITOR VALLIANTY DXM19C 19°,PECISTA,,1546802201003,,01929,NS: 1546802201003,
+649,Litiz - Porto Seguro,Pós-venda,Teclado,TECLADO CBTECH KB-15BK,PECISTA,,092229017017005683,,01171,NS: 092229017017005683,
+653,Litiz - Porto Seguro,Pós-venda,Mouse,OPTICAL MOUSE BR,PECISTA,,,,,,
+657,Litiz - Porto Seguro,Pós-venda,Energia,ESTABILIZADOR SMS,PECISTA,,19338892,,01113,NS: 19338892,
+661,Litiz - Porto Seguro,Pós-venda,Impressora,IMPRESSORA CANON G3010 SERIES,PÓS-VENDA,,KMVF84753,,01948,"NS: KMVF84753
+
+
+
+IMPRESSORA LOCALIZADA NA PARTE DE SERVIÇOS EXECUTADOS AO LADO DA SALA DA ADMINISTRAÇÃO",
+665,Litiz - Porto Seguro,Pós-venda,Telefone,TELEFONE INTELBRAS TS3112,PECISTA,,DTFM01004549G,,01735,NS: DTFM01004549G,
+673,Litiz - Porto Seguro,Pós-venda,Mouse,MOUSE GEARTE,MECÂNICOS,,,,,,
+677,Litiz - Porto Seguro,Administrativo,Áudio,CAIXA DE SOM PULSE SP403E,,,,,01881,"ANATEL: 07477-22-0311
+
+POTÊNCIA: 550W RMS",
+681,Litiz - Porto Seguro,Vendas,Mouse,MOUSE MULTI MS100,GERÊNCIA,,,,,PN: MO307,
+685,Litiz - Porto Seguro,Vendas,Desktop,COMPUTADOR I5-2 16GB RAM 447GB SSD,VENDAS,DESKTOP-L6F3F9R,,1971588123,01449,"Nome do Dispositivo DESKTOP-L6F3F9R
+
+ Processador Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz 3.10 GHz
+
+ RAM instalada 16,0 GB (utilizável: 15,9 GB)
+
+ Armazenamento 447 GB SSD TRS480G-SSD
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo 20931FFF-0362-4D4A-9204-4E11C18EF90F
+
+ ID do Produto 00330-80000-00000-AA458
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+689,Litiz - Porto Seguro,Vendas,Mouse,MOUSE BASIC 5+,VENDEDORES,,43000214194,,,NS: 43000214194,
+693,Litiz - Porto Seguro,Vendas,Teclado,TECLADO KB110,VENDEDORES,,KB110P37564,,,NS: KB110P37564,
+697,Litiz - Porto Seguro,Vendas,Monitor,MONITOR TRONOS CORP TRS-20WV 75 20°,VENDEDORES,,358KN24110535,,01905,NS: 358KN24110535,
+701,Litiz - Porto Seguro,Vendas,Áudio,CAIXA DE SOM KNUP KP-600,VENDEDORES,,,,,VIA PORTA USB,
+705,Litiz - Porto Seguro,Vendas,Impressora,IMPRESSORA BROTHER DCP 1617NW,VENDEDORES,,U63980L2N320248,,01885,NS: U63980L2N320248,
+709,Litiz - Porto Seguro,Vendas,Teclado,TECLADO MAXPRINT CONCEPT USB,VENDEDORES,,DPE11860131603815,,,NS: DPE11860131603815,
+713,Litiz - Porto Seguro,Vendas,Mouse,MOUSE OP-720,VENDEDORES,,,,,,
+717,Litiz - Porto Seguro,Vendas,Notebook,Notebook Positivo Vision C14 Celeron 8GB 256GB,VENDEDORES,DESKTOP-SMM7785,,17771947136,01827,"Nome do dispositivo DESKTOP-SMM7785
+
+ Processador Intel(R) Celeron(R) N4020 CPU @ 1.10GHz (1.10 GHz)
+
+ RAM instalada 8,00 GB (utilizável: 7,83 GB)
+
+ ID do dispositivo E5CD1079A17A-4253-BFC3-D7D9983DCA02
+
+ ID do Produto 00326-10000-00000-AA865
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+721,Litiz - Porto Seguro,Vendas,Notebook,NOTEBOOK ASUS I3-11 4GB RAM 240GB SSD,VENDEDORES,gerent-trancoso,,,01903,"Nome do dispositivo gerent-trancoso
+
+ Processador 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz (3.00 GHz)
+
+ RAM instalada 4,00 GB (utilizável: 3,70 GB)
+
+ ID do dispositivo F38B3B95-1CE6-4AB1-9B39-1B05343357B6
+
+ ID do Produto 00342-43299-57436-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+NS:",
+725,Litiz - Porto Seguro,Vendas,Monitor,MONITOR TRONOS CORP TRS-20WV75 20°,VENDEDORES,,358KN24110194,,01838,NS: 358KN24110194,
+729,Litiz - Porto Seguro,Vendas,Teclado,TECLADO KB110,VENDEDORES,,KB110P37586,,,NS: KB110P37586,
+733,Litiz - Porto Seguro,Vendas,Mouse,MOUSE H'MASTON,VENDEDORES,,,,,,
+737,Litiz - Porto Seguro,Vendas,Desktop,COMPUTADOR I5-2 16GB RAM 447GB SSD,VENDEDORES,DESKTOP-L6F3F9R,,1982291135,01957,"Nome do Dispositivo DESKTOP-L6F3F9R
+
+ Processador Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz 3.10 GHz
+
+ RAM instalada 16,0 GB (utilizável: 15,9 GB)
+
+ Armazenamento 447 GB SSD TRS480G-SSD
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo 20931FFF-0362-4D4A-9204-4E11C18EF90F
+
+ ID do Produto 00330-80000-00000-AA458
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+741,Litiz - Porto Seguro,Vendas,Energia,NOBREAK SMS,VENDEDORES,,274290015265,,00604,NS:274290015265,
+965,Litiz - Porto Seguro,Vendas,Desktop,COMPUTADOR CBTECH I3-3 8GB RAM 112GB SSD,MAILTON - VENDEDORES,TERMINAL-01,,1716254243,01406,"Nome do Dispositivo TERMINAL-01
+
+ Processador Intel(R) Core(TM) i3-3240 CPU @ 3.40GHz 3.40 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,89 GB)
+
+ Armazenamento 112 GB SSD Patriot Burst Elite 120GB
+
+ ID do dispositivo F442C1FA-77D2-428D-B3C4-BC22CE71F08C
+
+ ID do Produto 00331-10000-00001-AA052
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+37,Litiz - Jequié,Administrativo,Notebook,NOTEBOOK VAIO VJFE555F11X - I5-11 8GB 500GB SSD,GEIZA ALVES RODRIGUES,,87061679Q,996213724,01986,NS: 87061679Q,
+41,Litiz - Jequié,,Notebook,NOTEBOOK LENOVO IDEAPAD - I3-11,GORETE BARRETO DA SILVA GOMES,,,1923679296,,4GB RAM 256GB SSD,
+45,Litiz - Jequié,,Desktop,DESKTOP - I3 4GB 240GB SSD,ELIONAI DOS SANTOS MACEDO,JEQ-CAIXA,,816605713,,"Nome do dispositivo JEQ-CAIXA
+
+ Processador Intel(R) Core(TM) i3 CPU 540 @ 3.07GHz 3.07 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,74 GB)
+
+ ID do dispositivo F8032CCC-F1DA-4D6E-A32A-A89F614B1232
+
+ ID do Produto 00331-10000-00001-AA435",
+49,Litiz - Jequié,Pós-venda,Desktop,COMPUTADOR CBTECH I3-4 16GB RAM 224GB SSD,GABRIEL SANTOS MASCARENHAS,DESKTOP-IF8DG11,,1779029646,01155,"Nome do dispositivo DESKTOP-IF8DG11
+
+ Processador Intel(R) Core(TM) i3-4150 CPU @ 3.50GHz 3.50 GHz
+
+ RAM instalada 16,0 GB
+
+ ID do dispositivo E63E3DEE-9E6C-454A-9334-36EE507D1B58
+
+ ID do Produto 00331-10000-00001-AA899",
+53,Litiz - Jequié,Pós-venda,Notebook,NOTEBOOK LENOVO I5-8,GABRIEL FERREIRA DE OLIVEIRA,DESKTOP-7O7GP43,,1646720143,00602,"Nome do Dispositivo DESKTOP-7O7GP43
+
+ Processador Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz 1.80 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,88 GB)
+
+ Armazenamento 932 GB HDD WDC WD10SPZX-24Z10
+
+ Placa de vídeo Intel(R) UHD Graphics 620 (128 MB)
+
+ ID do dispositivo 62C63C10-4934-4A88-AB06-740E392CEC91
+
+ ID do Produto 00327-30778-78934-AAOEM",
+57,Litiz - Jequié,,Tablet,TABLET POSITIVO TWIST 64 GB 2GB RAM,,,,,,,
+61,Litiz - Jequié,Pós-venda,Tablet,TABLET SAMSUNG S6 64GB 4 GB RAM,GABRIEL - RECEPÇÃO DE SERVIÇOS,,RX2Y100VCCM,,01203,NS: RX2Y100VCCM,
+65,Litiz - Jequié,Vendas,Desktop,DESKTOP I3-2 4GB RAM 120GB,ITANA - VENDEDORES,VENDAS01-PC,,967664647,01700,"Nome do dispositivo VENDAS01-PC
+
+ Processador Intel(R) Core(TM) i3-2100 CPU @ 3.10GHz 3.10 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,89 GB)
+
+ ID do dispositivo 12B4C606-FCEE-40A5-913B-BCAE7D961A12
+
+ ID do Produto 00331-10000-00001-AA451
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+69,Litiz - Jequié,Vendas,Desktop,COMPUTADOR CBTECH I3-6 240GB SSD 8GB RAM,GESSICA - VENDEDORES,DESKTOP-J1OUIS3,,1862114573,01422,"Nome do dispositivo DESKTOP-J1OUIS3
+
+ Processador Intel(R) Core(TM) i3-6100 CPU @ 3.70GHz 3.70 GHz
+
+ RAM instalada 8,00 GB
+
+ ID do dispositivo 96208159-B098-4268-9A4C-84E5AA140E29
+
+ ID do Produto 00331-10000-00001-AA945
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64",
+201,Litiz - Jequié,Administrativo,Notebook,NOTEBOOK VAIO VJEFE55F11X - I5-11 8GB 500GB SSD,DAIANE SOUZA DOS SANTOS,,,563489035,01987,,
+305,Litiz - Jequié,Vendas,Notebook,NOTEBOOK POSITIVO VISION C14 4GB 128GB SSD,PARCEIRO JEQUIÉ,Litiz-Vendas,,1646441095,01601,"Nome do dispositivo Litiz-Vendas
+
+ Processador Intel(R) Celeron(R) N4020 CPU @ 1.10GHz (1.10 GHz)
+
+ RAM instalada 4,00 GB (utilizável: 3,83 GB)
+
+ ID do dispositivo AC234B3E-900D-412F-988A-F3C732B1478C
+
+ ID do Produto 00342-43566-21358-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+
+
+ Senha de acesso: Litiz25@
+
+Número de serial: 4AJ31LM0K",
+1205,Litiz - Jequié,Administrativo,Mouse,MOUSE MULTILASER MO300,DAIANE - FATURAMENTO,,,,,,
+1209,Litiz - Jequié,Caixa,Telefone,TELEFONE INTELBRAS PLENO,GORETE - CAIXA,,NSUK3406575SQ,,01654,NS: NSUK3406575SQ,
+1213,Litiz - Jequié,Caixa,Mouse,MOUSE MULTILASER MO302,GORETE - CAIXA,,,,,,
+1217,Litiz - Jequié,Pós-venda,Mouse,MOUSE MULTILASER MO300,GABRIEL - CONSULTOR OFICINA,,,,,,
+1221,Litiz - Jequié,Pós-venda,Monitor,MONITOR PCFORT F1930 19°,ELISABETH - PECISTA,,F1930121113,,01161,NS: F1930121113,Patrimônio informado como 1161 e padronizado para 01161.
+1225,Litiz - Jequié,Pós-venda,Teclado,TECLADO MULTILASER TF300,ELISABETH - PECISTA,,,,,,
+1229,Litiz - Jequié,Pós-venda,Mouse,MOUSE INTELBRAS M17-601USB,ELISABETH - PECISTA,,170575744,,,NS: 170575744,
+1233,Litiz - Jequié,Pós-venda,Telefone,TELEFONE INTELBRAS PLENO,ELISABETH - PECISTA,,NSUK3406573JE,,01653,NS: NSUK3406573JE,
+1237,Litiz - Jequié,Vendas,Monitor,"MONITOR SOYO SM185-L03 18,5°",GESSICA - VENDEDORES,,954923302525,,01533,NS: 954923302525,
+1241,Litiz - Jequié,Vendas,Teclado,TECLADO MULTI TF300,GESSICA - VENDEDORES,,,,,,
+1245,Litiz - Jequié,Vendas,Mouse,MOUSE KNUP KP-M611,GESSICA - VENDEDORES,,,,,,
+1249,Litiz - Jequié,Vendas,Energia,ESTABILIZADOR FORCE LINE ETERNITY,GESSICA - VENDEDORES,,,,01163,,
+1253,Litiz - Jequié,Vendas,Telefone,TELEFONE INTELBRAS PLENO,ITANA VENDEDORES,,NSUK34065748L,,01655,NS: NSUK34065748L,
+1257,Litiz - Jequié,Vendas,Mouse,MOUSE KNUP KP-M611,ITANA - VENDEDORES,,,,,,
+1261,Litiz - Jequié,Vendas,Teclado,TECLADO CBTECH KB15BK,ITANA - VENDEDORES,,092229017017008247,,01695,NS: 092229017017008247,
+1265,Litiz - Jequié,Vendas,Monitor,MONITOR VXPRO VX190Z 19º,ITANA - VENDEDORES,,,,01670,,
+1269,Litiz - Jequié,Vendas,Energia,ESTABILIZADOR TSHARA,ITANA - VENDEDORES,,,,01220,,
+109,Litiz - Itapetinga,Pós-venda,Notebook,NOTEBOOK ASUS I3-11 4GB RAM 240GB SSD,RAQUEL LIMA NASCIMENTO,oficina-itp,N8N0B602071933B,209215778,00593,"Nome do dispositivo oficina-itp
+
+ Processador 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz 3.00 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,70 GB)
+
+ ID do dispositivo AA3F5BFA-58D6-4F0C-A87F-397352C6FE6A
+
+ ID do Produto 00342-43299-57575-AAOEM
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo
+
+ NS: N8N0B602071933B",
+113,Litiz - Itapetinga,Caixa,Desktop,COMPUTADOR CBTECH I3-3 8GB RAM 240GB SSD,JOCEANE DE OLIVEIRA RODRIGUES,DESKTOP-HL1BAC6,,1479351256,01435,"Nome do dispositivo DESKTOP-HL1BAC6
+
+ Processador Intel(R) Core(TM) i3-3240 CPU @ 3.40GHz 3.40 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,89 GB)
+
+ ID do dispositivo 2E3B6CFF-8869-400C-BF6D-6E04976549F8
+
+ ID do Produto 00331-10000-00001-AA238
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+117,Litiz - Itapetinga,Administrativo,Tablet,TABLET POSITIVO TWIST 64GB 2 GB RAM,,,,,01395,"ENDEREÇO IP: 192.168.1.107
+
+ENDEREÇO MAC: 8C:92:53:B4:00:E8",
+121,Litiz - Itapetinga,Vendas,Desktop,COMPUTADOR CBTECH I3-4 4GB RAM 120GB SSD,VENDEDORES,vendas-itp,,1336112604,00015,"Nome do Dispositivo vendas-itp
+
+ Processador 
+
+ RAM instalada 4,00 GB
+
+ Placa de vídeo Intel(R) HD Graphics 4400 (113 MB)
+
+ ID do dispositivo E875C91F-A546-4E93-84BD-4DBCC19B9677
+
+ ID do Produto 00330-80000-00000-AA678
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+125,Litiz - Itapetinga,,Notebook,NOTEBOOK POSITIVO I3-7 4GB RAM 60GB SSD,,DESKTOP-6KQIKK8,,479592815,00516,"Nome do Dispositivo DESKTOP-6KQIKK8
+
+ Processador Intel(R) Core(TM) i3-7020U CPU @ 2.30GHz 2.30 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,89 GB)
+
+ Armazenamento 58 GB SSD VID:45 DF4064
+
+ Placa de vídeo Intel(R) HD Graphics 620 (128 MB)
+
+ ID do dispositivo 5195FC90-4857-4B4A-A5AD-CE1A1784803E
+
+ ID do Produto 00330-80000-00000-AA508
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+301,Litiz - Itapetinga,Pós-venda,Tablet,Tablet S6 64GB 4 GB RAM,RAQUEL LIMA NASCIMENTO,,RX2XB02PTNY,,01973,NS: RX2XB02PTNY,
+745,Litiz - Itapetinga,Caixa,Teclado,TECLADO CBTECH KB-15BK,CAIXA,,0323290170170027862,,01230,NS: 0323290170170027862,
+749,Litiz - Itapetinga,Caixa,Mouse,MOUSE INTELBRAS RTM 019,CAIXA,,180538931,,,NS: 180538931,
+753,Litiz - Itapetinga,Caixa,Monitor,"MONITOR HQ SCREEN 19,5°",CAIXA,,195HQLED168403232990,,01238,NS: 195HQLED168403232990,
+757,Litiz - Itapetinga,Caixa,Energia,ESTABILIZADOR FORCE LINE ETERNITY,CAIXA,,,,01643,,
+761,Litiz - Itapetinga,Vendas,Monitor,MONITOR PHILIPS 200v4lsb2/57 19.5°,VENDEDORES,,FX0A1411063641,,00515,NS: FX0A1411063641,
+765,Litiz - Itapetinga,,Áudio,CAIXA DE SOM AMVOX LP 180W RMS,,,,,01795,,
+769,Litiz - Itapetinga,Vendas,Energia,ESTABILIZADOR SMS,,,,,00556,,
+773,Litiz - Itapetinga,Vendas,Teclado,TECLADO KB007,VENDEDORES,,12984237,,01070,NS: 12984237,
+777,Litiz - Itapetinga,Vendas,Mouse,MOUSE MULTILASER MO304,,,,,,CONECTADO AO NOTEBOOK POSITIVO NO SHOWROOM,
+785,Litiz - Itapetinga,Administrativo,Impressora,IMPRESSORA DCP 1617NW,,,U63980E8N520621,,00494,NS: U63980E8N520621,
+789,Litiz - Itapetinga,Pós-venda,Mouse,MOUSE USB OPTICO,RAQUEL LIMA NASCIMENTO,,,,,,
+793,Litiz - Itapetinga,TI,TV,TV HQ SCREEN 32º,,,,,01797,,
+797,Litiz - Itapetinga,TI,Telefone,TELEFONE INTELBRAS PLENO,,,L7WJ41036707U,,01947,"NS: L7WJ41036707U
+
+TELEFONES PARADO",
+801,Litiz - Itapetinga,TI,Telefone,TELEFONE INTELBRAS PLENO,,,L7WJ4103668J4,,01074,"NS: L7WJ4103668J4
+
+TELEFONES PARADO",
+805,Litiz - Itapetinga,TI,Telefone,TELEFONE INTELBRAS PLENO,,,L7WJ4103667I6,,01064,"NS: L7WJ4103667I6
+
+TELEFONES PARADO",
+809,Litiz - Itapetinga,TI,Telefone,TELEFONE INTELBRAS PLENO,,,L7WJ4103669SH,,01069,"NS: L7WJ4103669SH
+
+TELEFONES PARADO",
+813,Litiz - Itapetinga,TI,Câmeras e DVR,DVR INTELBRAS MULTI HD,,,EWVK09013560L,,01912,NS: EWVK09013560L,
+817,Litiz - Itapetinga,TI,Mouse,MOUSE MS-31BK CBTECH,,,122229006013043993,,,NS: 122229006013043993,
+133,Litiz - Itabuna,Caixa,Desktop,"COMPUTADOR LOGIN I3-4 4GB RAM 240GB SSD, 1TB HD",MARIANA - CAIXA,DESKTOP-256NA3A,,1985709194,00852,"Nome do dispositivo DESKTOP-256NA3A
+
+ Processador Intel(R) Core(TM) i3-4150 CPU @ 3.50GHz 3.50 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,87 GB)
+
+ ID do dispositivo 8D11D5F4-E558-49B3-971C-348FBFE3F5D4
+
+ ID do Produto 00326-30000-00001-AA556
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64",
+137,Litiz - Itabuna,Vendas,Desktop,COMPUTADOR HP I3-4 4GB RAM 250GB SSD,VENDEDORES - MESA 01,,,1869664979,00877,"Proprietário registrado: Litiz
+
+ Organização registrada:
+
+ Identificação do produto: 00371-OEM-8992671-00008
+
+ Data da instalação original: 17/02/2016, 10:38:22
+
+ Tempo de Inicialização do Sistema: 06/05/2025, 08:05:36
+
+ Fabricante do sistema: Hewlett-Packard
+
+ Modelo do sistema: HP 402 G1 SFF Business PC
+
+ Tipo de sistema: x64-based PC
+
+ Processador(es): 1 processador(es) instalado(s).",
+141,Litiz - Itabuna,Administrativo,Tablet,"Multilaser M7 64GB, 4GB",,,,,,,
+145,Litiz - Itabuna,Vendas,Desktop,COMPUTADOR LENOVO I3-4 4GB RAM 120GB SSD,VENDEDORES - MESA 03,DESKTOP-3KQOLQB,,605131794,00887,"Nome do dispositivo DESKTOP-3KQOLQB
+
+ Processador Intel(R) Core(TM) i3-6100 CPU @ 3.70GHz 3.70 GHz
+
+ RAM instalada 4,00 GB
+
+ ID do dispositivo 943C77F6-BCF5-4845-9B05-C6623D947256
+
+ ID do Produto 00331-10000-00001-AA389
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+149,Litiz - Itabuna,Vendas,Desktop,COMPUTADOR ELCOMA I5-3 4GB RAM 500GB HD,VENDEDORES - MESA 03,EXTERNOS-PC,,1337103419,00878,"Computador possui dois Hd's 500GB
+
+
+
+Microsoft Windows [versão 6.1.7601]
+
+ Copyright (c) 2009 Microsoft Corporation. Todos os direitos reservados.
+
+ 
+
+ C:\Users\Litiz>systeminfo
+
+ 
+
+ Nome do host: EXTERNOS-PC
+
+ Nome do sistema operacional: Microsoft Windows 7 Professional
+
+ Versão do sistema operacional: 6.1.7601 Service Pack 1 compilação 76
+
+ 01
+
+ Fabricante do sistema operacional: Microsoft Corporation
+
+ Configuração do SO: Estação de trabalho autônoma
+
+ Tipo de compilação do sistema operacional: Multiprocessor Free
+
+ Proprietário registrado: Desenvolvimento-01
+
+ Organização registrada:
+
+ Identificação do produto: 00371-OEM-8992671-00524
+
+ Data da instalação original: 20/05/2014, 08:15:29
+
+ Tempo de Inicialização do Sistema: 06/05/2025, 08:04:22
+
+ Fabricante do sistema: System manufacturer
+
+ Modelo do sistema: System Product Name
+
+ Tipo de sistema: x64-based PC
+
+ Processador(es): 1 processador(es) instalado(s).",
+153,Litiz - Itabuna,Pós-venda,Desktop,COMPUTADOR CBTECH I3-3 8GB RAM 240GB SSD,MANUELA - POSVENDA,DESKTOP-R1C9IU2,,1345592423,01509,"Nome do dispositivo DESKTOP-R1C9IU2
+
+ Processador Intel(R) Core(TM) i3-3240 CPU @ 3.40GHz 3.40 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,89 GB)
+
+ ID do dispositivo 71A3A535-BCAB-431A-BEB5-B4D5D89F7450
+
+ ID do Produto 00331-10000-00001-AA008
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+157,Litiz - Itabuna,Pós-venda,Desktop,COMPUTADOR CBTECH I3-3 4GB RAM 120GB SSD,JOSEMAR DA SILVA SANTOS,DESKTOP-FG5PAKA,,583522401,01227,"Nome do dispositivo DESKTOP-FG5PAKA
+
+ Processador Intel(R) Core(TM) i3-3240 CPU @ 3.40GHz 3.40 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,89 GB)
+
+ ID do dispositivo C4845329-25F7-45A1-8EC8-D170F73C0816
+
+ ID do Produto 00331-10000-00001-AA477
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+173,Litiz - Itabuna,Pós-venda,Tablet,TABLET SAMSUNG S6 64GB 4 GB RAM,POS-VENDA,,RX2XA020FEJ,,01880,NS: RX2XA020FEJ,
+177,Litiz - Itabuna,Pós-venda,Tablet,TABLET SAMSUNG S6 4GB RAM 64GB,PÓSVENDA,,RX2XA020JYT,,01816,NS: RX2XA020JYT,
+185,Litiz - Itabuna,Pós-venda,Desktop,COMPUTADOR PC DIGITAL i5-4 4GB RAM 683GB HD 247GB SSD,AGNA - RECEPÇÃO DE SERVIÇOS,,,888116038,00762,,
+229,Litiz - Itabuna,Pós-venda,Desktop,COMPUTADOR CBTECTH I3-6 8GB RAM 240GB SSD,MECÂNICOS,DESKTOP-L3TBHMC,,1099448907,01501,"Nome do Dispositivo DESKTOP-L3TBHMC
+
+ Processador Intel(R) Core(TM) i3-6100 CPU @ 3.70GHz 3.70 GHz
+
+ RAM instalada 8,00 GB
+
+ Armazenamento 224 GB SSD Patriot Burst Elite 240GB
+
+ Placa de vídeo Intel(R) HD Graphics 530 (128 MB)
+
+ ID do dispositivo 4E039EE5-8A06-493D-8317-53EE0E572B94
+
+ ID do Produto 00331-10000-00001-AA377
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+289,Litiz - Itabuna,,Notebook,NOTEBOOK POSITIVO 1TB HD 8GB RAM,ADEMILSON FILHO SANTOS DA SILVA,,,,,,
+293,Litiz - Itabuna,Pós-venda,Notebook,NOTEBOOK ASUS I3-11 4GB RAM 240GB SSD,CAMILA -SUPERVISORA PÓS-VENDA,,R1N0B603037405D,1995999314,01293,NS: R1N0B603037405D,
+993,Litiz - Itabuna,Caixa,Monitor,MONITOR AOC E970SWNL,MARIANA - CAIXA,,KCYGAXAO18118,,00875,NS: KCYGAXAO18118,
+997,Litiz - Itabuna,Caixa,Mouse,MOUSE LAZOS L-MS-BK,MARIANA - CAIXA,,,,,,
+1001,Litiz - Itabuna,Caixa,Teclado,TECLADO KB007,MARIANA - CAIXA,,20067800,,00154,NS: 20067800,
+1005,Litiz - Itabuna,Caixa,Telefone,TELEFONE PLENO INTELBRAS,MARIANA - CAIXA,,L7WJ4104702JU,,01898,NS: L7WJ4104702JU,
+1009,Litiz - Itabuna,Caixa,Impressora,IMPRESSORA HP LASERJET P1102,MARIANA CAIXA,,,,01965,COR: BRANCA,
+1013,Litiz - Itabuna,Caixa,Áudio,CAIXA DE SOM MULTIMIDIA SLIM - MAXPRINT,MARIANA - CAIXA,,PEP0806038603937,,,NS: PEP0806038603937,
+1017,Litiz - Itabuna,Caixa,Impressora,IMPRESSORA BROTHER MFC- 74600DN,MARIANA - CAIXA,,,,,IMPRESSORA SÓ FUNCIONA A DIGITALIZAÇÃO,
+1021,Litiz - Itabuna,Pós-venda,Teclado,TECLADO HP KU-0316,MANUELA - POSVENDA,,434821-003,,00420,NS 434821-003,
+1025,Litiz - Itabuna,Pós-venda,Mouse,MOUSE BR 0106,MANUELA - POSVENDA,,,,,,
+1029,Litiz - Itabuna,Pós-venda,Teclado,TECLADO BR 0014,AGNA - POSVENDA,,,,,,
+1033,Litiz - Itabuna,Pós-venda,Mouse,MOUSE BR 0106,AGNA - POSVENDA,,,,,,
+1037,Litiz - Itabuna,Vendas,Monitor,MONITOR HP L1710 17°,VENDEDORES,,CNC847QJBW,,01968,NS: CNC847QJBW,
+1041,Litiz - Itabuna,Vendas,Desktop,COMPUTADOR LENOVO THINKCENTRE i7-2 8GB RAM 120 GB SSD,VENDEDORES,,,,01785,"ID DISPOSITIVO: 42C9E8F3-ACA3-903D-7A5E3B5CB4A2
+
+ID DO PRODUTO: 00331-10000-00001-AA416",
+1045,Litiz - Itabuna,Vendas,Teclado,TECLADO CHINAMATE,VENDEDORES,,,,,,
+1049,Litiz - Itabuna,Vendas,Mouse,MOUSE SEISA,VENDEDORES - MESA 04,,,,,,
+1053,Litiz - Itabuna,Vendas,Energia,ESTABILIZADOR TS SHARA,VENDEDORES - MESA 4,,,,01877,,
+1057,Litiz - Itabuna,Vendas,Teclado,TECLADO CHINAMATE,VENDEDORES - MESA 5,,,,,,
+1061,Litiz - Itabuna,Vendas,Mouse,MOUSE SEISA,VENDEDORES - MESA 05,,,,,,
+1065,Litiz - Itabuna,Vendas,Monitor,MONITOR HP L1710 17°,VENDEDORES - MESA 05,,CNC837PJYR,,01864,NS: CNC837PJYR,
+1069,Litiz - Itabuna,Vendas,Desktop,COMPUTADOR LENOVO THINKCENTRE I7-2 8GB RAM 120GB SSD,VENDEDORES - MESA 05,DESKTOP-JQGQHFK,,1563326979,01895,"Nome do dispositivo DESKTOP-JQGQHFK
+
+ Processador Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz 3.40 GHz
+
+ RAM instalada 8,00 GB (utilizável: 7,83 GB)
+
+ ID do dispositivo 42C9E8F3-ACA3-4358-903D-7A5E3B5CB4A2
+
+ ID do Produto 00331-10000-00001-AA416
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+1073,Litiz - Itabuna,Vendas,Energia,ESTABILIZADOR FORCE LINE ETERNITY,,,,,01893,,
+1077,Litiz - Itabuna,Vendas,Monitor,MONITOR 3GREEN TECHNOLOGY 17°,VENDEDORES - MESA 01,,1713GLED1853012400053,,01874,NS: 1713GLED1853012400053,
+1081,Litiz - Itabuna,Vendas,Teclado,TECLADO MULTILASER TC142,VENDEDORES - MESA 01,,,,00147,PO VS041,
+1085,Litiz - Itabuna,Vendas,Mouse,MOUSE K-MEX MO-833,VENDEDORES - MESA 01,,,,,,
+1089,Litiz - Itabuna,Vendas,Energia,ESTABILIZADOR SMS,VENDEDORES - MESA 01,,,,00185,,
+1093,Litiz - Itabuna,Vendas,Telefone,TELEFONE INTELBRAS PLENO,VENDEDORES - MESA 01,,TK0905280584,,01889,NS: TK0905280584,
+1097,Litiz - Itabuna,Vendas,Telefone,TELEFONE INTELBRAS PLENO,VENDEDORES - MESA 02,,NSUI3503365GK,,00136,NS: NSUI3503365GK,
+1101,Litiz - Itabuna,,Teclado,TECLADO GENIUS K639,VENDEDORES - MESA 02,,ZM7C02262809,,,NS: ZM7C02262809,
+1105,Litiz - Itabuna,Vendas,Monitor,MONITOR AOC E9705SWNL,VENDEDORES - MESA 02,,KCYGBXA019389,,00881,NS: KCYGBXA019389,
+1109,Litiz - Itabuna,Vendas,Energia,ESTABILIZADOR TS SHARA,VENDEDORES - MESA 03,,,,01943,,
+1113,Litiz - Itabuna,Vendas,Mouse,MOUSE BR,VENDEDORES - MESA 03,,,,,,
+1117,Litiz - Itabuna,Vendas,Teclado,TECLADO MULTILASER TC 142,VENDEDORES - MESA 03,,,,,PO VS041,
+1121,Litiz - Itabuna,Vendas,Energia,ESTABILIZADOR TS SHARA,VENDEDORES - MESA 03,,,,00782,,
+1125,Litiz - Itabuna,Vendas,Monitor,MONITOR VXPRO VX190Z 19°,VENDEDORES - MESA 03,,VXZ190C2400093,,01763,NS: VXZ190C2400093,
+1129,Litiz - Itabuna,Administrativo,Tablet,TABLET MULTILASER M7 4GB RAM 32GB,,,,,01779,"ENDEREÇO IP: 192.168.15.24
+
+ML_SO0S_SO4S_M7_WIFI.V7_20250805",
+1133,Litiz - Itabuna,Vendas,Telefone,TELEFONE INTELBRAS TC20,VENDEDORES,,VJEF2305266FE,,01345,NS: VJEF2305266FE,
+1137,Litiz - Itabuna,Vendas,Impressora,IMPRESSORA BROTHER DCP 1617NW,VENDEDORES,,U63980J6N449297,,00874,NS: U63980J6N449297,
+1141,Litiz - Itabuna,Pós-venda,Mouse,MOUSE INTELBRAS RTM 019,CAMILA - SUPERVISORA PÓS-VENDA,,180538931,,,NS: 180538931,
+1145,Litiz - Itabuna,Pós-venda,Monitor,MONITOR HQ SCREEN 19.5°,MANUELA - PECISTA,,,,01904,,
+1149,Litiz - Itabuna,Pós-venda,Monitor,"MONITOR AOC e970Swnl LED 18,5 POL.",AGNA - CONSULTOR OFICINA,,KCYGAXA008233,,01850,NS: KCYGAXA008233,
+1153,Litiz - Itabuna,Pós-venda,Monitor,MONITOR VXPRO VX190Z 19°,JOSEMAR - CONSULTOR OFICINA,,VXZ190C0009349,,01257,NS: VXZ190C0009349,
+1157,Litiz - Itabuna,Pós-venda,Teclado,TECLADO BR 0014,JOSEMAR - POSVENDA,,,,,,
+1161,Litiz - Itabuna,Pós-venda,Mouse,MOUSE BR 0106,JOSEMAR - POSVENDA,,,,,,
+1165,Litiz - Itabuna,Vendas,Energia,ESTABILIZADOR TS SHARA,JOSEMAR - CONSULTOR OFICINA,,,,01888,,
+1169,Litiz - Itabuna,Pós-venda,Energia,NOBREAK SMS,AGNA - CONSULTOR OFICINA,,,,013698,,Patrimônio 013698 tem mais dígitos que o padrão (5). Conferir.
+1177,Litiz - Itabuna,Pós-venda,Monitor,MONITOR SOYO SM19-L03,MECÂNICOS,,955023303120,,01909,NS: 955023303120,
+1181,Litiz - Itabuna,Pós-venda,Teclado,TECLADO MULTI TF 300,MECÂNICOS,,,,,PN TC065,
+1185,Litiz - Itabuna,Pós-venda,Mouse,MOUSE MULTI MF100,MECÂNICOS,,,,,PN MO300,
+1189,Litiz - Itabuna,,TV,TV AOC LE32H1461 32°,,,,,00810,,
+1193,Litiz - Itabuna,Caixa,Energia,ESTABILIZADOR TSSHARA,MARIANA - CAIXA,,,,01285,,
+249,Escritório,Administrativo,Notebook,NOTEBOOK LENOVO IDEAPAD I3-4GB RAM 256GB SSD,IZA SANTANA RIBEIRO,,,1083953931,,,
+253,Escritório,Administrativo,Notebook,NOTEBOOK LENOVO IDEAPAD I-3 11ª 4GB RAM 256GB SSD,VANESSA FERREIRA CONCEIÇÃO,,,1846350998,,,
+1337,Escritório,Pós-venda,Desktop,COMPUTADOR DELL OPTILEX 390 6GB RAM 112GB SSD,ANDERSON - CÓNSORCIO,DESKTOP-ND6L8N7,,1913773783,01271,"Nome do Dispositivo DESKTOP-ND6L8N7
+
+ Processador Intel(R) Core(TM) i3-2100 CPU @ 3.10GHz 3.10 GHz
+
+ RAM instalada 6,00 GB (utilizável: 5,90 GB)
+
+ Armazenamento 112 GB SSD SSD 120GB
+
+ Placa de vídeo Intel(R) HD Graphics (32 MB)
+
+ ID do dispositivo 475FC2BC-4438-4610-BA3A-0731F1F15390
+
+ ID do Produto 00331-10000-00001-AA393
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+1341,Escritório,Pós-venda,Áudio,FONE HEADSET,ANDERSON - CONSÓRCIO,,,,,,
+1345,Escritório,Pós-venda,Mouse,MOUSE MAXPRINT TECHZONE,ANDERSON - CONSÓRCIO,,,,,CÓD: 6013925,
+1349,Escritório,Pós-venda,Teclado,TECLADO MULTILASER TC213,ANDERSON - CONSÓRCIO,,,,,PO: SIN70,
+1353,Escritório,Pós-venda,Celular,SMARTPHONE MULTILASER G MAX SE 64 4GB RAM 64GB,ANDERSON - CONSÓRCIO,,,,01154,ENDEREÇO IP: 192.168.15.155,
+1,,TI,Notebook,Notebook Vaio I5-8 256GB SSD 8 GB RAM,ALBERT QUEIROZ SILVA DE ARGOLO,,,,01609,,
+357,,,Monitor,"MONITOR PHILIPS 15,6POL",,,,,,,Patrimônio informado como 1555 e padronizado para 01555. Patrimônio 01555 estava repetido na planilha original (também usado pelo ID 1357). Confirmar o número correto.
+361,,E-commerce,Impressora,IMPRESSORA BEMATECH MP-4200 HS,Rodrigo Neves,,,,01401,SETOR DE E-COMMERCE,Patrimônio informado como 1401 e padronizado para 01401.
+449,,,Desktop,COMPUTADOR LOGIN - PENTIUM J2900 120GB SSD 4GB RAM,iAGO,vdc-estoque,,1115190643,00011,"Nome do Dispositivo vdc-estoque
+
+ Processador Intel(R) Pentium(R) CPU J2900 @ 2.41GHz 2.42 GHz
+
+ RAM instalada 4,00 GB (utilizável: 3,89 GB)
+
+ Armazenamento 112 GB SSD Patriot Burst Elite 120GB
+
+ Placa de vídeo Intel(R) HD Graphics (64 MB)
+
+ ID do dispositivo 5D6EBEFC-F702-462E-967A-FB5B71366663
+
+ ID do Produto 00331-10000-00001-AA818
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+529,,,Mouse,MOUSE INTELBRAS RTM 019,BRUNO FELIPHE DOS SANTOS CHAVES,,180538931,,,NS: 180538931,
+669,,Pós-venda,Notebook,SAMSUNG BOOK I3-11 8GB RAM 1TB HD,MECÂNICOS,DESKTOP-7R820R5,,1380994964,01810,"Nome do dispositivo DESKTOP-7R820R5
+
+ Processador 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz (3.00 GHz)
+
+ RAM instalada 8,00 GB (utilizável: 7,73 GB)
+
+ ID do dispositivo 81073E1D-8158-4DA9-9508-4A28A4A5D9EF
+
+ ID do Produto 00327-60000-00000-AA309
+
+ Tipo de sistema Sistema operacional de 64 bits, processador baseado em x64
+
+ Caneta e toque Nenhuma entrada à caneta ou por toque disponível para este vídeo",
+781,,TI,Energia,TRANSFORMADOR,,,,,00493,,
+1197,,,Telefone,TELEFONE INTELBRAS PLENO COM FIO,CONSULTORES OFICINA,,NSUF4424229HX,,00134,NS: NSUF4424229HX,

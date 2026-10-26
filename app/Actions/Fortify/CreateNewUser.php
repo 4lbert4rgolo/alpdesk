@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\AccessGroup;
 use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Hash;
@@ -43,10 +44,23 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return User::create([
+        $usuario = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        // Toda pessoa que se cadastra entra no grupo padrão (config/permissoes.php)
+        $slugPadrao = config('permissoes.grupo_padrao_cadastro');
+
+        if ($slugPadrao) {
+            $grupo = AccessGroup::where('slug', $slugPadrao)->first();
+
+            if ($grupo) {
+                $usuario->accessGroups()->syncWithoutDetaching([$grupo->id]);
+            }
+        }
+
+        return $usuario;
     }
 }

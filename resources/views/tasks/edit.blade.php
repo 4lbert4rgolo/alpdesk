@@ -9,6 +9,17 @@
     
     <form action="/tasks/update/{{ $task->id }}" method="POST" enctype="multipart/form-data">
         @csrf
+
+        @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <strong>Confira os campos abaixo:</strong>
+                <ul class="mb-0">
+                    @foreach($errors->all() as $erro)
+                        <li>{{ $erro }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         @method('PUT')
         <div class="form-group mb-3">
             <label for="title">Tarefa:</label>
@@ -55,11 +66,13 @@
             @endforeach
         </div>
 
+        @include('tasks._equipamento')
+
         <div class="form-group mb-4">
             <label for="image" class="form-label">Anexar imagem da solicitação:</label>
-            <input type="file" id="image" name="image" class="form-control">
-            @if($task->image && file_exists(public_path('img/tasks/'.$task->image)))
-                <img src="/img/tasks/{{ $task->image }}" alt="{{ $task->title }}" class="img-preview">
+            <input type="file" accept="image/jpeg,image/png,image/webp" id="image" name="image" class="form-control">
+            @if($task->hasImage())
+                <img src="{{ route('tasks.image', $task->id) }}" alt="{{ $task->title }}" class="img-preview">
             @endif
         </div>
 

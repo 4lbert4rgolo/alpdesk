@@ -1,0 +1,37 @@
+# /etc/nginx/sites-available/alpdesk
+# Troque o domínio e o caminho. Depois: sudo ln -s /etc/nginx/sites-available/alpdesk /etc/nginx/sites-enabled/
+# Para HTTPS: sudo certbot --nginx -d helpdesk.suaempresa.com.br
+# No bloco http do /etc/nginx/nginx.conf, deixe: server_tokens off;
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name helpdesk.suaempresa.com.br;
+
+    # O servidor aponta para a pasta public, nunca para a raiz do projeto
+    root /var/www/alpdesk/public;
+    index index.php;
+    charset utf-8;
+
+    # Imagens de até 5 MB (o PHP também precisa permitir: upload_max_filesize e post_max_size)
+    client_max_body_size 8m;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    # SOMENTE o index.php é executado. Qualquer outro .php é tratado como arquivo comum.
+    location ~ ^/index\.php(/|$) {
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_hide_header X-Powered-By;
+    }
+
+    # Esconde arquivos de configuração, bancos, logs e cópias
+    location ~ /\.(?!well-known).* { deny all; }
+    location ~* \.(env|log|sql|bak|zip|sqlite|gz|md)$ { deny all; }
+}
