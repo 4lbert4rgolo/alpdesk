@@ -35,7 +35,7 @@ class TaskController extends Controller
     }
 
     public function store(Request $request){
-        $dados = $request->validate($this->regrasTarefa() + $this->regrasEquipamento(), $this->mensagensTarefa());
+        $dados = $request->validate($this->regrasTarefa(true) + $this->regrasEquipamento(), $this->mensagensTarefa());
 
         $task = new Task;
 
@@ -59,7 +59,7 @@ class TaskController extends Controller
         // NOVIDADE: Vincula o criador automaticamente como participante/responsável
         $user->tasksAsParticipant()->attach($task->id);
 
-        return redirect('/')->with('msg', 'Tarefa criada com sucesso!');
+        return redirect('/tasks/'.$task->id)->with('msg', "Tarefa #{$task->id} criada com sucesso!");
     }
 
     public function show($id){
@@ -74,17 +74,34 @@ class TaskController extends Controller
     public function dashboard() {
         $user = auth()->user();
 
-        // Tarefas que eu criei
-        $tasks = $user->tasks;
+        // Tarefas que eu abri e tarefas em que sou responsável (a lista junta as duas, sem repetir)
+        $criadas = $user->tasks()->with(['users', 'equipment'])->get();
+        $responsavel = $user->tasksAsParticipant()->with(['users', 'equipment'])->get();
 
-        // Tarefas onde sou participante (Responsável)
-        // ATENÇÃO: Verifique se no seu Model User o método é tasksAsParticipant (com 's')
-        $tasksAsParticipant = $user->tasksAsParticipant;
+        $tarefas = $criadas->concat($responsavel)
+            ->unique('id')
+            ->sortBy([['priority', 'desc'], ['deadline', 'asc']])
+            ->values();
 
         return view('tasks.dashboard', [
-            'tasks' => $tasks, 
-            'tasksasparticipant' => $tasksAsParticipant // Nome corrigido para a View
+            'tarefas' => $tarefas,
+            'idsCriadas' => $criadas->pluck('id')->all(),
+            'idsResponsavel' => $responsavel->pluck('id')->all(),
         ]);
+    }
+
+    /**
+     * Quem é responsável (mas não criou a tarefa) pode sair dela.
+     */
+    public function sair($id) {
+        $task = Task::findOrFail($id);
+
+        // Quem criou a tarefa não sai dela: pode editá-la ou excluí-la
+        abort_if((int) $task->user_id === (int) auth()->id(), 403);
+
+        $task->users()->detach(auth()->id());
+
+        return redirect('/dashboard')->with('msg', 'Você saiu da tarefa.');
     }
 
     public function destroy($id) {
@@ -259,12 +276,12 @@ class TaskController extends Controller
         return basename($arquivo->store('task-images', 'local'));
     }
 
-    private function regrasTarefa(): array
+    private function regrasTarefa(bool $nova = false): array
     {
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:5000'],
-            'deadline' => ['required', 'date'],
+            'deadline' => $nova ? ['required', 'date', 'after_or_equal:today'] : ['required', 'date'],
             'priority' => ['required', 'boolean'],
             'items' => ['nullable', 'array'],
             'items.*' => ['string', 'max:255'],
@@ -275,6 +292,7 @@ class TaskController extends Controller
     private function mensagensTarefa(): array
     {
         return $this->mensagensEquipamento() + [
+            'deadline.after_or_equal' => 'O prazo não pode ser uma data que já passou.',
             'image.file' => 'Escolha um arquivo de imagem válido.',
             'image.mimes' => 'A imagem deve ser JPG, PNG ou WEBP.',
             'image.max' => 'A imagem pode ter no máximo 5 MB.',

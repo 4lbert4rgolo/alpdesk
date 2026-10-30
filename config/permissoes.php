@@ -37,6 +37,9 @@ return [
             'equipamentos.gerenciar' => 'Cadastrar e editar equipamentos',
             'equipamentos.importar' => 'Importar equipamentos por planilha',
         ],
+        'Painel' => [
+            'painel.ver' => 'Ver o painel de indicadores',
+        ],
         'Administração' => [
             'usuarios.gerenciar' => 'Criar e editar usuários',
             'grupos.gerenciar' => 'Criar e editar grupos de acesso',

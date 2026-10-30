@@ -44,4 +44,17 @@ return [
 
     'force_https' => (bool) env('FORCE_HTTPS', false),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Logo
+    |--------------------------------------------------------------------------
+    |
+    | Caminho do logo dentro da pasta public. Para trocar, substitua o arquivo
+    | (ou aponte APP_LOGO no .env para outro). A tela adiciona a data do arquivo
+    | ao endereço, então o navegador mostra o novo logo sem precisar limpar o cache.
+    |
+    */
+
+    'logo' => env('APP_LOGO', 'img/alpdesk_logo.png'),
+
 ];

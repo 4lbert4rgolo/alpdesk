@@ -7,7 +7,7 @@
         <title>@yield('title')</title>
 
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 font-family=%22sans-serif%22 font-weight=%22bold%22 fill=%22%23169681%22>ALP</text></svg>">
+        @include('partials.favicon')
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         
         <link rel="stylesheet" href="{{ asset('CSS/styles.css') }}?v={{ @filemtime(public_path('CSS/styles.css')) }}">
@@ -24,7 +24,7 @@
                 </button>
 
                 <a href="/" class="navbar-brand">
-                    <img src="/img/alpdesk_logo.png" alt="AlpDesk Solutions">
+                    <x-logo />
                 </a>
             </div>
         </header>
@@ -32,7 +32,7 @@
         <aside class="offcanvas offcanvas-start sidebar" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
             <div class="sidebar-header">
                 <a href="/" class="navbar-brand" id="sidebarLabel">
-                    <img src="/img/alpdesk_logo.png" alt="AlpDesk Solutions">
+                    <x-logo />
                 </a>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
             </div>
@@ -45,6 +45,12 @@
             @endauth
 
             <nav class="sidebar-nav">
+                @can('painel.ver')
+                    <a href="/painel" class="sidebar-link {{ request()->is('painel') ? 'active' : '' }}">
+                        <ion-icon name="bar-chart-outline"></ion-icon> Painel
+                    </a>
+                @endcan
+
                 <a href="/" class="sidebar-link {{ request()->is('/') ? 'active' : '' }}">
                     <ion-icon name="home-outline"></ion-icon> Tarefas
                 </a>

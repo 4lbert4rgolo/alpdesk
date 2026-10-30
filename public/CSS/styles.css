@@ -930,3 +930,183 @@ footer strong {
 .related-tasks li:last-child { border-bottom: 0; }
 .related-tasks a { color: #2d3436; font-weight: 500; text-decoration: none; }
 .related-tasks a:hover { color: #0f7a68; text-decoration: underline; }
+
+/* ==========================================================================
+   Formulário de tarefa (abrir e editar) e Minhas tarefas
+   ========================================================================== */
+.admin-form .field input[type="date"] {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #cfd8d6;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 16px;
+}
+.admin-form .field input[type="date"]:focus {
+    outline: none;
+    border-color: #1eb39a;
+    box-shadow: 0 0 0 3px rgba(30, 179, 154, 0.2);
+}
+
+.optional { color: #636e72; font-weight: 400; }
+
+/* campo com erro */
+.admin-form .field.has-error input[type="text"],
+.admin-form .field.has-error input[type="date"],
+.admin-form .field.has-error textarea,
+.admin-form .field.has-error select { border-color: #b3261e; }
+.admin-form .field.has-error .check,
+.admin-form .field.has-error .priority-option { border-color: #e8b4b0; }
+
+.field-warning {
+    margin: 8px 0 0;
+    padding: 8px 12px;
+    background: #fff4e5;
+    border-radius: 8px;
+    color: #8a4b00;
+    font-size: 13px;
+}
+
+/* urgência: duas opções lado a lado */
+.priority-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.admin-form .field .priority-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    padding: 12px;
+    border: 1px solid #cfd8d6;
+    border-radius: 10px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.admin-form .field .priority-option input {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    accent-color: #0f7a68;
+}
+.admin-form .field .priority-option span { display: flex; flex-direction: column; }
+.admin-form .field .priority-option small { color: #636e72; font-size: 13px; font-weight: 400; }
+.admin-form .field .priority-option:has(input:checked) { border-color: #0f7a68; background: #f1faf8; }
+.admin-form .field .priority-option.is-urgent input { accent-color: #d93025; }
+.admin-form .field .priority-option.is-urgent:has(input:checked) { border-color: #d93025; background: #fdecea; }
+
+/* imagem */
+.image-preview {
+    display: block;
+    max-width: 100%;
+    max-height: 220px;
+    margin-top: 10px;
+    border: 1px solid #eef1f0;
+    border-radius: 8px;
+}
+.image-preview[hidden] { display: none; }
+.current-image { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; color: #636e72; font-size: 14px; }
+.current-image img { width: 72px; height: 72px; object-fit: cover; border: 1px solid #eef1f0; border-radius: 8px; }
+
+/* Minhas tarefas */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.summary-card {
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid #eef1f0;
+    border-radius: 12px;
+    color: #636e72;
+    font-size: 14px;
+}
+.summary-card strong { display: block; color: #2d3436; font-size: 26px; }
+.summary-card.is-bad strong { color: #b3261e; }
+button.store-tab { font-family: inherit; cursor: pointer; }
+.task-table tr[hidden] { display: none; }
+.chips .chip-muted { margin-left: 0; }
+.task-action .btn,
+.task-action form { margin-left: 4px; }
+.task-action form { display: inline-block; }
+
+@media (max-width: 576px) {
+    .priority-options { grid-template-columns: 1fr; }
+    .task-action .btn, .task-action form { margin: 0 6px 6px 0; }
+}
+
+/* ==========================================================================
+   Painel de indicadores
+   ========================================================================== */
+.admin-header .store-tabs { margin: 0; }
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.kpi {
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #eef1f0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.kpi strong { display: block; color: #2d3436; font-size: 30px; line-height: 1.1; }
+.kpi span { color: #636e72; font-size: 14px; }
+.kpi.is-bad strong { color: #b3261e; }
+.kpi.is-warn strong { color: #8a4b00; }
+
+.dash-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+.dash-card {
+    grid-column: span 12;
+    min-width: 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #eef1f0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.dash-card h2 { margin: 0 0 14px; font-size: 17px; font-weight: 700; }
+.dash-card h2 small { color: #636e72; font-size: 13px; font-weight: 400; }
+@media (min-width: 992px) {
+    .dash-card.span-4 { grid-column: span 4; }
+    .dash-card.span-6 { grid-column: span 6; }
+    .dash-card.span-8 { grid-column: span 8; }
+}
+
+.bars { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.bars li { display: grid; grid-template-columns: minmax(90px, 38%) 1fr 36px; align-items: center; gap: 10px; font-size: 14px; }
+.bar-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { height: 10px; overflow: hidden; background: #eef1f0; border-radius: 999px; }
+.bar-fill { display: block; height: 100%; background: #1eb39a; border-radius: 999px; }
+.bar-fill.is-muted { background: #b2bec3; }
+.bar-value { font-weight: 500; text-align: right; }
+
+.chart { display: block; width: 100%; height: auto; }
+.chart-bar { fill: #1eb39a; }
+.chart-base { stroke: #e3e8e7; stroke-width: 1; }
+.chart-value { fill: #2d3436; font-size: 9px; text-anchor: middle; }
+.chart-label { fill: #636e72; font-size: 8.5px; text-anchor: middle; }
+
+.rank { margin: 0; padding: 0; list-style: none; }
+.rank li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eef1f0;
+    font-size: 14px;
+}
+.rank li:last-child { border-bottom: 0; }
+.rank a { color: #2d3436; font-weight: 500; text-decoration: none; }
+.rank a:hover { color: #0f7a68; text-decoration: underline; }
+.rank span { flex-shrink: 0; font-size: 13px; }
+.inventory-stats { margin-bottom: 14px; }
+
+/* Logo em texto (usado se o arquivo do logo estiver ausente ou quebrado) */
+.logo-texto { color: #0f7a68; font-size: 22px; font-weight: 900; letter-spacing: -0.5px; white-space: nowrap; }

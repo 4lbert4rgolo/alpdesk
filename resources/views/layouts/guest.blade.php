@@ -7,6 +7,8 @@
 
         <title>{{ config('app.name', 'AlpDesk') }}</title>
 
+        @include('partials.favicon')
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

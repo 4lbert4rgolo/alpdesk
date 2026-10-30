@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AccessGroupController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EquipmentTransferController;
+use App\Http\Controllers\PainelController;
 use App\Http\Controllers\TaskController;
 
 Route::get('/',[TaskController::class, 'index'])->middleware(['auth', 'verified']);
@@ -23,6 +24,10 @@ Route::get('/contact', function () {
 Route::get('/dashboard', [TaskController::class, 'dashboard'])->middleware(['auth', 'verified']);
 
 Route::post('/tasks/join/{id}', [TaskController::class, 'joinTask'])->middleware(['auth', 'verified', 'can:tarefas.assumir']);
+Route::post('/tasks/leave/{id}', [TaskController::class, 'sair'])->middleware(['auth', 'verified'])->name('tasks.leave');
+
+// Painel de indicadores (para quem acompanha todas as tarefas)
+Route::get('/painel', [PainelController::class, 'index'])->middleware(['auth', 'verified', 'can:painel.ver'])->name('painel');
 
 // Inventário de equipamentos
 Route::middleware(['auth', 'verified'])->prefix('equipamentos')->name('equipamentos.')->group(function () {
