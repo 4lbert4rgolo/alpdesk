@@ -13,7 +13,16 @@
         <ion-icon name="arrow-back-outline"></ion-icon> Voltar aos usuários
     </a>
 
-    <h1 class="admin-title">{{ $usuario ? 'Editar usuário' : 'Novo usuário' }}</h1>
+    <h1 class="admin-title">
+        {{ $usuario ? 'Editar usuário' : 'Novo usuário' }}
+        @if($usuario && ! $usuario->ativo)
+            <span class="badge-status status-cancelada">Desativado</span>
+        @endif
+    </h1>
+
+    @error('conta')
+        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+    @enderror
 
     <form method="POST" class="admin-form"
           action="{{ $usuario ? route('admin.usuarios.update', $usuario) : route('admin.usuarios.store') }}">
@@ -80,5 +89,95 @@
             <a href="{{ route('admin.usuarios.index') }}" class="btn btn-outline-secondary">Cancelar</a>
         </div>
     </form>
+
+    @if($usuario)
+        @php
+            $voce = $usuario->id === auth()->id();
+        @endphp
+        <section class="account-panel" aria-labelledby="titulo-conta">
+            <h2 id="titulo-conta">Conta</h2>
+
+            <dl class="account-info">
+                <div>
+                    <dt>Situação</dt>
+                    <dd><span class="badge-status {{ $usuario->ativo ? 'status-concluida' : 'status-cancelada' }}">{{ $usuario->ativo ? 'Ativo' : 'Desativado' }}</span></dd>
+                </div>
+                <div>
+                    <dt>Último acesso</dt>
+                    <dd>{{ $usuario->ultimo_acesso_em ? $usuario->ultimo_acesso_em->format('d/m/Y H:i') : 'Nunca entrou' }}</dd>
+                </div>
+                <div>
+                    <dt>Conta criada em</dt>
+                    <dd>{{ $usuario->created_at?->format('d/m/Y') ?? '—' }}</dd>
+                </div>
+                <div>
+                    <dt>E-mail confirmado</dt>
+                    <dd>{{ $usuario->email_verified_at ? 'Sim, em '.$usuario->email_verified_at->format('d/m/Y') : 'Não' }}</dd>
+                </div>
+                <div>
+                    <dt>Verificação em duas etapas</dt>
+                    <dd>{{ $usuario->temDoisFatores() ? 'Ativada' : 'Desativada' }}</dd>
+                </div>
+                <div>
+                    <dt>Tarefas</dt>
+                    <dd>{{ $usuario->tasks_count }} abertas por ele · responsável em {{ $usuario->tasks_as_participant_count }}</dd>
+                </div>
+            </dl>
+
+            <div class="account-actions">
+                <form action="{{ route('admin.usuarios.password-link', $usuario) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">
+                        <ion-icon name="mail-outline"></ion-icon> Enviar link para redefinir a senha
+                    </button>
+                </form>
+
+                @unless($usuario->email_verified_at)
+                    <form action="{{ route('admin.usuarios.verify-email', $usuario) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-secondary btn-sm">
+                            <ion-icon name="checkmark-done-outline"></ion-icon> Marcar e-mail como confirmado
+                        </button>
+                    </form>
+                @endunless
+
+                @if($usuario->temDoisFatores())
+                    <form action="{{ route('admin.usuarios.remove-2fa', $usuario) }}" method="POST"
+                          onsubmit="return confirm('Remover a verificação em duas etapas desta conta? A pessoa passa a entrar só com a senha.')">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-secondary btn-sm">
+                            <ion-icon name="phone-portrait-outline"></ion-icon> Remover verificação em duas etapas
+                        </button>
+                    </form>
+                @endif
+
+                @unless($voce)
+                    @if($usuario->ativo)
+                        <form action="{{ route('admin.usuarios.deactivate', $usuario) }}" method="POST"
+                              onsubmit="return confirm('Desativar esta conta? A pessoa não conseguirá mais entrar. O histórico e as tarefas dela continuam no sistema.')">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <ion-icon name="ban-outline"></ion-icon> Desativar conta
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('admin.usuarios.activate', $usuario) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-sm">
+                                <ion-icon name="checkmark-circle-outline"></ion-icon> Reativar conta
+                            </button>
+                        </form>
+                    @endif
+                @endunless
+            </div>
+
+            <p class="field-hint">
+                Para quem saiu da empresa, prefira <strong>desativar</strong>: a pessoa perde o acesso, mas o histórico de tarefas e equipamentos continua mostrando o nome dela.
+                @if($voce)
+                    Você não pode desativar a sua própria conta.
+                @endif
+            </p>
+        </section>
+    @endif
 </div>
 @endsection

@@ -37,6 +37,12 @@ class AccessGroupController extends Controller
             'slug.unique' => 'Já existe um grupo com um nome muito parecido.',
         ]);
 
+        if (! Permissoes::podeConceder($request->user(), $dados['permissions'] ?? [])) {
+            return back()->withInput()->withErrors([
+                'permissions' => 'Você só pode conceder permissões que você mesmo tem. Peça a um administrador.',
+            ]);
+        }
+
         AccessGroup::create([
             'name' => $dados['name'],
             'slug' => $dados['slug'],
@@ -54,6 +60,13 @@ class AccessGroupController extends Controller
 
     public function update(Request $request, AccessGroup $grupo)
     {
+        // Só administradores alteram o grupo Administrador ou grupos com permissões que a pessoa não tem
+        if (! Permissoes::podeConceder($request->user(), $grupo->isAdministrator() ? Permissoes::chaves() : ($grupo->permissions ?? []))) {
+            return back()->withErrors([
+                'permissions' => 'Este grupo tem permissões que você não tem. Somente um administrador pode alterá-lo.',
+            ]);
+        }
+
         // O grupo Administrador sempre tem todas as permissões: só a descrição pode mudar
         if ($grupo->isAdministrator()) {
             $dados = $request->validate([
@@ -77,6 +90,12 @@ class AccessGroupController extends Controller
             'slug.unique' => 'Já existe um grupo com um nome muito parecido.',
         ]);
 
+        if (! Permissoes::podeConceder($request->user(), $dados['permissions'] ?? [])) {
+            return back()->withInput()->withErrors([
+                'permissions' => 'Você só pode conceder permissões que você mesmo tem. Peça a um administrador.',
+            ]);
+        }
+
         // O slug original é mantido: ele identifica o grupo no sistema
         // (por exemplo, o grupo padrão do cadastro).
         $grupo->update([
@@ -88,8 +107,12 @@ class AccessGroupController extends Controller
         return redirect()->route('admin.grupos.index')->with('msg', 'Grupo atualizado.');
     }
 
-    public function destroy(AccessGroup $grupo)
+    public function destroy(Request $request, AccessGroup $grupo)
     {
+        if (! Permissoes::podeConceder($request->user(), $grupo->permissions ?? [])) {
+            return back()->with('msg', 'Este grupo tem permissões que você não tem. Somente um administrador pode excluí-lo.');
+        }
+
         if ($grupo->is_system) {
             return back()->with('msg', 'Este grupo é do sistema e não pode ser excluído.');
         }

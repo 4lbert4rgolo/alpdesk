@@ -165,3 +165,36 @@ Esperado: `/.env` e o log com 403 ou 404, `/register` com 404, `/` com redirecio
 - **Monitoramento** e alertas (disco, erros, site fora do ar) e **antivírus** para anexos.
 - Um **teste de invasão** por alguém de segurança, se o sistema ficar exposto à internet.
 - Acompanhe o `storage/logs` na primeira semana e mantenha o sistema e o PHP atualizados.
+
+## 12. Checklist de segurança antes de liberar (revisão de 17/11/2026)
+
+No computador de desenvolvimento, **antes** de enviar para o servidor:
+
+```
+composer update laravel/framework livewire/livewire phpoffice/phpspreadsheet --with-all-dependencies
+composer audit          # deve terminar sem avisos
+php artisan test
+```
+
+- `laravel/framework` precisa estar em **13.40 ou mais novo** (correções de segurança de jun/set/out/nov de 2026).
+- `livewire/livewire` precisa estar em **3.8.3 ou mais novo** (correção de XSS de set/2026).
+
+No servidor:
+
+- **PHP 8.3.36 ou mais novo** (`php -v`). Versões anteriores têm falhas críticas de execução remota (CVE-2026-109618/109619).
+- `.env`:
+  - `APP_ENV=production`, `APP_DEBUG=false`
+  - `APP_URL=https://portal.litizmotos.com.br` (exatamente o endereço usado: o sistema recusa outros endereços)
+  - `ADMIN_2FA_REQUIRED=true` (administradores precisam ativar a verificação em duas etapas)
+  - `SESSION_SECURE_COOKIE=true`, `SESSION_ENCRYPT=true`, `SESSION_DOMAIN` **vazio**
+  - `REGISTRATION_ENABLED=false` (contas criadas pelo administrador)
+- `chmod 640 .env` e dono `usuario:www-data`.
+- Nginx com o `docs/nginx.conf.example` (só o `index.php` executa; `.env`, logs e bancos bloqueados).
+- Firewall: só 22 (SSH por chave), 80 e 443 abertos. Banco ouvindo só em `127.0.0.1`.
+- Backups diários (`scripts/backup.sh`) copiados para fora do servidor.
+- Rode a seção 10 (conferência final) depois de publicar.
+
+### DNS (Skymail)
+- Criar **apenas** um registro `A` com nome `portal` apontando para o IP do servidor (TTL 300 no início).
+- Não alterar os registros existentes (`@`, `www`, `MX`, `TXT`) nem os servidores DNS do domínio.
+- Se o Certbot reclamar de CAA, acrescentar `CAA 0 issue "letsencrypt.org"`.

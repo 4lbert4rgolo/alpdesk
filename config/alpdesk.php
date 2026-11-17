@@ -46,6 +46,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Verificação em duas etapas obrigatória para administradores
+    |--------------------------------------------------------------------------
+    |
+    | true: administrador sem a verificação em duas etapas ativada só consegue
+    | abrir o perfil (para ativá-la). Recomendado em produção: ADMIN_2FA_REQUIRED=true
+    |
+    */
+
+    'exigir_2fa_admin' => (bool) env('ADMIN_2FA_REQUIRED', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Logo
     |--------------------------------------------------------------------------
     |

@@ -84,6 +84,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
         Route::get('/usuarios/{usuario}/editar', [UserController::class, 'edit'])->name('usuarios.edit');
         Route::put('/usuarios/{usuario}', [UserController::class, 'update'])->name('usuarios.update');
+        Route::post('/usuarios/{usuario}/desativar', [UserController::class, 'desativar'])->name('usuarios.deactivate');
+        Route::post('/usuarios/{usuario}/ativar', [UserController::class, 'ativar'])->name('usuarios.activate');
+        Route::post('/usuarios/{usuario}/redefinir-senha', [UserController::class, 'enviarRedefinicaoDeSenha'])->middleware('throttle:6,1')->name('usuarios.password-link');
+        Route::post('/usuarios/{usuario}/remover-2fa', [UserController::class, 'removerDoisFatores'])->name('usuarios.remove-2fa');
+        Route::post('/usuarios/{usuario}/confirmar-email', [UserController::class, 'confirmarEmail'])->name('usuarios.verify-email');
     });
 
     Route::middleware('can:grupos.gerenciar')->group(function () {

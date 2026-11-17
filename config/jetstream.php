@@ -62,7 +62,9 @@ return [
         // Features::profilePhotos(),
         // Features::api(),
         // Features::teams(['invitations' => true]),
-        Features::accountDeletion(),
+        // Desligado: a exclusão da própria conta apagaria o histórico e poderia deixar o
+        // sistema sem administrador. Contas são desativadas em Administração > Usuários.
+        // Features::accountDeletion(),
     ],
 
     /*

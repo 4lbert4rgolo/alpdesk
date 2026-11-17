@@ -1378,3 +1378,21 @@ button.store-tab { font-family: inherit; cursor: pointer; }
 .timeline-delete { padding: 0 4px; font-size: 13px; color: #8a9294; vertical-align: baseline; }
 .timeline-delete:hover { color: #b3261e; }
 #historico .comment-form { margin: 0 0 16px; }
+
+/* Painel de usuários: dados e ações da conta */
+.admin-title .badge-status { vertical-align: middle; font-size: 13px; margin-left: 8px; }
+.account-panel {
+    margin-top: 28px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e1e6e5;
+    border-radius: 12px;
+}
+.account-panel h2 { margin: 0 0 12px; font-size: 18px; font-weight: 700; }
+.account-info { margin: 0 0 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; }
+.account-info dt { font-size: 13px; font-weight: 500; color: #636e72; }
+.account-info dd { margin: 2px 0 0; }
+.account-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.account-actions form { margin: 0; }
+.account-actions ion-icon { vertical-align: -2px; }
+@media (max-width: 575px) { .account-info { grid-template-columns: 1fr; } }

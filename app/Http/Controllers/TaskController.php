@@ -219,7 +219,8 @@ class TaskController extends Controller
         $candidatos = collect();
 
         if ($task->podeGerenciarParticipantes(auth()->user())) {
-            $candidatos = User::orderBy('name')
+            $candidatos = User::ativos()
+                ->orderBy('name')
                 ->whereNotIn('id', $task->envolvidos()->pluck('id'))
                 ->get(['id', 'name', 'email']);
         }

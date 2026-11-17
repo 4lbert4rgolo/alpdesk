@@ -91,7 +91,7 @@ class NotificadorTarefas
             ->filter()
             ->unique('id')
             ->reject(fn (User $u) => (int) $u->id === (int) $autor->id)
-            ->filter(fn (User $u) => ! empty($u->email))
+            ->filter(fn (User $u) => ! empty($u->email) && $u->ativo)
             ->values();
 
         if ($destino->isEmpty()) {

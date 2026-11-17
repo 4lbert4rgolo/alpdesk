@@ -34,14 +34,26 @@ class AvisoTarefa extends Notification
         $mensagem = (new MailMessage)
             ->subject('['.config('app.name').'] Tarefa #'.$this->tarefa->id.': '.$this->assunto)
             ->greeting('Olá, '.strtok((string) $notifiable->name, ' ').'!')
-            ->line('**#'.$this->tarefa->id.' · '.$this->tarefa->title.'**');
+            ->line('**#'.$this->tarefa->id.' · '.self::textoPuro($this->tarefa->title).'**');
 
         foreach ($this->linhas as $linha) {
-            $mensagem->line($linha);
+            $mensagem->line(self::textoPuro($linha));
         }
 
         return $mensagem
             ->action('Abrir a tarefa', url('/tasks/'.$this->tarefa->id))
             ->salutation('Equipe '.config('app.name'));
+    }
+
+    /**
+     * O e-mail é montado em Markdown. Título, comentários e nomes são digitados pelas
+     * pessoas, então os símbolos do Markdown são neutralizados: ninguém consegue
+     * colocar um link disfarçado (ex.: [Clique aqui](site-falso)) num aviso do sistema.
+     */
+    public static function textoPuro(string $texto): string
+    {
+        $texto = str_replace(["\r", "\n"], ' ', $texto);
+
+        return preg_replace('/([\\\\`*_{}\[\]()#+\-.!|<>~])/', '\\\\$1', $texto);
     }
 }

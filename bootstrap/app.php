@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\BloquearContaDesativada;
+use App\Http\Middleware\ExigirDoisFatoresAdmin;
 use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -23,7 +25,13 @@ return Application::configure(basePath: dirname(__DIR__))
             '192.168.0.0/16',
         ]);
 
-        $middleware->web(append: [SecurityHeaders::class]);
+        $middleware->web(append: [SecurityHeaders::class, BloquearContaDesativada::class, ExigirDoisFatoresAdmin::class]);
+
+        // Só responde para o endereço do APP_URL (ex.: portal.litizmotos.com.br).
+        // Impede que alguém troque o cabeçalho Host e faça os links dos e-mails
+        // (como o de "redefinir senha") apontarem para um site falso.
+        // Não vale no ambiente local nem nos testes.
+        $middleware->trustHosts();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

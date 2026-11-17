@@ -54,6 +54,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    /**
+     * Valores padrão de uma conta nova. "ativo" não está em $fillable de
+     * propósito: só o painel de usuários muda esse campo (com forceFill).
+     */
+    protected $attributes = [
+        'ativo' => true,
+    ];
+
     public function tasks() {
         return $this->hasMany('App\Models\Task');
     }
@@ -69,6 +77,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'ativo' => 'boolean',
+            'ultimo_acesso_em' => 'datetime',
+            'two_factor_confirmed_at' => 'datetime',
         ];
     }
 
@@ -91,6 +102,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function accessGroups()
     {
         return $this->belongsToMany(AccessGroup::class, 'access_group_user')->withTimestamps();
+    }
+
+    public function scopeAtivos($consulta)
+    {
+        return $consulta->where('ativo', true);
+    }
+
+    public function temDoisFatores(): bool
+    {
+        return ! empty($this->two_factor_secret) && ! empty($this->two_factor_confirmed_at);
     }
 
     public function isAdministrator(): bool

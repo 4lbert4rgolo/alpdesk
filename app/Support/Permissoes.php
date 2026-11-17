@@ -37,4 +37,29 @@ class Permissoes
     {
         return array_keys(self::todas());
     }
+
+    /**
+     * Quem não é administrador só pode conceder (em grupos) ou atribuir (a usuários)
+     * permissões que ele mesmo tem. Assim ninguém aumenta o próprio acesso.
+     *
+     * @param  array<int, string>  $permissoes
+     */
+    public static function podeConceder(?\App\Models\User $usuario, array $permissoes): bool
+    {
+        if (! $usuario) {
+            return false;
+        }
+
+        if ($usuario->isAdministrator()) {
+            return true;
+        }
+
+        foreach ($permissoes as $permissao) {
+            if (! $usuario->hasPermission($permissao)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\User;
 use App\Services\NotificadorTarefas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 /**
  * Participantes: pessoas que acompanham a tarefa, comentam e autorizam.
@@ -28,7 +29,7 @@ class TaskParticipantController extends Controller
         abort_unless($task->podeGerenciarParticipantes($usuario), 403);
 
         $dados = $request->validate([
-            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'user_id' => ['required', 'integer', Rule::exists('users', 'id')->where('ativo', true)],
         ], [
             'user_id.required' => 'Escolha uma pessoa da lista.',
             'user_id.exists' => 'Escolha uma pessoa da lista.',
