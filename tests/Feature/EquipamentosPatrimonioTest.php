@@ -89,7 +89,9 @@ class EquipamentosPatrimonioTest extends TestCase
             ->assertRedirect('/equipamentos');
 
         $this->assertSoftDeleted($e);
-        $this->actingAs($admin)->get('/equipamentos')->assertDontSee('Notebook Vendas');
+        // Some da lista (o nome ainda aparece na mensagem de confirmação, por isso confere a lista)
+        $this->actingAs($admin)->get('/equipamentos')
+            ->assertViewHas('equipamentos', fn ($lista) => $lista->total() === 0);
         $this->actingAs($admin)->get('/equipamentos/'.$e->id)->assertNotFound();
         $this->actingAs($admin)->get('/equipamentos/lixeira')->assertOk()->assertSee('Notebook Vendas')->assertSee('Cadastro duplicado');
 
