@@ -51,17 +51,18 @@
                     </a>
                 @endcan
 
-                <a href="/" class="sidebar-link {{ request()->is('/') ? 'active' : '' }}">
+                {{-- Tarefas e "Nova tarefa" ficam juntas: o botão de criar está na própria lista --}}
+                <a href="/" class="sidebar-link {{ request()->is('/') || request()->is('tasks*') ? 'active' : '' }}">
                     <ion-icon name="home-outline"></ion-icon> Tarefas
                 </a>
-                @can('tarefas.criar')
-                    <a href="/tasks/create" class="sidebar-link {{ request()->is('tasks/create') ? 'active' : '' }}">
-                        <ion-icon name="add-circle-outline"></ion-icon> Criar Tarefas
-                    </a>
-                @endcan
                 @auth
                     <a href="/dashboard" class="sidebar-link {{ request()->is('dashboard') ? 'active' : '' }}">
                         <ion-icon name="list-outline"></ion-icon> Minhas Tarefas
+                    </a>
+                    <a href="/chat" class="sidebar-link {{ request()->is('chat*') ? 'active' : '' }}">
+                        <ion-icon name="chatbubbles-outline"></ion-icon> Chat
+                        <span class="chat-badge" id="chat-badge" {{ ($chatNaoLidas ?? 0) > 0 ? '' : 'hidden' }}
+                              aria-label="mensagens não lidas">{{ $chatNaoLidas ?? 0 }}</span>
                     </a>
                 @endauth
 
@@ -71,7 +72,7 @@
                     </a>
                 @endcan
 
-                @canany(['usuarios.gerenciar', 'grupos.gerenciar', 'cadastros.gerenciar'])
+                @canany(['usuarios.gerenciar', 'grupos.gerenciar', 'cadastros.gerenciar', 'modelos.gerenciar'])
                     <p class="sidebar-section">Administração</p>
                     @can('usuarios.gerenciar')
                         <a href="/admin/usuarios" class="sidebar-link {{ request()->is('admin/usuarios*') ? 'active' : '' }}">
@@ -81,6 +82,11 @@
                     @can('grupos.gerenciar')
                         <a href="/admin/grupos" class="sidebar-link {{ request()->is('admin/grupos*') ? 'active' : '' }}">
                             <ion-icon name="shield-checkmark-outline"></ion-icon> Grupos de acesso
+                        </a>
+                    @endcan
+                    @can('modelos.gerenciar')
+                        <a href="/admin/modelos" class="sidebar-link {{ request()->is('admin/modelos*') ? 'active' : '' }}">
+                            <ion-icon name="document-text-outline"></ion-icon> Modelos de tarefa
                         </a>
                     @endcan
                     @can('cadastros.gerenciar')
@@ -133,5 +139,25 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        @auth
+            <script>
+                // Atualiza o número de mensagens não lidas do chat a cada 30 segundos (só com a aba visível)
+                (function () {
+                    var selo = document.getElementById('chat-badge');
+                    if (!selo) return;
+                    setInterval(function () {
+                        if (document.hidden) return;
+                        fetch('/chat/nao-lidas', { headers: { 'Accept': 'application/json' } })
+                            .then(function (r) { return r.ok ? r.json() : null; })
+                            .then(function (dados) {
+                                if (!dados) return;
+                                selo.textContent = dados.total;
+                                selo.hidden = dados.total === 0;
+                            })
+                            .catch(function () {});
+                    }, 30000);
+                })();
+            </script>
+        @endauth
     </body>
 </html>

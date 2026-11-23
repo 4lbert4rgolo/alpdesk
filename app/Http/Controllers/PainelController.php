@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipment;
+use App\Models\Sector;
 use App\Models\Store;
 use App\Models\Task;
 use App\Models\User;
@@ -17,8 +18,15 @@ class PainelController extends Controller
         $limite = $hoje->copy()->addDays(7);
         $inicio = $hoje->copy()->subDays($dias - 1);
 
+        // Setores: o administrador vê todos e pode escolher um; quem atende vê só o seu
+        $setores = Sector::filasDe($request->user());
+        $setorAtual = ctype_digit((string) $request->query('setor')) ? $setores->firstWhere('id', (int) $request->query('setor')) : null;
+
         // O volume de tarefas é pequeno, então os números são calculados a partir da lista carregada.
-        $todas = Task::with(['equipment.store', 'users'])->get();
+        $todas = Task::with(['equipment.store', 'users'])
+            ->visiveisPara($request->user())
+            ->when($setorAtual, fn ($q) => $q->where('sector_id', $setorAtual->id))
+            ->get();
         $tarefas = $todas->filter(fn (Task $t) => $t->estaAberta())->values(); // somente as em aberto
 
         $kpis = [
@@ -121,7 +129,8 @@ class PainelController extends Controller
         }
 
         return view('painel.index', compact(
-            'dias', 'hoje', 'kpis', 'serie', 'porLoja', 'porTipo', 'topEquipamentos', 'carga', 'vencimentos', 'inventario'
+            'dias', 'hoje', 'kpis', 'serie', 'porLoja', 'porTipo', 'topEquipamentos', 'carga', 'vencimentos', 'inventario',
+            'setores', 'setorAtual'
         ));
     }
 }

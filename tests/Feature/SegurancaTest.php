@@ -19,6 +19,11 @@ class SegurancaTest extends TestCase
         $usuario = User::factory()->create();
         $usuario->accessGroups()->attach(AccessGroup::where('slug', $grupo)->firstOrFail()->id);
 
+        // Técnicos atendem o setor TI (criado pela migration), como no sistema real
+        if ($grupo === 'tecnico') {
+            $usuario->forceFill(['sector_id' => \App\Models\Sector::where('name', 'TI')->value('id')])->save();
+        }
+
         return $usuario;
     }
 
@@ -51,35 +56,36 @@ class SegurancaTest extends TestCase
         }
     }
 
-    public function test_arquivo_php_nao_e_aceito_como_imagem(): void
+    public function test_arquivo_php_nao_e_aceito_como_anexo(): void
     {
         Storage::fake('local');
         $usuario = $this->usuario('tecnico');
 
         $this->actingAs($usuario)
             ->post('/tasks', $this->dadosDaTarefa([
-                'image' => UploadedFile::fake()->createWithContent('shell.php', '<?php echo "x";'),
+                'anexos' => [UploadedFile::fake()->createWithContent('shell.php', '<?php echo "x";')],
             ]))
-            ->assertSessionHasErrors('image');
+            ->assertSessionHasErrors('anexos.0');
 
         $this->assertDatabaseCount('tasks', 0);
     }
 
-    public function test_imagem_valida_vai_para_a_pasta_privada(): void
+    public function test_anexo_valido_vai_para_a_pasta_privada(): void
     {
         Storage::fake('local');
         $usuario = $this->usuario('tecnico');
 
         $this->actingAs($usuario)
             ->post('/tasks', $this->dadosDaTarefa([
-                'image' => UploadedFile::fake()->image('foto.jpg', 100, 100),
+                'anexos' => [UploadedFile::fake()->image('foto.jpg', 100, 100)],
             ]))
             ->assertSessionHasNoErrors();
 
-        $tarefa = Task::firstOrFail();
+        $anexo = Task::firstOrFail()->anexos()->firstOrFail();
 
-        Storage::disk('local')->assertExists('task-images/'.$tarefa->image);
-        $this->assertFileDoesNotExist(public_path('img/tasks/'.$tarefa->image));
+        Storage::disk('local')->assertExists('task-attachments/'.$anexo->arquivo);
+        $this->assertSame('foto.jpg', $anexo->nome_original);
+        $this->assertFileDoesNotExist(public_path('task-attachments/'.$anexo->arquivo));
     }
 
     public function test_solicitante_nao_ve_tarefa_nem_imagem_de_outra_pessoa(): void

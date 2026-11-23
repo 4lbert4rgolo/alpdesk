@@ -56,4 +56,17 @@ return [
 
     'notificar_por_email' => (bool) env('TASKS_EMAIL_NOTIFICATIONS', true),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Setor padrão
+    |--------------------------------------------------------------------------
+    |
+    | Nome do setor que já vem escolhido ao abrir uma tarefa, e que recebe as
+    | tarefas criadas sem setor. Os setores que recebem tarefas são marcados em
+    | Administração > Setores e lojas.
+    |
+    */
+
+    'setor_padrao' => 'TI',
+
 ];

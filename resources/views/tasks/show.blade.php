@@ -12,10 +12,11 @@
     $aberta = $task->estaAberta();
     $podeGerenciar = $task->podeGerenciar($usuario);
     $podeAtender = $task->podeAtender($usuario);
-    $podeAssumir = $usuario && $usuario->can('tarefas.assumir');
+    $podeAssumir = $task->podeAssumir($usuario);
     $podeGerenciarParticipantes = $task->podeGerenciarParticipantes($usuario);
     $podeAutorizar = $task->podeAutorizar($usuario);
     $temImagem = $task->hasImage();
+    $podeAnexar = $task->podeAnexar($usuario);
     $itens = is_array($task->items) ? $task->items : [];
     $palavrasDeAlerta = ['sensíveis', 'inoperante'];
 
@@ -37,6 +38,9 @@
                 <span class="badge-priority prio-{{ $task->priority }}">{{ $task->prioridadeLabel() }}</span>
                 <span class="badge-status status-{{ $task->status }}">{{ $task->statusLabel() }}</span>
                 <span class="muted">#{{ $task->id }}</span>
+                @if($task->template || $task->temRespostas())
+                    <span class="sector-tag">{{ $task->template->name ?? 'Modelo' }}</span>
+                @endif
             </div>
 
             <h1 class="task-heading">{{ $task->title }}</h1>
@@ -58,10 +62,26 @@
                 </div>
             @endif
 
-            <section class="task-section">
-                <h2>Descrição</h2>
-                <p class="task-description">{{ $task->description }}</p>
-            </section>
+            @if($task->temRespostas())
+                <section class="task-section">
+                    <h2>Dados do pedido</h2>
+                    <dl class="task-answers">
+                        @foreach($task->respostas as $resposta)
+                            <div>
+                                <dt>{{ $resposta['rotulo'] }}</dt>
+                                <dd class="{{ ($resposta['tipo'] ?? '') === 'texto_longo' ? 'is-long' : '' }}">{{ \App\Models\TaskTemplate::formatar($resposta) }}</dd>
+                            </div>
+                        @endforeach
+                    </dl>
+                </section>
+            @endif
+
+            @if(! $task->temRespostas() || trim((string) $task->description) !== '')
+                <section class="task-section">
+                    <h2>{{ $task->temRespostas() ? 'Observações' : 'Descrição' }}</h2>
+                    <p class="task-description">{{ $task->description }}</p>
+                </section>
+            @endif
 
             <section class="task-section">
                 <h2>Contexto do problema</h2>
@@ -152,6 +172,10 @@
                                 <span class="deadline-late">Vencida</span>
                             @endif
                         </dd>
+                    </div>
+                    <div>
+                        <dt>Setor</dt>
+                        <dd>{{ $task->sector->name ?? 'Sem setor' }}</dd>
                     </div>
                     <div>
                         <dt>Aberta por</dt>
@@ -246,6 +270,14 @@
                                 @error('user_id')
                                     <p class="field-error">{{ $message }}</p>
                                 @enderror
+                            @elseif($podeGerenciarParticipantes)
+                                {{-- Sem ninguém para convidar: todas as contas ativas já estão na tarefa (ou só existe a sua) --}}
+                                <p class="field-hint">
+                                    Não há outras pessoas ativas para adicionar.
+                                    @can('usuarios.gerenciar')
+                                        <a href="{{ route('admin.usuarios.create') }}">Cadastre usuários</a> para convidá-los.
+                                    @endcan
+                                </p>
                             @endif
                         </dd>
                     </div>
@@ -341,12 +373,70 @@
                 </div>
             </div>
 
-            @if($temImagem)
-                <a href="{{ route('tasks.image', $task->id) }}" target="_blank" rel="noopener" class="task-image">
-                    <img src="{{ route('tasks.image', $task->id) }}" alt="Anexo da tarefa: {{ $task->title }}">
-                    <span>Abrir em tamanho real</span>
-                </a>
-            @endif
+            <section class="task-attachments" id="anexos" aria-labelledby="titulo-anexos">
+                <h2 id="titulo-anexos">Anexos <span class="muted">({{ $task->anexos->count() + ($temImagem ? 1 : 0) }})</span></h2>
+
+                @if($temImagem)
+                    {{-- Imagem enviada antes dos anexos múltiplos --}}
+                    <a href="{{ route('tasks.image', $task->id) }}" target="_blank" rel="noopener" class="task-image">
+                        <img src="{{ route('tasks.image', $task->id) }}" alt="Anexo da tarefa: {{ $task->title }}">
+                        <span>Abrir em tamanho real</span>
+                    </a>
+                @endif
+
+                @if($task->anexos->isNotEmpty())
+                    <ul class="attachment-list">
+                        @foreach($task->anexos as $anexo)
+                            @php
+                                $url = route('tasks.attachments.show', [$task->id, $anexo->id]);
+                            @endphp
+                            <li>
+                                <a href="{{ $url }}" target="_blank" rel="noopener" class="attachment-link">
+                                    @if($anexo->ehImagem())
+                                        <img src="{{ $url }}" alt="" loading="lazy">
+                                    @else
+                                        <ion-icon name="document-outline" aria-hidden="true"></ion-icon>
+                                    @endif
+                                    <span>
+                                        <strong>{{ $anexo->nome_original }}</strong>
+                                        <small class="muted">{{ $anexo->tamanhoLegivel() }} · {{ $anexo->user->name ?? 'Usuário removido' }} · {{ $anexo->created_at->format('d/m/Y H:i') }}</small>
+                                    </span>
+                                </a>
+                                @if($anexo->podeApagar($usuario, $task))
+                                    <form action="{{ route('tasks.attachments.destroy', [$task->id, $anexo->id]) }}" method="POST"
+                                          onsubmit="return confirm('Remover o anexo {{ addslashes($anexo->nome_original) }}?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-link btn-sm text-danger" title="Remover anexo">
+                                            <ion-icon name="trash-outline"></ion-icon><span class="visually-hidden">Remover</span>
+                                        </button>
+                                    </form>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
+                @elseif(! $temImagem)
+                    <p class="muted">Nenhum arquivo anexado.</p>
+                @endif
+
+                @if($podeAnexar)
+                    <form action="{{ route('tasks.attachments.store', $task->id) }}" method="POST" enctype="multipart/form-data" class="attachment-form">
+                        @csrf
+                        <label for="novos-anexos" class="visually-hidden">Anexar arquivos</label>
+                        <input type="file" id="novos-anexos" name="anexos[]" multiple required accept="image/jpeg,image/png,image/webp,application/pdf">
+                        <button type="submit" class="btn btn-outline-secondary btn-sm">
+                            <ion-icon name="attach-outline"></ion-icon> Anexar
+                        </button>
+                        <p class="field-hint">Imagens ou PDF, até 10 MB cada.</p>
+                        @error('anexos')
+                            <p class="field-error">{{ $message }}</p>
+                        @enderror
+                        @error('anexos.*')
+                            <p class="field-error">{{ $message }}</p>
+                        @enderror
+                    </form>
+                @endif
+            </section>
         </aside>
     </div>
 </div>

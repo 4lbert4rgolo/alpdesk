@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\AccessGroup;
+use App\Models\TermAcceptance;
 use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Hash;
@@ -49,6 +50,12 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        // LGPD: quem se cadastra já marcou "Li e concordo" no formulário, então o aceite
+        // da versão atual fica registrado aqui mesmo (sem pedir de novo no primeiro acesso)
+        if (Jetstream::hasTermsAndPrivacyPolicyFeature()) {
+            TermAcceptance::registrar($usuario, request());
+        }
 
         // Toda pessoa que se cadastra entra no grupo padrão (config/permissoes.php)
         $slugPadrao = config('permissoes.grupo_padrao_cadastro');

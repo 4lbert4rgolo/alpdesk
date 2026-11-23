@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipment;
+use App\Models\Sector;
 use App\Models\Store;
 use App\Models\Task;
+use App\Models\TaskTemplate;
 use App\Models\User;
+use App\Services\AnexosTarefa;
 use App\Services\NotificadorTarefas;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +18,7 @@ use Illuminate\Validation\Rule;
 
 class TaskController extends Controller
 {
-    public function __construct(private NotificadorTarefas $notificador) {}
+    public function __construct(private NotificadorTarefas $notificador, private AnexosTarefa $anexos) {}
 
     /**
      * Lista de tarefas com busca e filtros: período de abertura, situação,
@@ -27,8 +29,13 @@ class TaskController extends Controller
     {
         $filtros = $this->filtrosDaLista($request);
 
-        $query = Task::with(['users', 'equipment.store'])
+        $query = Task::with(['users', 'equipment.store', 'sector', 'template'])
             ->visiveisPara(auth()->user());
+
+        // Setor (fila): TI, Financeiro...
+        if ($filtros['setor']) {
+            $query->where('sector_id', (int) $filtros['setor']);
+        }
 
         // Situação: abertas (padrão), encerradas, todas ou uma situação específica
         if ($filtros['situacao'] === 'abertas') {
@@ -69,6 +76,13 @@ class TaskController extends Controller
             $query->where('priority', $filtros['prioridade']);
         }
 
+        // Modelo de tarefa (ex.: Devolução de valores) ou "tarefa livre"
+        if ($filtros['modelo'] === 'livre') {
+            $query->whereNull('task_template_id');
+        } elseif ($filtros['modelo']) {
+            $query->where('task_template_id', (int) $filtros['modelo']);
+        }
+
         // Busca livre: número da tarefa (#12), título, descrição ou equipamento
         if ($filtros['search'] !== '') {
             $termo = '%'.$filtros['search'].'%';
@@ -102,6 +116,10 @@ class TaskController extends Controller
             'situacao' => $filtros['situacao'],
             'responsaveis' => $this->opcoesDeResponsavel(),
             'lojas' => Store::orderBy('name')->get(['id', 'name']),
+            // Setores que a pessoa pode escolher no filtro (administrador: todos; quem atende: o seu)
+            'setores' => Sector::filasDe(auth()->user()),
+            'setorAtual' => $filtros['setor'] ? Sector::find((int) $filtros['setor']) : null,
+            'modelos' => TaskTemplate::orderBy('name')->get(['id', 'name', 'ativo']),
         ]);
     }
 
@@ -140,6 +158,8 @@ class TaskController extends Controller
         $responsavel = (string) $request->query('responsavel', '');
         $loja = (string) $request->query('loja', '');
         $prioridade = (int) $request->query('prioridade');
+        $setor = (string) $request->query('setor', '');
+        $modelo = (string) $request->query('modelo', '');
 
         return [
             'search' => trim((string) $request->query('search', '')),
@@ -148,6 +168,8 @@ class TaskController extends Controller
             'ate' => $ate,
             'responsavel' => ($responsavel === 'sem' || ctype_digit($responsavel)) ? $responsavel : '',
             'loja' => ($loja === 'sem' || ctype_digit($loja)) ? $loja : '',
+            'setor' => ctype_digit($setor) ? $setor : '',
+            'modelo' => ($modelo === 'livre' || ctype_digit($modelo)) ? $modelo : '',
             'prioridade' => array_key_exists($prioridade, config('tarefas.prioridades')) ? $prioridade : 0,
         ];
     }
@@ -166,41 +188,133 @@ class TaskController extends Controller
             ->values();
     }
 
-    public function create()
+    /**
+     * Nova tarefa. Se houver modelos ativos, primeiro a pessoa escolhe entre
+     * "Tarefa livre" e um modelo (ex.: Devolução de valores).
+     */
+    public function create(Request $request)
     {
-        return view('tasks.create', ['equipamentos' => $this->equipamentosDeInformatica()]);
+        $modelos = TaskTemplate::ativos()->with('sector')->orderBy('name')->get();
+
+        // Voltando de um erro de validação, reabre o mesmo formulário (com o que foi preenchido)
+        $idModelo = $request->query('modelo') ?: $request->old('task_template_id');
+        $voltouComErro = $request->session()->hasOldInput();
+
+        $modelo = $idModelo ? $modelos->firstWhere('id', (int) $idModelo) : null;
+
+        // Link para um modelo que não existe (ou foi desativado)
+        abort_if($request->filled('modelo') && ! $modelo, 404);
+
+        if (! $modelo && $modelos->isNotEmpty() && ! $request->boolean('livre') && ! $voltouComErro) {
+            return view('tasks.escolher', ['modelos' => $modelos]);
+        }
+
+        return view('tasks.create', [
+            'modelo' => $modelo,
+            'camposModelo' => $modelo?->campos ?? [],
+            'equipamentos' => $this->equipamentosDeInformatica(),
+            'setoresDestino' => $this->setoresDestino(),
+            'setorPadrao' => $modelo?->sector_id ?? Sector::padraoParaTarefas()?->id,
+            // Responsável já definido no modelo (aparece no formulário)
+            'responsaveisModelo' => $modelo?->responsaveisValidos() ?? collect(),
+            // Quem pode ser convidado como participante: contas ativas, menos quem está abrindo
+            'pessoas' => User::ativos()->with('sector:id,name')->where('id', '!=', auth()->id())->orderBy('name')->get(['id', 'name', 'sector_id']),
+        ]);
     }
 
     public function store(Request $request)
     {
-        $dados = $request->validate($this->regrasTarefa(true) + $this->regrasEquipamento(), $this->mensagensTarefa());
+        // Modelo escolhido (só os ativos podem ser usados para abrir tarefas novas)
+        $modelo = $request->filled('task_template_id')
+            ? TaskTemplate::ativos()->find((int) $request->input('task_template_id'))
+            : null;
+
+        if ($request->filled('task_template_id') && ! $modelo) {
+            return back()->withInput()->withErrors(['title' => 'Este modelo de tarefa não está mais disponível.']);
+        }
+
+        $campos = $modelo?->campos ?? [];
+
+        $dados = $request->validate(
+            $this->regrasTarefa(nova: true, descricaoObrigatoria: ! $modelo)
+                + $this->regrasEquipamento()
+                + $this->regrasSetor()
+                + AnexosTarefa::regras()
+                + TaskTemplate::regras($campos)
+                + [
+                    // Participantes: contas ativas que vão acompanhar a tarefa
+                    'participantes' => ['nullable', 'array', 'max:20'],
+                    'participantes.*' => ['integer', Rule::exists('users', 'id')->where('ativo', true)],
+                ],
+            $this->mensagensTarefa() + AnexosTarefa::mensagens() + [
+                'participantes.max' => 'Escolha no máximo 20 participantes.',
+                'participantes.*.exists' => 'Uma das pessoas escolhidas não está mais ativa. Escolha de novo.',
+            ],
+            TaskTemplate::nomesDosCampos($campos)
+        );
         $user = auth()->user();
 
         $task = new Task;
         $task->title = $dados['title'];
-        $task->description = $dados['description'];
+        $task->description = $dados['description'] ?? '';
         $task->deadline = $dados['deadline'];
         $task->priority = (int) $dados['priority'];
-        $task->items = $dados['items'] ?? [];
-        $task->equipment_id = $dados['equipment_id'] ?? null;
         $task->status = 'aberta';
         $task->user_id = $user->id;
 
-        // Imagem: somente JPG, PNG ou WEBP, guardada em pasta privada (fora de public)
-        if ($request->hasFile('image')) {
-            $task->image = $this->guardarImagem($request->file('image'));
+        if ($modelo) {
+            // O modelo define o setor; o "contexto do problema" é das tarefas de TI e não aparece aqui
+            $task->task_template_id = $modelo->id;
+            $task->respostas = TaskTemplate::montarRespostas($campos, $dados['respostas'] ?? []);
+            $task->sector_id = $modelo->sector_id ?? $dados['sector_id'] ?? Sector::padraoParaTarefas()?->id;
+            $task->items = [];
+            $task->equipment_id = $modelo->pede_equipamento ? ($dados['equipment_id'] ?? null) : null;
+        } else {
+            $task->sector_id = $dados['sector_id'] ?? Sector::padraoParaTarefas()?->id;
+            $task->items = $dados['items'] ?? [];
+            $task->equipment_id = $dados['equipment_id'] ?? null;
         }
 
         $task->save();
         $task->registrar('criada', $user);
 
-        // Quem abriu NÃO vira responsável automaticamente. Quem pode atender
-        // tarefas pode marcar "Eu mesmo vou atender" no formulário.
-        if ($request->boolean('assumir_agora') && $user->can('tarefas.assumir')) {
+        // Anexos: imagens e PDF, guardados em pasta privada (fora de public)
+        $this->anexos->salvar($task, $request->file('anexos', []), $user);
+
+        // Responsável automático definido no modelo (pessoas do setor que podem atender)
+        $responsaveis = $modelo
+            ? $modelo->responsaveisValidos()->filter(fn (User $pessoa) => $task->podeAssumir($pessoa))->values()
+            : collect();
+
+        if ($responsaveis->isNotEmpty()) {
+            $task->users()->attach($responsaveis->pluck('id'));
+            $task->registrar('atribuida', $user, null, ['nomes' => $responsaveis->pluck('name')->join(', ', ' e ')]);
+        }
+
+        // "Eu mesmo vou atender": só para quem atende o setor escolhido (ou o administrador)
+        $assumiu = false;
+
+        if ($request->boolean('assumir_agora') && $task->podeAssumir($user) && ! $responsaveis->contains('id', $user->id)) {
             $task->users()->attach($user->id);
             $task->update(['status' => 'em_andamento']);
             $task->registrar('assumiu', $user);
-        } else {
+            $assumiu = true;
+        }
+
+        // Participantes escolhidos no formulário (quem abriu e os responsáveis não entram na lista)
+        $jaEnvolvidos = $responsaveis->pluck('id')->push($user->id)->map(fn ($id) => (int) $id);
+        $convidados = User::whereIn('id', collect($dados['participantes'] ?? [])->map(fn ($id) => (int) $id)->unique()->diff($jaEnvolvidos))->get();
+
+        foreach ($convidados as $participante) {
+            $task->participantes()->attach($participante->id, ['added_by' => $user->id]);
+            $task->registrar('participante_adicionado', $user, null, ['user_id' => $participante->id, 'nome' => $participante->name]);
+            $this->notificador->participanteAdicionado($task, $participante, $user);
+        }
+
+        // Avisos: o responsável definido no modelo recebe o aviso direto; sem responsável, avisa o setor
+        if ($responsaveis->isNotEmpty()) {
+            $this->notificador->atribuida($task, $responsaveis, $user);
+        } elseif (! $assumiu) {
             $this->notificador->criada($task, $user);
         }
 
@@ -209,7 +323,7 @@ class TaskController extends Controller
 
     public function show($id)
     {
-        $task = Task::with(['user', 'users', 'participantes', 'equipment.store', 'atividades.user', 'concluidaPor'])
+        $task = Task::with(['user', 'users', 'participantes', 'equipment.store', 'sector', 'template', 'anexos.user', 'atividades.user', 'concluidaPor'])
             ->findOrFail($id);
 
         // Quem não pode ver a tarefa recebe "não encontrada" (não revela que ela existe)
@@ -285,6 +399,10 @@ class TaskController extends Controller
             Storage::disk('local')->delete('task-images/'.$task->image);
         }
 
+        foreach ($task->anexos as $anexo) {
+            Storage::disk('local')->delete($anexo->caminho());
+        }
+
         $task->users()->detach();
         $task->delete(); // participantes e linha do tempo saem juntos (cascade)
 
@@ -293,7 +411,7 @@ class TaskController extends Controller
 
     public function edit($id)
     {
-        $task = Task::findOrFail($id);
+        $task = Task::with('template')->findOrFail($id);
 
         if (! $task->podeGerenciar(auth()->user())) {
             return redirect('/dashboard');
@@ -301,7 +419,12 @@ class TaskController extends Controller
 
         return view('tasks.edit', [
             'task' => $task,
+            'modelo' => $task->template,
+            // Na edição valem os campos copiados para a tarefa (o modelo pode ter mudado depois)
+            'camposModelo' => $task->temRespostas() ? $task->respostas : [],
             'equipamentos' => $this->equipamentosDeInformatica($task->equipment_id),
+            'setoresDestino' => $this->setoresDestino($task->sector_id),
+            'setorPadrao' => $task->sector_id,
         ]);
     }
 
@@ -312,36 +435,62 @@ class TaskController extends Controller
         // Quem criou a tarefa (ou tem a permissão de gerenciar todas) pode editá-la
         abort_unless($task->podeGerenciar(auth()->user()), 403);
 
+        $campos = $task->temRespostas() ? $task->respostas : [];
+
         // Apenas os campos do formulário (evita alterar user_id e outros campos)
-        $dados = $request->validate($this->regrasTarefa() + $this->regrasEquipamento($task), $this->mensagensTarefa());
+        $dados = $request->validate(
+            $this->regrasTarefa(descricaoObrigatoria: ! $campos)
+                + $this->regrasEquipamento($task)
+                + $this->regrasSetor($task)
+                + AnexosTarefa::regras($task)
+                + TaskTemplate::regras($campos),
+            $this->mensagensTarefa() + AnexosTarefa::mensagens(),
+            TaskTemplate::nomesDosCampos($campos)
+        );
 
         $data = [
             'title' => $dados['title'],
-            'description' => $dados['description'],
+            'description' => $dados['description'] ?? '',
             'deadline' => $dados['deadline'],
             'priority' => (int) $dados['priority'],
-            'items' => $dados['items'] ?? [],
-            'equipment_id' => $dados['equipment_id'] ?? null,
+            'sector_id' => $dados['sector_id'] ?? $task->sector_id,
         ];
 
-        $imagemAntiga = null;
+        if ($campos) {
+            $data['respostas'] = TaskTemplate::montarRespostas($campos, $dados['respostas'] ?? []);
 
-        if ($request->hasFile('image')) {
-            $imagemAntiga = $task->image;
-            $data['image'] = $this->guardarImagem($request->file('image'));
+            if ($task->template?->pede_equipamento) {
+                $data['equipment_id'] = $dados['equipment_id'] ?? null;
+            }
+        } else {
+            $data['items'] = $dados['items'] ?? [];
+            $data['equipment_id'] = $dados['equipment_id'] ?? null;
         }
 
         $task->fill($data);
-        $campos = $this->camposAlterados($task);
+        $setorAnterior = $task->isDirty('sector_id') ? Sector::find($task->getOriginal('sector_id')) : null;
+        $encaminhada = $task->isDirty('sector_id');
+        $alterados = $this->camposAlterados($task);
         $task->save();
 
-        if ($campos) {
-            $task->registrar('editada', auth()->user(), null, ['campos' => $campos]);
+        $novosAnexos = $this->anexos->salvar($task, $request->file('anexos', []), auth()->user());
+
+        if ($novosAnexos > 0) {
+            $alterados[] = $novosAnexos === 1 ? '1 anexo novo' : "{$novosAnexos} anexos novos";
         }
 
-        // Remove a imagem anterior, que foi substituída
-        if ($imagemAntiga) {
-            Storage::disk('local')->delete('task-images/'.$imagemAntiga);
+        if ($alterados) {
+            $task->registrar('editada', auth()->user(), null, ['campos' => $alterados]);
+        }
+
+        // Mudou de setor: fica na linha do tempo e quem atende o novo setor é avisado
+        if ($encaminhada) {
+            $task->load('sector');
+            $task->registrar('encaminhada', auth()->user(), null, [
+                'de' => $setorAnterior?->name,
+                'para' => $task->sector?->name,
+            ]);
+            $this->notificador->criada($task, auth()->user(), encaminhada: true);
         }
 
         return redirect('/tasks/'.$task->id)->with('msg', 'Tarefa atualizada com sucesso!');
@@ -359,6 +508,9 @@ class TaskController extends Controller
         if ($task->ehResponsavel($user)) {
             return redirect('/tasks/'.$task->id)->with('msg', 'Você já é responsável por esta tarefa.');
         }
+
+        // Só assume quem atende o setor da tarefa (ou o administrador)
+        abort_unless($task->podeAssumir($user), 403);
 
         $task->users()->syncWithoutDetaching([$user->id]);
         $task->registrar('assumiu', $user);
@@ -401,6 +553,7 @@ class TaskController extends Controller
             'deadline' => 'prazo',
             'priority' => 'prioridade',
             'items' => 'contexto',
+            'respostas' => 'dados do pedido',
             'equipment_id' => 'equipamento',
             'image' => 'imagem',
         ];
@@ -435,6 +588,26 @@ class TaskController extends Controller
             ->get();
     }
 
+    /**
+     * Setores que aparecem como destino no formulário. Na edição, o setor atual
+     * continua na lista mesmo se deixou de receber tarefas.
+     */
+    private function setoresDestino(?int $setorAtual = null)
+    {
+        return Sector::where(fn ($q) => $q->where('recebe_tarefas', true)->when($setorAtual, fn ($w) => $w->orWhere('id', $setorAtual)))
+            ->orderBy('name')
+            ->get(['id', 'name']);
+    }
+
+    private function regrasSetor(?Task $task = null): array
+    {
+        return [
+            'sector_id' => ['nullable', 'integer', Rule::exists('sectors', 'id')->where(
+                fn ($q) => $q->where('recebe_tarefas', true)->when($task?->sector_id, fn ($w) => $w->orWhere('id', $task->sector_id))
+            )],
+        ];
+    }
+
     private function regrasEquipamento(?Task $task = null): array
     {
         return [
@@ -461,24 +634,17 @@ class TaskController extends Controller
     }
 
     /**
-     * Guarda a imagem em storage/app/private/task-images com nome aleatório e
-     * extensão definida pelo conteúdo do arquivo (já validado como JPG, PNG ou WEBP).
+     * Regras dos campos fixos. Em tarefas de modelo, a descrição vira "Observações" (opcional).
      */
-    private function guardarImagem(UploadedFile $arquivo): string
-    {
-        return basename($arquivo->store('task-images', 'local'));
-    }
-
-    private function regrasTarefa(bool $nova = false): array
+    private function regrasTarefa(bool $nova = false, bool $descricaoObrigatoria = true): array
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:5000'],
+            'description' => [$descricaoObrigatoria ? 'required' : 'nullable', 'string', 'max:5000'],
             'deadline' => $nova ? ['required', 'date', 'after_or_equal:today'] : ['required', 'date'],
             'priority' => ['required', 'integer', Rule::in(array_keys(config('tarefas.prioridades')))],
             'items' => ['nullable', 'array'],
             'items.*' => ['string', 'max:255'],
-            'image' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ];
     }
 
@@ -486,12 +652,9 @@ class TaskController extends Controller
     {
         return [
             'equipment_id.integer' => 'Escolha um equipamento de informática da lista.',
+            'sector_id.exists' => 'Escolha um dos setores da lista.',
             'priority.in' => 'Escolha uma das prioridades da lista.',
             'deadline.after_or_equal' => 'O prazo não pode ser uma data que já passou.',
-            'image.file' => 'Escolha um arquivo de imagem válido.',
-            'image.mimes' => 'A imagem deve ser JPG, PNG ou WEBP.',
-            'image.max' => 'A imagem pode ter no máximo 5 MB.',
-            'image.uploaded' => 'Não foi possível enviar a imagem. Ela pode ser maior que o limite do servidor.',
         ];
     }
 }

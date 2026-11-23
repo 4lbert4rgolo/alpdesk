@@ -58,6 +58,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Aceite dos Termos de Uso e da Política de Privacidade (LGPD)
+    |--------------------------------------------------------------------------
+    |
+    | termos_versao: versão atual dos textos em resources/markdown (terms.md e
+    | policy.md). Ao mudar um texto de forma relevante, troque a versão (ex.: a data
+    | da mudança): todos terão que aceitar de novo no próximo acesso.
+    |
+    | exigir_aceite_termos: true = quem ainda não aceitou a versão atual só consegue
+    | ver a tela de aceite, os textos e sair. Desligado só nos testes automáticos.
+    |
+    */
+
+    'termos_versao' => env('TERMS_VERSION', '2026-11-23'),
+
+    'exigir_aceite_termos' => (bool) env('TERMS_ACCEPTANCE_REQUIRED', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Logo
     |--------------------------------------------------------------------------
     |

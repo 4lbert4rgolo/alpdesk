@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Storage;
  * - participantes (participantes / tabela task_participants): acompanham, comentam
  *   e registram autorizações, mas não editam nem atendem.
  * Quem tem "tarefas.gerenciar_todas" pode fazer tudo em qualquer tarefa.
+ *
+ * Setor (sector_id): para qual setor a tarefa foi aberta (TI, Financeiro...).
+ * Quem tem "tarefas.assumir" vê e assume as tarefas do PRÓPRIO setor.
  */
 class Task extends Model
 {
@@ -32,6 +35,9 @@ class Task extends Model
         'image',
         'equipment_id',
         'user_id',
+        'sector_id',
+        'task_template_id',
+        'respostas',
         'status',
         'concluida_em',
         'concluida_por',
@@ -43,6 +49,7 @@ class Task extends Model
         'deadline' => 'datetime',
         'priority' => 'integer',
         'concluida_em' => 'datetime',
+        'respostas' => 'array',
     ];
 
     protected $attributes = [
@@ -50,7 +57,43 @@ class Task extends Model
         'priority' => 2,
     ];
 
+    /**
+     * Tarefa criada sem setor (por exemplo, por um script) vai para o setor padrão.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (Task $tarefa) {
+            if (! $tarefa->sector_id) {
+                $tarefa->sector_id = Sector::padraoParaTarefas()?->id;
+            }
+        });
+    }
+
     // ---------------------------------------------------------------- Relações
+
+    /** Modelo usado para abrir a tarefa (ex.: Devolução de valores) */
+    public function template(): BelongsTo
+    {
+        return $this->belongsTo(TaskTemplate::class, 'task_template_id');
+    }
+
+    /** Arquivos anexados (imagens e PDF) */
+    public function anexos(): HasMany
+    {
+        return $this->hasMany(TaskAttachment::class)->orderBy('created_at')->orderBy('id');
+    }
+
+    /** Campos preenchidos a partir de um modelo (cópia dos campos com o valor) */
+    public function temRespostas(): bool
+    {
+        return is_array($this->respostas) && count($this->respostas) > 0;
+    }
+
+    /** Setor para o qual a tarefa foi aberta */
+    public function sector(): BelongsTo
+    {
+        return $this->belongsTo(Sector::class);
+    }
 
     /** Quem abriu a tarefa */
     public function user(): BelongsTo
@@ -153,11 +196,20 @@ class Task extends Model
         return $usuario !== null && $usuario->can('tarefas.gerenciar_todas');
     }
 
+    /** A pessoa atende tarefas (pode assumir) e é do mesmo setor da tarefa */
+    public function atendidaPeloSetorDe(?User $usuario): bool
+    {
+        return $usuario !== null
+            && $usuario->sector_id
+            && (int) $usuario->sector_id === (int) $this->sector_id
+            && $usuario->can('tarefas.assumir');
+    }
+
     // --------------------------------------------------------------- Permissões
 
     /**
      * Quem pode ver a tarefa (e a imagem dela): quem abriu, os responsáveis, os
-     * participantes e quem tem permissão de assumir ou gerenciar tarefas.
+     * participantes, quem atende o setor da tarefa e quem gerencia todas (administrador).
      * Veja config/alpdesk.php (visibilidade_restrita).
      */
     public function visivelPara(?User $usuario): bool
@@ -170,13 +222,19 @@ class Task extends Model
             return true;
         }
 
-        if ($usuario->can('tarefas.assumir') || $usuario->can('tarefas.gerenciar_todas')) {
+        if ($this->gerenciaTodas($usuario) || $this->atendidaPeloSetorDe($usuario)) {
             return true;
         }
 
         return $this->ehCriador($usuario)
             || $this->ehResponsavel($usuario)
             || $this->ehParticipante($usuario);
+    }
+
+    /** Assumir (virar responsável): quem atende o setor da tarefa ou quem gerencia todas */
+    public function podeAssumir(?User $usuario): bool
+    {
+        return $this->gerenciaTodas($usuario) || $this->atendidaPeloSetorDe($usuario);
     }
 
     /** Editar e excluir: quem abriu ou quem gerencia todas */
@@ -201,6 +259,12 @@ class Task extends Model
     public function podeReabrir(?User $usuario): bool
     {
         return $this->ehCriador($usuario) || $this->podeAtender($usuario);
+    }
+
+    /** Anexar arquivos: todos que podem ver a tarefa */
+    public function podeAnexar(?User $usuario): bool
+    {
+        return $this->visivelPara($usuario);
     }
 
     /** Comentar: todos que podem ver a tarefa */
@@ -230,14 +294,15 @@ class Task extends Model
             return $consulta->whereRaw('1 = 0');
         }
 
-        if (! config('alpdesk.visibilidade_restrita')
-            || $usuario->can('tarefas.assumir')
-            || $usuario->can('tarefas.gerenciar_todas')) {
+        if (! config('alpdesk.visibilidade_restrita') || $usuario->can('tarefas.gerenciar_todas')) {
             return $consulta;
         }
 
-        return $consulta->where(function ($filtro) use ($usuario) {
+        $atendeSetor = $usuario->sector_id && $usuario->can('tarefas.assumir');
+
+        return $consulta->where(function ($filtro) use ($usuario, $atendeSetor) {
             $filtro->where('user_id', $usuario->id)
+                ->when($atendeSetor, fn ($f) => $f->orWhere('sector_id', $usuario->sector_id))
                 ->orWhereHas('users', fn ($responsaveis) => $responsaveis->where('users.id', $usuario->id))
                 ->orWhereHas('participantes', fn ($participantes) => $participantes->where('users.id', $usuario->id));
         });

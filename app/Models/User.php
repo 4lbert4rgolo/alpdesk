@@ -112,6 +112,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Store::class);
     }
 
+    /** Conversas do chat interno de que a pessoa participa */
+    public function conversas()
+    {
+        return $this->belongsToMany(Conversation::class)->withPivot(['ultima_lida_id', 'gerente'])->withTimestamps();
+    }
+
     /** Equipamentos que estão com esta pessoa */
     public function equipamentos()
     {
@@ -121,6 +127,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function accessGroups()
     {
         return $this->belongsToMany(AccessGroup::class, 'access_group_user')->withTimestamps();
+    }
+
+    /** Aceites dos Termos de Uso e da Política de Privacidade (um por versão) */
+    public function aceitesTermos()
+    {
+        return $this->hasMany(TermAcceptance::class);
+    }
+
+    /** Já aceitou a versão atual dos Termos e da Política? */
+    public function aceitouTermosAtuais(): bool
+    {
+        return $this->aceitesTermos()->where('versao', (string) config('alpdesk.termos_versao'))->exists();
     }
 
     public function scopeAtivos($consulta)

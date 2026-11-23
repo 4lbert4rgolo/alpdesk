@@ -3,10 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AccessGroupController;
 use App\Http\Controllers\Admin\CadastroController;
+use App\Http\Controllers\Admin\TaskTemplateController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AceiteTermosController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EquipmentTransferController;
 use App\Http\Controllers\PainelController;
+use App\Http\Controllers\TaskAttachmentController;
 use App\Http\Controllers\TaskCommentController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskParticipantController;
@@ -37,6 +41,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/tasks/{id}/comentarios', [TaskCommentController::class, 'store'])->middleware('throttle:30,1')->name('tasks.comments.store');
     Route::post('/tasks/{id}/participantes', [TaskParticipantController::class, 'store'])->name('tasks.participants.store');
     Route::delete('/tasks/{id}/participantes/{userId}', [TaskParticipantController::class, 'destroy'])->name('tasks.participants.destroy');
+
+    // Chat interno (conversas individuais e grupos)
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chat/nao-lidas', [ChatController::class, 'naoLidas'])->name('chat.nao-lidas');
+    Route::post('/chat/individual', [ChatController::class, 'individual'])->name('chat.individual');
+    Route::post('/chat/grupos', [ChatController::class, 'criarGrupo'])->name('chat.grupos.store');
+    Route::get('/chat/{conversa}', [ChatController::class, 'show'])->whereNumber('conversa')->name('chat.show');
+    Route::put('/chat/{conversa}/grupo', [ChatController::class, 'atualizarGrupo'])->whereNumber('conversa')->name('chat.grupos.update');
+    Route::post('/chat/{conversa}/sair', [ChatController::class, 'sair'])->whereNumber('conversa')->name('chat.sair');
+    Route::post('/chat/{conversa}/mensagens', [ChatController::class, 'enviar'])->whereNumber('conversa')->middleware('throttle:60,1')->name('chat.mensagens.store');
+    Route::get('/chat/{conversa}/mensagens', [ChatController::class, 'novas'])->whereNumber('conversa')->name('chat.mensagens.index');
+    Route::get('/chat/{conversa}/anexos/{mensagem}', [ChatController::class, 'anexo'])->whereNumber('conversa')->name('chat.anexo');
+
+    // Anexos (imagens e PDF): só quem pode ver a tarefa abre e envia
+    Route::get('/tasks/{id}/anexos/{anexo}', [TaskAttachmentController::class, 'show'])->whereNumber('id')->name('tasks.attachments.show');
+    Route::post('/tasks/{id}/anexos', [TaskAttachmentController::class, 'store'])->whereNumber('id')->middleware('throttle:20,1')->name('tasks.attachments.store');
+    Route::delete('/tasks/{id}/anexos/{anexo}', [TaskAttachmentController::class, 'destroy'])->whereNumber('id')->name('tasks.attachments.destroy');
 });
 
 // Painel de indicadores (para quem acompanha todas as tarefas)
@@ -101,6 +122,16 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::delete('/grupos/{grupo}', [AccessGroupController::class, 'destroy'])->name('grupos.destroy');
     });
 
+    // Modelos de tarefa (formulários prontos, ex.: Devolução de valores)
+    Route::middleware('can:modelos.gerenciar')->group(function () {
+        Route::get('/modelos', [TaskTemplateController::class, 'index'])->name('modelos.index');
+        Route::get('/modelos/novo', [TaskTemplateController::class, 'create'])->name('modelos.create');
+        Route::post('/modelos', [TaskTemplateController::class, 'store'])->name('modelos.store');
+        Route::get('/modelos/{modelo}/editar', [TaskTemplateController::class, 'edit'])->name('modelos.edit');
+        Route::put('/modelos/{modelo}', [TaskTemplateController::class, 'update'])->name('modelos.update');
+        Route::delete('/modelos/{modelo}', [TaskTemplateController::class, 'destroy'])->name('modelos.destroy');
+    });
+
     // Setores e lojas (usados em usuários e equipamentos)
     Route::middleware('can:cadastros.gerenciar')->prefix('cadastros/{tipo}')->where(['tipo' => 'setores|lojas'])
         ->name('cadastros.')->group(function () {
@@ -111,6 +142,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         });
 });
 
-
-
-
+// LGPD: aceite dos Termos de Uso e da Política de Privacidade.
+// Só "auth" (sem "verified"): quem ainda não confirmou o e-mail também pode aceitar.
+Route::middleware('auth')->prefix('aceite-dos-termos')->name('termos.')->group(function () {
+    Route::get('/', [AceiteTermosController::class, 'show'])->name('aceite');
+    Route::post('/', [AceiteTermosController::class, 'store'])->middleware('throttle:10,1')->name('aceitar');
+    Route::post('/recusar', [AceiteTermosController::class, 'recusar'])->name('recusar');
+});

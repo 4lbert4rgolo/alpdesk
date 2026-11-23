@@ -7,7 +7,7 @@
     <div class="admin-header">
         <div>
             <h1>Setores e lojas</h1>
-            <p class="subtitle">Usados no cadastro de usuários e de equipamentos. Cada pessoa tem um setor e uma loja.</p>
+            <p class="subtitle">Usados no cadastro de usuários e de equipamentos. Cada pessoa tem um setor e uma loja. Marque <strong>Recebe tarefas</strong> nos setores que atendem pedidos (ex.: TI, Financeiro).</p>
         </div>
     </div>
 
@@ -24,6 +24,9 @@
     <form method="POST" action="{{ route('admin.cadastros.store', $tipo) }}" class="filter-bar">
         @csrf
         <input type="text" name="name" maxlength="100" required placeholder="Nome" aria-label="{{ $config['novo'] }}">
+        @if($tipo === 'setores')
+            <label class="check-inline"><input type="checkbox" name="recebe_tarefas" value="1"> Recebe tarefas</label>
+        @endif
         <button type="submit" class="btn btn-primary">{{ $config['novo'] }}</button>
     </form>
 
@@ -35,6 +38,9 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Pessoas</th>
                         <th scope="col">Equipamentos</th>
+                        @if($tipo === 'setores')
+                            <th scope="col">Tarefas</th>
+                        @endif
                         <th scope="col"><span class="visually-hidden">Ações</span></th>
                     </tr>
                 </thead>
@@ -46,7 +52,12 @@
                                     @csrf
                                     @method('PUT')
                                     <input type="text" name="name" value="{{ $item->name }}" maxlength="100" required aria-label="Nome de {{ $item->name }}">
-                                    <button type="submit" class="btn btn-outline-secondary btn-sm">Renomear</button>
+                                    @if($tipo === 'setores')
+                                        <label class="check-inline" title="Aparece como destino ao abrir uma tarefa">
+                                            <input type="checkbox" name="recebe_tarefas" value="1" {{ $item->recebe_tarefas ? 'checked' : '' }}> Recebe tarefas
+                                        </label>
+                                    @endif
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm">Salvar</button>
                                 </form>
                             </td>
                             <td data-label="Pessoas">
@@ -59,8 +70,17 @@
                                     {{ $item->equipment_count }}
                                 @endcan
                             </td>
+                            @if($tipo === 'setores')
+                                <td data-label="Tarefas">
+                                    <a href="/?setor={{ $item->id }}&situacao=todas">{{ $item->tasks_count }}</a>
+                                </td>
+                            @endif
                             <td class="task-action">
-                                @if($item->users_count === 0 && $item->equipment_count === 0)
+                                @php
+                                    $vinculos = $item->users_count + $item->equipment_count + ($item->tasks_count ?? 0);
+                                    $outros = $itens->where('id', '!=', $item->id);
+                                @endphp
+                                @if($vinculos === 0)
                                     <form method="POST" action="{{ route('admin.cadastros.destroy', [$tipo, $item->id]) }}"
                                           onsubmit="return confirm('Excluir {{ addslashes($item->name) }}?')">
                                         @csrf
@@ -68,7 +88,24 @@
                                         <button type="submit" class="btn btn-outline-danger btn-sm">Excluir</button>
                                     </form>
                                 @else
-                                    <span class="muted" title="Só dá para excluir o que não está em uso">Em uso</span>
+                                    <details class="delete-box">
+                                        <summary class="btn btn-outline-danger btn-sm">Excluir</summary>
+                                        <form method="POST" action="{{ route('admin.cadastros.destroy', [$tipo, $item->id]) }}"
+                                              onsubmit="return confirm('Excluir {{ addslashes($item->name) }} e mover os vínculos?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <label for="mover-{{ $item->id }}">
+                                                Em uso por {{ $item->users_count }} pessoa(s), {{ $item->equipment_count }} equipamento(s){{ isset($item->tasks_count) ? ' e '.$item->tasks_count.' tarefa(s)' : '' }}. Mover para:
+                                            </label>
+                                            <select id="mover-{{ $item->id }}" name="mover_para">
+                                                <option value="">Deixar {{ $tipo === 'setores' ? 'sem setor' : 'sem loja' }}</option>
+                                                @foreach($outros as $outro)
+                                                    <option value="{{ $outro->id }}">{{ $outro->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <button type="submit" class="btn btn-danger btn-sm">Confirmar exclusão</button>
+                                        </form>
+                                    </details>
                                 @endif
                             </td>
                         </tr>

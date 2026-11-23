@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Conversation;
 use App\Models\User;
 use App\Support\Permissoes;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -37,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
             if ($evento->user instanceof User) {
                 $evento->user->forceFill(['ultimo_acesso_em' => now()])->saveQuietly();
             }
+        });
+
+        // Menu lateral: número de mensagens não lidas no chat
+        View::composer('layouts.main', function ($view) {
+            $view->with('chatNaoLidas', Conversation::naoLidasDe(auth()->user()));
         });
 
         // Em produção atrás de um proxy HTTPS, todos os links saem em https

@@ -20,14 +20,30 @@ use Throwable;
  */
 class NotificadorTarefas
 {
-    /** Tarefa nova: avisa quem pode assumir tarefas */
-    public function criada(Task $tarefa, User $autor): void
+    /**
+     * Tarefa nova (ou encaminhada para outro setor): avisa quem atende o setor da tarefa.
+     * Se o setor ainda não tem ninguém para atender, avisa quem gerencia todas as tarefas,
+     * para a tarefa não ficar esquecida.
+     */
+    public function criada(Task $tarefa, User $autor, bool $encaminhada = false): void
     {
-        $tecnicos = User::with('accessGroups')->get()
-            ->filter(fn (User $u) => $u->can('tarefas.assumir'));
+        $setor = $tarefa->sector?->name;
 
-        $this->enviar($tecnicos, $autor, $tarefa, 'nova tarefa aberta', [
-            $autor->name.' abriu uma tarefa com prioridade '.$tarefa->prioridadeLabel().'.',
+        $doSetor = $tarefa->sector_id
+            ? User::with('accessGroups')->where('sector_id', $tarefa->sector_id)->get()
+                ->filter(fn (User $u) => $u->can('tarefas.assumir'))
+            : collect();
+
+        $destino = $doSetor->filter(fn (User $u) => $u->ativo)->isNotEmpty()
+            ? $doSetor
+            : User::with('accessGroups')->get()->filter(fn (User $u) => $u->can('tarefas.gerenciar_todas'));
+
+        $primeiraLinha = $encaminhada
+            ? $autor->name.' encaminhou esta tarefa para o setor '.($setor ?? '—').'.'
+            : $autor->name.' abriu uma tarefa'.($setor ? ' para o setor '.$setor : '').' com prioridade '.$tarefa->prioridadeLabel().'.';
+
+        $this->enviar($destino, $autor, $tarefa, $encaminhada ? 'tarefa encaminhada para o seu setor' : 'nova tarefa aberta', [
+            $primeiraLinha,
             'Prazo: '.$tarefa->deadline->format('d/m/Y').'.',
         ]);
     }
@@ -70,6 +86,15 @@ class NotificadorTarefas
     }
 
     /** Virou participante: avisa a pessoa adicionada */
+    /** Tarefa aberta por modelo que já define o responsável: avisa quem recebeu */
+    public function atribuida(Task $tarefa, Collection $responsaveis, User $autor): void
+    {
+        $this->enviar($responsaveis, $autor, $tarefa, 'tarefa atribuída a você', [
+            $autor->name.' abriu esta tarefa'.($tarefa->template ? ' pelo modelo "'.$tarefa->template->name.'"' : '').', e você é o responsável.',
+            'Prazo: '.$tarefa->deadline->format('d/m/Y').'.',
+        ]);
+    }
+
     public function participanteAdicionado(Task $tarefa, User $participante, User $autor): void
     {
         $this->enviar(collect([$participante]), $autor, $tarefa, 'você foi adicionado como participante', [

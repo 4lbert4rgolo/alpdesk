@@ -21,6 +21,11 @@ class AdminUsuariosTest extends TestCase
         $usuario = User::factory()->create($extra);
         $usuario->accessGroups()->attach(AccessGroup::where('slug', $grupo)->firstOrFail()->id);
 
+        // Técnicos atendem o setor TI (criado pela migration), como no sistema real
+        if ($grupo === 'tecnico') {
+            $usuario->forceFill(['sector_id' => \App\Models\Sector::where('name', 'TI')->value('id')])->save();
+        }
+
         return $usuario;
     }
 
@@ -56,8 +61,9 @@ class AdminUsuariosTest extends TestCase
     public function test_busca_e_filtro_por_situacao(): void
     {
         $admin = $this->usuario('administrador');
-        $this->usuario('solicitante', ['name' => 'Joana Vendas']);
-        $inativo = $this->usuario('solicitante', ['name' => 'Pedro Antigo']);
+        // E-mails fixos: o e-mail aleatório da factory às vezes contém "joana" e atrapalhava a busca
+        $this->usuario('solicitante', ['name' => 'Joana Vendas', 'email' => 'joana.vendas@empresa.com']);
+        $inativo = $this->usuario('solicitante', ['name' => 'Pedro Antigo', 'email' => 'pedro.antigo@empresa.com']);
         $inativo->forceFill(['ativo' => false])->save();
 
         $this->actingAs($admin)->get('/admin/usuarios?q=joana')->assertSee('Joana Vendas')->assertDontSee('Pedro Antigo');

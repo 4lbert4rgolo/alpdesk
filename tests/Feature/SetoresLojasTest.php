@@ -38,7 +38,7 @@ class SetoresLojasTest extends TestCase
 
     public function test_administrador_cria_usuario_com_setor_e_loja(): void
     {
-        $setor = Sector::create(['name' => 'Financeiro']);
+        $setor = Sector::firstOrCreate(['name' => 'Financeiro']);
         $loja = Store::create(['name' => 'Matriz']);
 
         $this->actingAs($this->usuario('administrador'))->post('/admin/usuarios', [
@@ -85,7 +85,7 @@ class SetoresLojasTest extends TestCase
 
     public function test_lista_de_usuarios_filtra_por_setor(): void
     {
-        $financeiro = Sector::create(['name' => 'Financeiro']);
+        $financeiro = Sector::firstOrCreate(['name' => 'Financeiro']);
         $this->usuario('solicitante', ['name' => 'Bruno Financeiro'])->forceFill(['sector_id' => $financeiro->id])->save();
         $this->usuario('solicitante', ['name' => 'Carla Oficina']);
 
@@ -119,18 +119,41 @@ class SetoresLojasTest extends TestCase
         $this->assertSame('Peças e Acessórios', $setor->fresh()->name);
     }
 
-    public function test_nao_exclui_setor_em_uso(): void
+    public function test_exclui_setor_em_uso_movendo_pessoas_para_outro(): void
     {
         $admin = $this->usuario('administrador');
-        $usado = Sector::create(['name' => 'Vendas']);
-        $livre = Sector::create(['name' => 'Antigo']);
-        $this->usuario('solicitante')->forceFill(['sector_id' => $usado->id])->save();
+        $antigo = Sector::create(['name' => 'Vendas Antigo']);
+        $novo = Sector::create(['name' => 'Vendas']);
+        $pessoa = $this->usuario('solicitante');
+        $pessoa->forceFill(['sector_id' => $antigo->id])->save();
+        $equipamento = $this->equipamento(['sector_id' => $antigo->id]);
 
-        $this->actingAs($admin)->delete('/admin/cadastros/setores/'.$usado->id)->assertSessionHasErrors('name');
-        $this->assertNotNull($usado->fresh());
+        $this->actingAs($admin)->delete('/admin/cadastros/setores/'.$antigo->id, ['mover_para' => $novo->id])->assertSessionHasNoErrors();
 
-        $this->actingAs($admin)->delete('/admin/cadastros/setores/'.$livre->id)->assertSessionHasNoErrors();
-        $this->assertNull($livre->fresh());
+        $this->assertNull($antigo->fresh());
+        $this->assertSame($novo->id, $pessoa->fresh()->sector_id);
+        $this->assertSame($novo->id, $equipamento->fresh()->sector_id);
+    }
+
+    public function test_exclui_loja_deixando_sem_loja(): void
+    {
+        $admin = $this->usuario('administrador');
+        $loja = Store::create(['name' => 'Filial fechada']);
+        $equipamento = $this->equipamento(['store_id' => $loja->id]);
+
+        $this->actingAs($admin)->delete('/admin/cadastros/lojas/'.$loja->id, ['mover_para' => ''])->assertSessionHasNoErrors();
+
+        $this->assertNull($loja->fresh());
+        $this->assertNull($equipamento->fresh()->store_id);
+    }
+
+    public function test_nao_move_para_o_proprio_item(): void
+    {
+        $admin = $this->usuario('administrador');
+        $setor = Sector::create(['name' => 'Peças']);
+
+        $this->actingAs($admin)->delete('/admin/cadastros/setores/'.$setor->id, ['mover_para' => $setor->id])->assertSessionHasErrors('mover_para');
+        $this->assertNotNull($setor->fresh());
     }
 
     // ------------------------------------------------ Equipamento ligado à conta

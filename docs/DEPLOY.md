@@ -206,7 +206,7 @@ No servidor:
 - **PHP 8.3.36 ou mais novo** (`php -v`). Versões anteriores têm falhas críticas de execução remota (CVE-2026-109618/109619).
 - `.env`:
   - `APP_ENV=production`, `APP_DEBUG=false`
-  - `APP_URL=https://portal.litizmotos.com.br` (exatamente o endereço usado: o sistema recusa outros endereços)
+  - `APP_URL=https://helpdesk.suaempresa.com.br` (exatamente o endereço usado: o sistema recusa outros endereços)
   - `ADMIN_2FA_REQUIRED=true` (administradores precisam ativar a verificação em duas etapas)
   - `SESSION_SECURE_COOKIE=true`, `SESSION_ENCRYPT=true`, `SESSION_DOMAIN` **vazio**
   - `REGISTRATION_ENABLED=false` (contas criadas pelo administrador)

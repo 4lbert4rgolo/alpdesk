@@ -52,9 +52,18 @@
     if ($filtros['prioridade']) {
         $ativos[] = ['Prioridade: '.config('tarefas.prioridades')[$filtros['prioridade']][0], ['prioridade' => null]];
     }
+    if ($filtros['modelo'] !== '') {
+        $nome = $filtros['modelo'] === 'livre'
+            ? 'tarefa livre'
+            : ($modelos->firstWhere('id', (int) $filtros['modelo'])->name ?? 'modelo #'.$filtros['modelo']);
+        $ativos[] = ['Tipo: '.$nome, ['modelo' => null]];
+    }
 
     $filtrando = count($ativos) > 0;
-    $painelAberto = $filtros['de'] || $filtros['ate'] || $filtros['responsavel'] !== '' || $filtros['loja'] !== ''
+
+    // O setor funciona como "fila" (vem do menu): limpar os filtros mantém o setor escolhido
+    $urlLimpar = $filtros['setor'] ? '/?setor='.$filtros['setor'] : '/';
+    $painelAberto = $filtros['de'] || $filtros['ate'] || $filtros['responsavel'] !== '' || $filtros['loja'] !== '' || $filtros['modelo'] !== ''
         || $filtros['prioridade'] || $filtros['situacao'] !== 'abertas';
 @endphp
 
@@ -64,6 +73,9 @@
         <ion-icon name="search-outline"></ion-icon>
         <input type="search" id="search" name="search" value="{{ $filtros['search'] }}" placeholder="Número, título, descrição ou equipamento" aria-label="Procurar tarefa">
         <button type="submit">Buscar</button>
+        @if($filtros['setor'] && $setores->count() <= 1)
+            <input type="hidden" name="setor" value="{{ $filtros['setor'] }}">
+        @endif
     </form>
 </div>
 
@@ -96,6 +108,18 @@
                 </div>
             </div>
 
+            @if($setores->count() > 1)
+                <div class="filter-field">
+                    <label class="filter-label" for="setor">Setor</label>
+                    <select id="setor" name="setor" form="form-busca">
+                        <option value="">Todos os setores</option>
+                        @foreach($setores as $setor)
+                            <option value="{{ $setor->id }}" {{ $filtros['setor'] === (string) $setor->id ? 'selected' : '' }}>{{ $setor->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+
             <div class="filter-field">
                 <label class="filter-label" for="situacao">Situação</label>
                 <select id="situacao" name="situacao" form="form-busca">
@@ -127,6 +151,19 @@
                 </select>
             </div>
 
+            @if($modelos->isNotEmpty())
+                <div class="filter-field">
+                    <label class="filter-label" for="modelo">Tipo de tarefa</label>
+                    <select id="modelo" name="modelo" form="form-busca">
+                        <option value="">Todos os tipos</option>
+                        @foreach($modelos as $opcaoModelo)
+                            <option value="{{ $opcaoModelo->id }}" {{ $filtros['modelo'] === (string) $opcaoModelo->id ? 'selected' : '' }}>{{ $opcaoModelo->name }}</option>
+                        @endforeach
+                        <option value="livre" {{ $filtros['modelo'] === 'livre' ? 'selected' : '' }}>Tarefa livre</option>
+                    </select>
+                </div>
+            @endif
+
             <div class="filter-field">
                 <label class="filter-label" for="prioridade">Prioridade</label>
                 <select id="prioridade" name="prioridade" form="form-busca">
@@ -140,7 +177,7 @@
             <div class="filter-actions">
                 <button type="submit" form="form-busca" class="btn btn-primary">Aplicar filtros</button>
                 @if($filtrando)
-                    <a href="/" class="btn btn-outline-secondary">Limpar</a>
+                    <a href="{{ $urlLimpar }}" class="btn btn-outline-secondary">Limpar</a>
                 @endif
             </div>
         </div>
@@ -153,18 +190,50 @@
                     {{ $ativo[0] }} <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                 </a>
             @endforeach
-            <a href="/" class="filter-clear">Limpar tudo</a>
+            <a href="{{ $urlLimpar }}" class="filter-clear">Limpar tudo</a>
         </div>
     @endif
 
     <div class="tasks-header">
         <div>
-            <h2>{{ $titulos[$filtros['situacao']] ?? 'Tarefas: '.($opcoesSituacao[$filtros['situacao']] ?? '') }}</h2>
+            <h2>
+                {{ $titulos[$filtros['situacao']] ?? 'Tarefas: '.($opcoesSituacao[$filtros['situacao']] ?? '') }}
+                @if($setorAtual)
+                    <span class="sector-tag">{{ $setorAtual->name }}</span>
+                @endif
+            </h2>
             <p class="subtitle">Urgentes e de prazo mais próximo aparecem primeiro.</p>
         </div>
-        @if($tasks->total() > 0)
-            <span class="tasks-count">{{ $tasks->total() }} {{ $tasks->total() == 1 ? 'tarefa' : 'tarefas' }}</span>
-        @endif
+        <div class="tasks-header-actions">
+            @if($tasks->total() > 0)
+                <span class="tasks-count">{{ $tasks->total() }} {{ $tasks->total() == 1 ? 'tarefa' : 'tarefas' }}</span>
+            @endif
+
+            @can('tarefas.criar')
+                @php
+                    $modelosAtivos = $modelos->where('ativo', true);
+                @endphp
+                @if($modelosAtivos->isEmpty())
+                    <a href="/tasks/create" class="btn btn-primary">
+                        <ion-icon name="add-outline"></ion-icon> Nova tarefa
+                    </a>
+                @else
+                    {{-- Botão com lista: escolhe o modelo direto daqui, sem passar pela tela de escolha --}}
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <ion-icon name="add-outline"></ion-icon> Nova tarefa
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end new-task-menu">
+                            @foreach($modelosAtivos as $opcaoModelo)
+                                <li><a class="dropdown-item" href="/tasks/create?modelo={{ $opcaoModelo->id }}">{{ $opcaoModelo->name }}</a></li>
+                            @endforeach
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/tasks/create?livre=1">Tarefa livre</a></li>
+                        </ul>
+                    </div>
+                @endif
+            @endcan
+        </div>
     </div>
 
     @if($tasks->total() > 0)
@@ -193,6 +262,12 @@
                             <td data-label="Tarefa" class="task-title">
                                 <div>
                                     <a href="/tasks/{{ $task->id }}">#{{ $task->id }} · {{ $task->title }}</a>
+                                    @if($task->template)
+                                        <span class="sector-tag">{{ $task->template->name }}</span>
+                                    @endif
+                                    @if($task->sector && ! $setorAtual && $setores->count() > 1)
+                                        <span class="sector-tag is-muted">{{ $task->sector->name }}</span>
+                                    @endif
                                     @if($task->equipment)
                                         <small class="muted d-block">{{ $task->equipment->name }}{{ $task->equipment->store ? ' · '.$task->equipment->store->name : '' }}</small>
                                     @endif
@@ -229,7 +304,7 @@
         </div>
     @elseif($filtrando)
         <div class="tasks-empty">
-            Nenhuma tarefa encontrada com esses filtros. <a href="/">Limpar filtros</a>
+            Nenhuma tarefa encontrada com esses filtros. <a href="{{ $urlLimpar }}">Limpar filtros</a>
         </div>
     @else
         <div class="tasks-empty">Não há tarefas pendentes.</div>

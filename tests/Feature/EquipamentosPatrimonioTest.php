@@ -23,6 +23,11 @@ class EquipamentosPatrimonioTest extends TestCase
         $usuario = User::factory()->create();
         $usuario->accessGroups()->attach(AccessGroup::where('slug', $grupo)->firstOrFail()->id);
 
+        // Técnicos atendem o setor TI (criado pela migration), como no sistema real
+        if ($grupo === 'tecnico') {
+            $usuario->forceFill(['sector_id' => \App\Models\Sector::where('name', 'TI')->value('id')])->save();
+        }
+
         return $usuario;
     }
 

@@ -45,6 +45,8 @@ return [
             'usuarios.gerenciar' => 'Criar e editar usuários',
             'grupos.gerenciar' => 'Criar e editar grupos de acesso',
             'cadastros.gerenciar' => 'Criar, renomear e excluir setores e lojas',
+            'modelos.gerenciar' => 'Criar e editar modelos de tarefa',
+            'chat.grupos' => 'Criar grupos no chat e gerenciar qualquer grupo',
         ],
     ],
 

@@ -1,0 +1,101 @@
+# Pipeline de testes do AlpDesk (GitHub Actions)
+#
+# A cada "git push" (e a cada pull request), o GitHub liga uma máquina Linux limpa,
+# instala o projeto do zero e roda todos os testes. Se algo falhar, o commit ganha
+# um X vermelho no GitHub e você recebe um e-mail.
+#
+# Em YAML a INDENTAÇÃO (espaços no começo da linha) define o que está dentro do quê,
+# como as chaves { } no PHP. Use sempre espaços, nunca TAB.
+
+name: Testes
+
+# "on" = QUANDO a pipeline roda
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch: # permite rodar na mão, pelo botão "Run workflow" na aba Actions
+
+# Se você der dois pushes seguidos, a execução antiga é cancelada e só a nova continua
+concurrency:
+  group: testes-${{ github.ref }}
+  cancel-in-progress: true
+
+# Permissão mínima: a pipeline só LÊ o código, não altera nada no repositório
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    name: PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest   # sistema da máquina virtual
+    timeout-minutes: 15      # se travar, para sozinha depois de 15 minutos
+
+    # "matrix" roda o mesmo job em mais de uma versão. Hoje só a 8.3, que é a mínima
+    # exigida pelo composer.json. Para testar também a 8.4: php: ['8.3', '8.4']
+    strategy:
+      matrix:
+        php: ['8.3']
+
+    # "steps" = os passos, executados em ordem, de cima para baixo
+    steps:
+      # 1. Baixa o código do repositório para dentro da máquina
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      # 2. Instala o PHP com as extensões que o AlpDesk usa
+      #    (pdo_sqlite para o banco dos testes, gd e zip para planilhas e QR Code...)
+      - name: Instalar PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, pdo_sqlite, sqlite3, gd, zip, intl, bcmath, exif, fileinfo
+          coverage: none
+          tools: composer:v2
+
+      # 3. Guarda as bibliotecas baixadas entre uma execução e outra (cache).
+      #    Assim a pipeline não baixa tudo de novo a cada push e fica bem mais rápida.
+      - name: Cache do Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: composer-${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ matrix.php }}-
+
+      # 4. Instala as dependências PHP exatamente nas versões do composer.lock
+      - name: Instalar dependências PHP
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      # 5. Instala o Node e gera o CSS/JS. As telas usam @vite: sem os arquivos
+      #    gerados em public/build, os testes que abrem páginas falham.
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Gerar CSS e JS
+        run: |
+          npm ci
+          npm run build
+
+      # 6. Cria o .env a partir do modelo e gera uma APP_KEY só para os testes.
+      #    Nenhuma senha real vai para a pipeline: o banco dos testes é SQLite em
+      #    memória (configurado no phpunit.xml) e os e-mails não são enviados.
+      - name: Preparar o .env
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # 7. Roda todos os testes (a mesma coisa que você roda no Laragon)
+      - name: Rodar os testes
+        run: php artisan test
+
+      # 8. Confere se alguma biblioteca tem falha de segurança conhecida.
+      #    "continue-on-error" = se achar algo, avisa no relatório, mas não deixa
+      #    o commit vermelho. Depois de atualizar Laravel e Livewire, você pode
+      #    apagar essa linha para que uma falha de segurança também bloqueie.
+      - name: Auditoria de segurança das bibliotecas
+        run: composer audit
+        continue-on-error: true

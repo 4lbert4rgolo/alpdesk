@@ -18,15 +18,24 @@
     <div class="admin-header">
         <div>
             <h1>Painel</h1>
-            <p class="subtitle">Visão geral das tarefas e dos equipamentos.</p>
+            <p class="subtitle">Visão geral das tarefas{{ $setorAtual ? ' do setor '.$setorAtual->name : '' }} e dos equipamentos.</p>
         </div>
 
         <div class="store-tabs" role="group" aria-label="Período">
             @foreach([7, 14, 30] as $opcao)
-                <a href="{{ route('painel', ['dias' => $opcao]) }}" class="store-tab {{ $dias === $opcao ? 'is-active' : '' }}">{{ $opcao }} dias</a>
+                <a href="{{ route('painel', array_filter(['dias' => $opcao, 'setor' => $setorAtual?->id])) }}" class="store-tab {{ $dias === $opcao ? 'is-active' : '' }}">{{ $opcao }} dias</a>
             @endforeach
         </div>
     </div>
+
+    @if($setores->count() > 1)
+        <nav class="store-tabs" aria-label="Setor">
+            <a href="{{ route('painel', ['dias' => $dias]) }}" class="store-tab {{ $setorAtual ? '' : 'is-active' }}">Todos os setores</a>
+            @foreach($setores as $setor)
+                <a href="{{ route('painel', ['dias' => $dias, 'setor' => $setor->id]) }}" class="store-tab {{ $setorAtual?->id === $setor->id ? 'is-active' : '' }}">{{ $setor->name }}</a>
+            @endforeach
+        </nav>
+    @endif
 
     <div class="kpi-grid">
         <div class="kpi"><strong>{{ $kpis['total'] }}</strong><span>tarefas em aberto</span></div>
