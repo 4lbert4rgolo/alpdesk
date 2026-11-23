@@ -120,12 +120,34 @@ O DNS do domínio precisa apontar para o servidor antes do `certbot`.
 
 ```
 sudo mkdir -p /var/backups/alpdesk && sudo chown $USER /var/backups/alpdesk
+sudo apt install -y rclone
 crontab -e
-# 0 2 * * * /var/www/alpdesk/scripts/backup.sh
+# 0 2 * * * /var/www/alpdesk/scripts/backup.sh >> /var/backups/alpdesk/backup.log 2>&1
 ```
 
-O backup guarda 14 dias de banco e imagens. **Copie a pasta para fora do servidor** (outro computador, rclone, rsync).
-Teste a restauração de vez em quando: `gunzip < db_AAAA-MM-DD_HHMM.sql.gz | mysql -u alpdesk -p alpdesk` (em um banco de teste).
+O backup guarda 14 dias de banco e imagens no servidor e envia uma cópia para o Google Drive
+(pasta `AlpDesk-Backups`, mantém 30 dias). Ajustes por variável: `KEEP_DAYS`, `RCLONE_REMOTE`, `REMOTE_KEEP_DAYS`.
+
+Configurar o Google Drive no servidor (ele não tem navegador):
+1. No seu PC Windows (onde o rclone já está configurado), rode `rclone authorize "drive"` e faça login.
+2. Copie o texto `{"access_token":...}` que aparece.
+3. No servidor, rode `rclone config` → `n` (novo) → nome `gdrive` → tipo `drive` → escopo `drive.file`
+   → responda `n` em "Use web browser" e cole o texto do passo 2.
+4. Teste: `./scripts/backup.sh` e confira a pasta `AlpDesk-Backups` no Drive.
+
+Teste a restauração de vez em quando: `gunzip < db_AAAA-MM-DD_HHMM.sql.gz | mysql -u alpdesk -p alpdesk_teste` (em um banco de teste).
+
+Guarde uma cópia do `.env` de produção (tem a `APP_KEY`) num gerenciador de senhas. Ela **não** vai no backup,
+e sem ela os códigos de dois fatores restaurados deixam de funcionar.
+
+### No Laragon (fase de testes)
+
+`scripts/backup-windows.ps1` faz o mesmo no Windows: grava em `C:\laragon\backups\alpdesk` e envia para o Drive.
+Agendar todo dia às 17:30 (o PC e o MySQL do Laragon precisam estar ligados):
+
+```
+schtasks /Create /TN "AlpDesk Backup" /SC DAILY /ST 17:30 /TR "powershell -NoProfile -ExecutionPolicy Bypass -File C:\laragon\www\alpdesk\scripts\backup-windows.ps1"
+```
 
 ## 8. Atualizações
 

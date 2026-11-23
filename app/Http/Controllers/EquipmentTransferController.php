@@ -23,9 +23,9 @@ class EquipmentTransferController extends Controller
             return back()->with('msg', EquipmentSpreadsheet::AVISO_XLS);
         }
 
-        $filtros = $request->only(['loja', 'setor', 'tipo', 'status', 'pendencia', 'q']);
+        $filtros = $request->only(['loja', 'setor', 'usuario', 'tipo', 'status', 'pendencia', 'q']);
 
-        $linhas = Equipment::with(['store', 'sector'])
+        $linhas = Equipment::with(['store', 'sector', 'user'])
             ->filtrar($filtros)
             ->orderBy('id')
             ->get()

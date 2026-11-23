@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AccessGroup;
+use App\Models\Sector;
+use App\Models\Store;
 use App\Models\User;
 use App\Support\Permissoes;
 use Illuminate\Http\RedirectResponse;
@@ -30,13 +32,19 @@ class UserController extends Controller
         $busca = trim((string) $request->query('q', ''));
         $grupo = (string) $request->query('grupo', '');
         $situacao = in_array($request->query('situacao'), ['ativos', 'desativados'], true) ? $request->query('situacao') : 'todos';
+        $setor = (string) $request->query('setor', '');
+        $loja = (string) $request->query('loja', '');
 
-        $usuarios = User::with('accessGroups')
+        $usuarios = User::with(['accessGroups', 'sector', 'store'])
             ->when($busca !== '', function ($consulta) use ($busca) {
                 $consulta->where(fn ($q) => $q->where('name', 'like', "%{$busca}%")->orWhere('email', 'like', "%{$busca}%"));
             })
             ->when($grupo === 'sem', fn ($consulta) => $consulta->doesntHave('accessGroups'))
             ->when(ctype_digit($grupo), fn ($consulta) => $consulta->whereHas('accessGroups', fn ($g) => $g->where('access_groups.id', (int) $grupo)))
+            ->when($setor === 'sem', fn ($consulta) => $consulta->whereNull('sector_id'))
+            ->when(ctype_digit($setor), fn ($consulta) => $consulta->where('sector_id', (int) $setor))
+            ->when($loja === 'sem', fn ($consulta) => $consulta->whereNull('store_id'))
+            ->when(ctype_digit($loja), fn ($consulta) => $consulta->where('store_id', (int) $loja))
             ->when($situacao === 'ativos', fn ($consulta) => $consulta->where('ativo', true))
             ->when($situacao === 'desativados', fn ($consulta) => $consulta->where('ativo', false))
             ->orderByDesc('ativo')
@@ -47,7 +55,9 @@ class UserController extends Controller
         return view('admin.usuarios.index', [
             'usuarios' => $usuarios,
             'grupos' => AccessGroup::orderBy('name')->get(),
-            'filtros' => ['q' => $busca, 'grupo' => $grupo, 'situacao' => $situacao],
+            'setores' => Sector::orderBy('name')->get(),
+            'lojas' => Store::orderBy('name')->get(),
+            'filtros' => ['q' => $busca, 'grupo' => $grupo, 'setor' => $setor, 'loja' => $loja, 'situacao' => $situacao],
             'totais' => [
                 'todos' => User::count(),
                 'ativos' => User::where('ativo', true)->count(),
@@ -58,10 +68,7 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.usuarios.form', [
-            'usuario' => null,
-            'grupos' => AccessGroup::orderBy('name')->get(),
-        ]);
+        return view('admin.usuarios.form', ['usuario' => null] + $this->opcoes());
     }
 
     public function store(Request $request)
@@ -72,7 +79,7 @@ class UserController extends Controller
             'password' => ['required', 'confirmed', Password::default()],
             'groups' => ['nullable', 'array'],
             'groups.*' => ['integer', 'exists:access_groups,id'],
-        ]);
+        ] + $this->regrasSetorLoja());
 
         if ($erro = $this->conferirGrupos(collect($dados['groups'] ?? []))) {
             return $erro;
@@ -85,7 +92,12 @@ class UserController extends Controller
         ]);
 
         // Contas criadas pelo administrador já nascem com o e-mail confirmado
-        $usuario->forceFill(['email_verified_at' => now(), 'ativo' => true])->save();
+        $usuario->forceFill([
+            'email_verified_at' => now(),
+            'ativo' => true,
+            'sector_id' => $dados['sector_id'] ?? null,
+            'store_id' => $dados['store_id'] ?? null,
+        ])->save();
 
         $usuario->accessGroups()->sync($dados['groups'] ?? []);
 
@@ -96,9 +108,9 @@ class UserController extends Controller
     public function edit(User $usuario)
     {
         return view('admin.usuarios.form', [
-            'usuario' => $usuario->load('accessGroups')->loadCount(['tasks', 'tasksAsParticipant']),
-            'grupos' => AccessGroup::orderBy('name')->get(),
-        ]);
+            'usuario' => $usuario->load('accessGroups')->loadCount(['tasks', 'tasksAsParticipant', 'equipamentos']),
+            'equipamentos' => $usuario->equipamentos()->with('store')->orderBy('name')->limit(20)->get(),
+        ] + $this->opcoes());
     }
 
     public function update(Request $request, User $usuario)
@@ -109,7 +121,7 @@ class UserController extends Controller
             'password' => ['nullable', 'confirmed', Password::default()],
             'groups' => ['nullable', 'array'],
             'groups.*' => ['integer', 'exists:access_groups,id'],
-        ]);
+        ] + $this->regrasSetorLoja());
 
         if ($erro = $this->protegerAdministrador($usuario)) {
             return $erro;
@@ -147,6 +159,10 @@ class UserController extends Controller
 
         $usuario->name = $dados['name'];
         $usuario->email = mb_strtolower($dados['email']);
+        $usuario->forceFill([
+            'sector_id' => $dados['sector_id'] ?? null,
+            'store_id' => $dados['store_id'] ?? null,
+        ]);
 
         if (! empty($dados['password'])) {
             $usuario->password = Hash::make($dados['password']);
@@ -186,7 +202,14 @@ class UserController extends Controller
 
         $usuario->forceFill(['ativo' => false, 'remember_token' => null])->save();
 
-        return back()->with('msg', "{$usuario->name} foi desativado. A pessoa não consegue mais entrar e, se estiver logada, será desconectada.");
+        $mensagem = "{$usuario->name} foi desativado. A pessoa não consegue mais entrar e, se estiver logada, será desconectada.";
+        $comEle = $usuario->equipamentos()->count();
+
+        if ($comEle > 0) {
+            $mensagem .= " Atenção: {$comEle} ".($comEle === 1 ? 'equipamento continua vinculado' : 'equipamentos continuam vinculados').' a esta conta. Transfira-os na tela de equipamentos.';
+        }
+
+        return back()->with('msg', $mensagem);
     }
 
     public function ativar(User $usuario)
@@ -257,6 +280,24 @@ class UserController extends Controller
     }
 
     // ------------------------------------------------------------------ Apoio
+
+    private function opcoes(): array
+    {
+        return [
+            'grupos' => AccessGroup::orderBy('name')->get(),
+            'setores' => Sector::orderBy('name')->get(),
+            'lojas' => Store::orderBy('name')->get(),
+        ];
+    }
+
+    /** Setor e loja são opcionais (um de cada por pessoa). */
+    private function regrasSetorLoja(): array
+    {
+        return [
+            'sector_id' => ['nullable', 'integer', 'exists:sectors,id'],
+            'store_id' => ['nullable', 'integer', 'exists:stores,id'],
+        ];
+    }
 
     /**
      * Só administradores alteram contas de administradores.

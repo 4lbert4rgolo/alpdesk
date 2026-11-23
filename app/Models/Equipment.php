@@ -18,6 +18,7 @@ class Equipment extends Model
     protected $fillable = [
         'store_id',
         'sector_id',
+        'user_id',
         'type',
         'name',
         'asset_tag',
@@ -39,6 +40,21 @@ class Equipment extends Model
     public function sector(): BelongsTo
     {
         return $this->belongsTo(Sector::class);
+    }
+
+    /** Conta do sistema de quem usa o equipamento (opcional) */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Nome de quem usa: o da conta vinculada ou, se não houver,
+     * o nome digitado (para quem não tem login, ex.: "PC do caixa").
+     */
+    public function quemUsa(): ?string
+    {
+        return $this->user?->name ?? ($this->user_name ?: null);
     }
 
     public function tasks(): HasMany
@@ -68,6 +84,7 @@ class Equipment extends Model
             ->when(! empty($f['loja']) && $f['loja'] !== 'sem', fn ($q) => $q->where('store_id', (int) $f['loja']))
             ->when(($f['setor'] ?? '') === 'sem', fn ($q) => $q->whereNull('sector_id'))
             ->when(! empty($f['setor']) && $f['setor'] !== 'sem', fn ($q) => $q->where('sector_id', (int) $f['setor']))
+            ->when(ctype_digit((string) ($f['usuario'] ?? '')), fn ($q) => $q->where('user_id', (int) $f['usuario']))
             ->when(! empty($f['tipo']), fn ($q) => $q->where('type', $f['tipo']))
             ->when(! empty($f['status']), fn ($q) => $q->where('status', $f['status']))
             ->when(($f['pendencia'] ?? '') === 'sem_patrimonio', fn ($q) => $q->whereNull('asset_tag'))
@@ -78,6 +95,7 @@ class Equipment extends Model
                 $q->where(function ($w) use ($termo) {
                     $w->where('name', 'like', $termo)
                         ->orWhere('user_name', 'like', $termo)
+                        ->orWhereHas('user', fn ($u) => $u->where('name', 'like', $termo))
                         ->orWhere('asset_tag', 'like', $termo)
                         ->orWhere('hostname', 'like', $termo)
                         ->orWhere('serial_number', 'like', $termo)

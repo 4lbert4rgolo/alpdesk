@@ -13,4 +13,10 @@ class Store extends Model
     {
         return $this->hasMany(Equipment::class);
     }
+
+    /** Pessoas que trabalham nesta loja */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
 }

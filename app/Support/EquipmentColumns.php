@@ -78,7 +78,7 @@ class EquipmentColumns
             $equipamento->statusLabel(),
             (string) ($equipamento->store->name ?? ''),
             (string) ($equipamento->sector->name ?? ''),
-            (string) $equipamento->user_name,
+            (string) $equipamento->quemUsa(),
             (string) $equipamento->serial_number,
             (string) $equipamento->hostname,
             (string) $equipamento->anydesk_id,

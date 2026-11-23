@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AccessGroupController;
+use App\Http\Controllers\Admin\CadastroController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EquipmentTransferController;
@@ -99,6 +100,15 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::put('/grupos/{grupo}', [AccessGroupController::class, 'update'])->name('grupos.update');
         Route::delete('/grupos/{grupo}', [AccessGroupController::class, 'destroy'])->name('grupos.destroy');
     });
+
+    // Setores e lojas (usados em usuários e equipamentos)
+    Route::middleware('can:cadastros.gerenciar')->prefix('cadastros/{tipo}')->where(['tipo' => 'setores|lojas'])
+        ->name('cadastros.')->group(function () {
+            Route::get('/', [CadastroController::class, 'index'])->name('index');
+            Route::post('/', [CadastroController::class, 'store'])->name('store');
+            Route::put('/{id}', [CadastroController::class, 'update'])->whereNumber('id')->name('update');
+            Route::delete('/{id}', [CadastroController::class, 'destroy'])->whereNumber('id')->name('destroy');
+        });
 });
 
 

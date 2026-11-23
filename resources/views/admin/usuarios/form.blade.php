@@ -63,6 +63,39 @@
             <input type="password" id="password_confirmation" name="password_confirmation" autocomplete="new-password">
         </div>
 
+        <div class="field-grid">
+            <div class="field">
+                <label for="sector_id">Setor</label>
+                <select id="sector_id" name="sector_id">
+                    <option value="">Sem setor</option>
+                    @foreach($setores as $setor)
+                        <option value="{{ $setor->id }}" {{ (string) old('sector_id', $usuario->sector_id ?? '') === (string) $setor->id ? 'selected' : '' }}>{{ $setor->name }}</option>
+                    @endforeach
+                </select>
+                @error('sector_id')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="field">
+                <label for="store_id">Loja</label>
+                <select id="store_id" name="store_id">
+                    <option value="">Sem loja</option>
+                    @foreach($lojas as $loja)
+                        <option value="{{ $loja->id }}" {{ (string) old('store_id', $usuario->store_id ?? '') === (string) $loja->id ? 'selected' : '' }}>{{ $loja->name }}</option>
+                    @endforeach
+                </select>
+                @error('store_id')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+        @can('cadastros.gerenciar')
+            <p class="field-hint">
+                Não achou o setor ou a loja? <a href="{{ route('admin.cadastros.index', 'setores') }}" target="_blank">Cadastre em Setores e lojas</a> e recarregue esta página.
+            </p>
+        @endcan
+
         <fieldset class="field">
             <legend>Grupos de acesso</legend>
             @foreach($grupos as $grupo)
@@ -122,7 +155,33 @@
                     <dt>Tarefas</dt>
                     <dd>{{ $usuario->tasks_count }} abertas por ele · responsável em {{ $usuario->tasks_as_participant_count }}</dd>
                 </div>
+                <div>
+                    <dt>Equipamentos com a pessoa</dt>
+                    <dd>{{ $usuario->equipamentos_count }}</dd>
+                </div>
             </dl>
+
+            @if($equipamentos->isNotEmpty())
+                <ul class="person-equipment">
+                    @foreach($equipamentos as $item)
+                        <li>
+                            @can('equipamentos.ver')
+                                <a href="{{ route('equipamentos.show', $item) }}">{{ $item->name }}</a>
+                            @else
+                                {{ $item->name }}
+                            @endcan
+                            <small class="muted">
+                                {{ $item->asset_tag ? 'Patrimônio '.$item->asset_tag : 'Sem patrimônio' }}{{ $item->store ? ' · '.$item->store->name : '' }}
+                            </small>
+                        </li>
+                    @endforeach
+                </ul>
+                @if($usuario->equipamentos_count > $equipamentos->count())
+                    @can('equipamentos.ver')
+                        <a href="{{ route('equipamentos.index', ['usuario' => $usuario->id]) }}" class="field-hint">Ver todos os {{ $usuario->equipamentos_count }} equipamentos</a>
+                    @endcan
+                @endif
+            @endif
 
             <div class="account-actions">
                 <form action="{{ route('admin.usuarios.password-link', $usuario) }}" method="POST">

@@ -6,6 +6,7 @@ use App\Models\Equipment;
 use App\Models\EquipmentMovement;
 use App\Models\Sector;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -13,9 +14,9 @@ class EquipmentController extends Controller
 {
     public function index(Request $request)
     {
-        $filtros = $request->only(['loja', 'setor', 'tipo', 'status', 'pendencia', 'q']);
+        $filtros = $request->only(['loja', 'setor', 'usuario', 'tipo', 'status', 'pendencia', 'q']);
 
-        $equipamentos = Equipment::with(['store', 'sector'])
+        $equipamentos = Equipment::with(['store', 'sector', 'user'])
             ->filtrar($filtros)
             ->orderBy('name')
             ->orderBy('id')
@@ -32,13 +33,14 @@ class EquipmentController extends Controller
             'setores' => Sector::orderBy('name')->get(),
             'tipos' => config('equipamentos.tipos'),
             'situacoes' => config('equipamentos.status'),
+            'usuarioFiltrado' => ctype_digit((string) ($filtros['usuario'] ?? '')) ? User::find((int) $filtros['usuario']) : null,
         ]);
     }
 
     public function show(Equipment $equipamento)
     {
         return view('equipamentos.show', [
-            'equipamento' => $equipamento->load(['store', 'sector'])->loadCount('tasks'),
+            'equipamento' => $equipamento->load(['store', 'sector', 'user'])->loadCount('tasks'),
             'tarefas' => $equipamento->tasks()->visiveisPara(auth()->user())->latest()->limit(20)->get(),
             'movimentacoes' => $equipamento->movimentacoes()->with('user')->limit(50)->get(),
         ]);
@@ -59,7 +61,7 @@ class EquipmentController extends Controller
 
     public function store(Request $request)
     {
-        $dados = $request->validate($this->regras(), $this->mensagens());
+        $dados = $this->ajustarQuemUsa($request->validate($this->regras(), $this->mensagens()));
         unset($dados['motivo_alteracao']);
 
         $equipamento = Equipment::create($dados);
@@ -71,12 +73,12 @@ class EquipmentController extends Controller
 
     public function edit(Equipment $equipamento)
     {
-        return view('equipamentos.form', ['equipamento' => $equipamento] + $this->opcoes());
+        return view('equipamentos.form', ['equipamento' => $equipamento] + $this->opcoes($equipamento));
     }
 
     public function update(Request $request, Equipment $equipamento)
     {
-        $dados = $request->validate($this->regras($equipamento), $this->mensagens());
+        $dados = $this->ajustarQuemUsa($request->validate($this->regras($equipamento), $this->mensagens()));
         $motivo = trim((string) ($dados['motivo_alteracao'] ?? '')) ?: null;
         unset($dados['motivo_alteracao']);
 
@@ -206,7 +208,8 @@ class EquipmentController extends Controller
             'serial_number' => ['Nº de série', $texto],
             'store_id' => ['Loja', fn ($id) => $id ? (Store::find($id)?->name ?? '—') : 'Sem loja'],
             'sector_id' => ['Setor', fn ($id) => $id ? (Sector::find($id)?->name ?? '—') : 'Sem setor'],
-            'user_name' => ['Usuário', $texto],
+            'user_id' => ['Usuário do sistema', fn ($id) => $id ? (User::find($id)?->name ?? '—') : 'Nenhum'],
+            'user_name' => ['Usuário (sem login)', $texto],
             'status' => ['Situação', fn ($valor) => $situacoes[$valor] ?? $texto($valor)],
             'hostname' => ['Nome na rede', $texto],
             'anydesk_id' => ['AnyDesk', $texto],
@@ -234,9 +237,32 @@ class EquipmentController extends Controller
         return $alteracoes;
     }
 
-    private function opcoes(): array
+    /**
+     * Com uma conta escolhida, o nome digitado é apagado: o nome passa a vir da conta
+     * (se a pessoa mudar de nome no sistema, o equipamento acompanha).
+     */
+    private function ajustarQuemUsa(array $dados): array
     {
+        if (! empty($dados['user_id'])) {
+            $dados['user_name'] = null;
+        }
+
+        return $dados;
+    }
+
+    /**
+     * Lista de pessoas para o campo "Usuário do sistema": as contas ativas e, ao editar,
+     * também a conta já vinculada (mesmo se foi desativada), para não sumir da tela.
+     */
+    private function opcoes(?Equipment $equipamento = null): array
+    {
+        $usuarios = User::with(['store:id,name', 'sector:id,name'])
+            ->where(fn ($q) => $q->where('ativo', true)->when($equipamento?->user_id, fn ($w) => $w->orWhere('id', $equipamento->user_id)))
+            ->orderBy('name')
+            ->get(['id', 'name', 'email', 'ativo', 'store_id', 'sector_id']);
+
         return [
+            'usuarios' => $usuarios,
             'lojas' => Store::orderBy('name')->get(),
             'setores' => Sector::orderBy('name')->get(),
             'tipos' => config('equipamentos.tipos'),
@@ -252,6 +278,11 @@ class EquipmentController extends Controller
             'status' => ['required', Rule::in(array_keys(config('equipamentos.status')))],
             'store_id' => ['nullable', 'integer', 'exists:stores,id'],
             'sector_id' => ['nullable', 'integer', 'exists:sectors,id'],
+            // Conta ativa, ou a mesma que já estava vinculada (permite salvar outras mudanças
+            // num equipamento de alguém que foi desativado)
+            'user_id' => ['nullable', 'integer', Rule::exists('users', 'id')->where(
+                fn ($q) => $q->where('ativo', true)->when($equipamento?->user_id, fn ($w) => $w->orWhere('id', $equipamento->user_id))
+            )],
             // A regra unique também enxerga a lixeira (o banco não deixa repetir o patrimônio)
             'asset_tag' => ['nullable', 'string', 'max:50', Rule::unique('equipment', 'asset_tag')->ignore($equipamento?->id)],
             'serial_number' => ['nullable', 'string', 'max:100'],
@@ -268,6 +299,7 @@ class EquipmentController extends Controller
     {
         return [
             'asset_tag.unique' => 'Já existe outro equipamento com este patrimônio (confira também a lixeira).',
+            'user_id.exists' => 'Escolha uma conta ativa da lista.',
         ];
     }
 }

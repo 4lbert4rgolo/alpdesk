@@ -1396,3 +1396,11 @@ button.store-tab { font-family: inherit; cursor: pointer; }
 .account-actions form { margin: 0; }
 .account-actions ion-icon { vertical-align: -2px; }
 @media (max-width: 575px) { .account-info { grid-template-columns: 1fr; } }
+
+/* ---------- Setores e lojas / equipamentos da pessoa ---------- */
+.inline-form { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+.inline-form input[type="text"] { flex: 1 1 14rem; min-width: 0; padding: .35rem .6rem; border: 1px solid #cfd8d6; border-radius: 6px; }
+.person-equipment { list-style: none; padding: 0; margin: .75rem 0; display: grid; gap: .4rem; }
+.person-equipment li { display: flex; flex-wrap: wrap; gap: .25rem .6rem; align-items: baseline; }
+.filter-person { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.filter-person a { margin-left: auto; }

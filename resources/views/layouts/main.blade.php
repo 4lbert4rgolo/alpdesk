@@ -71,7 +71,7 @@
                     </a>
                 @endcan
 
-                @canany(['usuarios.gerenciar', 'grupos.gerenciar'])
+                @canany(['usuarios.gerenciar', 'grupos.gerenciar', 'cadastros.gerenciar'])
                     <p class="sidebar-section">Administração</p>
                     @can('usuarios.gerenciar')
                         <a href="/admin/usuarios" class="sidebar-link {{ request()->is('admin/usuarios*') ? 'active' : '' }}">
@@ -81,6 +81,11 @@
                     @can('grupos.gerenciar')
                         <a href="/admin/grupos" class="sidebar-link {{ request()->is('admin/grupos*') ? 'active' : '' }}">
                             <ion-icon name="shield-checkmark-outline"></ion-icon> Grupos de acesso
+                        </a>
+                    @endcan
+                    @can('cadastros.gerenciar')
+                        <a href="/admin/cadastros/setores" class="sidebar-link {{ request()->is('admin/cadastros*') ? 'active' : '' }}">
+                            <ion-icon name="business-outline"></ion-icon> Setores e lojas
                         </a>
                     @endcan
                 @endcanany

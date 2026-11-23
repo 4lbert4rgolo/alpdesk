@@ -44,6 +44,7 @@ return [
         'Administração' => [
             'usuarios.gerenciar' => 'Criar e editar usuários',
             'grupos.gerenciar' => 'Criar e editar grupos de acesso',
+            'cadastros.gerenciar' => 'Criar, renomear e excluir setores e lojas',
         ],
     ],
 

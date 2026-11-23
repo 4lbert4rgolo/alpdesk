@@ -251,10 +251,10 @@ class AdminUsuariosTest extends TestCase
     {
         app()->setLocale('pt_BR');
 
-        $resposta = $this->from('/forgot-password')->post('/forgot-password', ['email' => 'ninguem@empresa.com']);
-
-        $mensagem = session('errors')?->first('email') ?? session('status');
-        $this->assertStringContainsString('Se o e-mail estiver cadastrado', (string) $mensagem);
+        // E-mail que não existe recebe a MESMA mensagem de quando existe
+        $this->from('/forgot-password')
+            ->post('/forgot-password', ['email' => 'ninguem@empresa.com'])
+            ->assertSessionHasErrors(['email' => 'Se o e-mail estiver cadastrado, você receberá o link para redefinir a senha.']);
     }
 
     // ----------------------------------------------------------- Ações de conta

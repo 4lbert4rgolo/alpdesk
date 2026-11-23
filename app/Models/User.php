@@ -55,8 +55,9 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Valores padrão de uma conta nova. "ativo" não está em $fillable de
-     * propósito: só o painel de usuários muda esse campo (com forceFill).
+     * Valores padrão de uma conta nova. "ativo", "sector_id" e "store_id" não estão
+     * em $fillable de propósito: só o painel de usuários muda esses campos (com forceFill),
+     * assim ninguém altera o próprio setor ou loja pela tela de perfil.
      */
     protected $attributes = [
         'ativo' => true,
@@ -97,6 +98,24 @@ class User extends Authenticatable implements MustVerifyEmail
     public function participacoes()
     {
         return $this->belongsToMany(Task::class, 'task_participants')->withPivot('added_by')->withTimestamps();
+    }
+
+    /** Setor onde a pessoa trabalha (um só) */
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class);
+    }
+
+    /** Loja onde a pessoa trabalha */
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+
+    /** Equipamentos que estão com esta pessoa */
+    public function equipamentos()
+    {
+        return $this->hasMany(Equipment::class);
     }
 
     public function accessGroups()

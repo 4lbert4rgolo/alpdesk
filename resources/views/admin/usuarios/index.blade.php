@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $temFiltro = $filtros['q'] !== '' || $filtros['grupo'] !== '';
+    $temFiltro = $filtros['q'] !== '' || $filtros['grupo'] !== '' || $filtros['setor'] !== '' || $filtros['loja'] !== '';
     $urlSituacao = fn ($valor) => request()->fullUrlWithQuery(['situacao' => $valor === 'todos' ? null : $valor, 'page' => null]);
 @endphp
 
@@ -35,6 +35,20 @@
             @endforeach
             <option value="sem" {{ $filtros['grupo'] === 'sem' ? 'selected' : '' }}>Sem grupo</option>
         </select>
+        <select name="setor" aria-label="Setor">
+            <option value="">Todos os setores</option>
+            @foreach($setores as $setor)
+                <option value="{{ $setor->id }}" {{ $filtros['setor'] === (string) $setor->id ? 'selected' : '' }}>{{ $setor->name }}</option>
+            @endforeach
+            <option value="sem" {{ $filtros['setor'] === 'sem' ? 'selected' : '' }}>Sem setor</option>
+        </select>
+        <select name="loja" aria-label="Loja">
+            <option value="">Todas as lojas</option>
+            @foreach($lojas as $loja)
+                <option value="{{ $loja->id }}" {{ $filtros['loja'] === (string) $loja->id ? 'selected' : '' }}>{{ $loja->name }}</option>
+            @endforeach
+            <option value="sem" {{ $filtros['loja'] === 'sem' ? 'selected' : '' }}>Sem loja</option>
+        </select>
         <button type="submit" class="btn btn-primary">Filtrar</button>
         @if($temFiltro)
             <a href="{{ route('admin.usuarios.index', array_filter(['situacao' => $filtros['situacao'] !== 'todos' ? $filtros['situacao'] : null])) }}" class="btn btn-outline-secondary">Limpar</a>
@@ -48,6 +62,7 @@
                     <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">E-mail</th>
+                        <th scope="col">Setor / loja</th>
                         <th scope="col">Grupos</th>
                         <th scope="col">Último acesso</th>
                         <th scope="col">Situação</th>
@@ -64,6 +79,10 @@
                                 @endif
                             </td>
                             <td data-label="E-mail">{{ $usuario->email }}</td>
+                            <td data-label="Setor / loja">
+                                {{ $usuario->sector->name ?? 'Sem setor' }}
+                                <small class="muted d-block">{{ $usuario->store->name ?? 'Sem loja' }}</small>
+                            </td>
                             <td data-label="Grupos">
                                 @if($usuario->accessGroups->isNotEmpty())
                                     <span class="chips">

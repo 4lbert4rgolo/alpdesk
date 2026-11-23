@@ -92,12 +92,31 @@
                 @enderror
             </div>
             <div class="field">
-                <label for="user_name">Usuário (quem usa)</label>
-                <input type="text" id="user_name" name="user_name" value="{{ $v('user_name') }}" maxlength="255">
-                @error('user_name')
+                <label for="user_id">Usuário do sistema (quem usa)</label>
+                <select id="user_id" name="user_id">
+                    <option value="">Nenhum</option>
+                    @foreach($usuarios as $pessoa)
+                        <option value="{{ $pessoa->id }}"
+                                data-store="{{ $pessoa->store_id }}" data-sector="{{ $pessoa->sector_id }}"
+                                {{ (string) $v('user_id') === (string) $pessoa->id ? 'selected' : '' }}>
+                            {{ $pessoa->name }}{{ $pessoa->sector ? ' · '.$pessoa->sector->name : '' }}{{ $pessoa->ativo ? '' : ' (desativado)' }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('user_id')
                     <p class="field-error">{{ $message }}</p>
                 @enderror
             </div>
+        </div>
+
+        <div class="field">
+            <label for="user_name">Ou nome de quem usa <span class="optional">(para quem não tem login, ex.: “PC do caixa”)</span></label>
+            <input type="text" id="user_name" name="user_name" value="{{ $v('user_name') }}" maxlength="255"
+                   {{ $v('user_id') ? 'disabled' : '' }}>
+            <p class="field-hint">Ao escolher um usuário do sistema, este campo fica desligado e o nome passa a vir da conta.</p>
+            @error('user_name')
+                <p class="field-error">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="field-grid">
@@ -158,4 +177,30 @@
         </div>
     </form>
 </div>
+
+<script>
+    // Ao escolher quem usa: desliga o campo de nome livre e, se a loja ou o setor
+    // ainda estiverem vazios, já preenche com a loja e o setor da pessoa.
+    (function () {
+        const pessoa = document.getElementById('user_id');
+        const nomeLivre = document.getElementById('user_name');
+        const loja = document.getElementById('store_id');
+        const setor = document.getElementById('sector_id');
+
+        pessoa.addEventListener('change', function () {
+            const opcao = pessoa.selectedOptions[0];
+            nomeLivre.disabled = pessoa.value !== '';
+
+            if (pessoa.value === '') {
+                return;
+            }
+            if (loja.value === '' && opcao.dataset.store) {
+                loja.value = opcao.dataset.store;
+            }
+            if (setor.value === '' && opcao.dataset.sector) {
+                setor.value = opcao.dataset.sector;
+            }
+        });
+    })();
+</script>
 @endsection

@@ -54,6 +54,9 @@
         @if($lojaAtual)
             <input type="hidden" name="loja" value="{{ $lojaAtual }}">
         @endif
+        @if($usuarioFiltrado)
+            <input type="hidden" name="usuario" value="{{ $usuarioFiltrado->id }}">
+        @endif
 
         <input type="search" name="q" value="{{ $filtros['q'] ?? '' }}" placeholder="Buscar por nome, patrimônio, usuário ou série" aria-label="Buscar equipamentos">
 
@@ -92,6 +95,14 @@
         @endif
     </form>
 
+    @if($usuarioFiltrado)
+        <div class="alert alert-info filter-person" role="status">
+            <ion-icon name="person-outline"></ion-icon>
+            Equipamentos com <strong>{{ $usuarioFiltrado->name }}</strong>
+            <a href="{{ request()->fullUrlWithQuery(['usuario' => null, 'page' => null]) }}">Ver todos</a>
+        </div>
+    @endif
+
     @if($equipamentos->total() > 0)
         <p class="list-count">{{ $equipamentos->total() }} {{ $equipamentos->total() === 1 ? 'equipamento' : 'equipamentos' }}</p>
 
@@ -126,7 +137,7 @@
                             </td>
                             <td data-label="Loja">{{ $equipamento->store->name ?? 'Sem loja' }}</td>
                             <td data-label="Setor">{{ $equipamento->sector->name ?? '—' }}</td>
-                            <td data-label="Usuário">{{ $equipamento->user_name ?: '—' }}</td>
+                            <td data-label="Usuário">{{ $equipamento->quemUsa() ?? '—' }}</td>
                             <td class="task-action">
                                 <a href="{{ route('equipamentos.show', $equipamento) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
                                 @can('equipamentos.gerenciar')

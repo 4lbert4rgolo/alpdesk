@@ -13,4 +13,10 @@ class Sector extends Model
     {
         return $this->hasMany(Equipment::class);
     }
+
+    /** Pessoas que trabalham neste setor */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
 }

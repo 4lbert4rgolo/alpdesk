@@ -132,7 +132,23 @@
                     </div>
                     <div>
                         <dt>Usuário</dt>
-                        <dd>{{ $equipamento->user_name ?: '—' }}</dd>
+                        <dd>
+                            @if($equipamento->user)
+                                @can('usuarios.gerenciar')
+                                    <a href="{{ route('admin.usuarios.edit', $equipamento->user) }}">{{ $equipamento->user->name }}</a>
+                                @else
+                                    {{ $equipamento->user->name }}
+                                @endcan
+                                @unless($equipamento->user->ativo)
+                                    <span class="badge-status status-cancelada">Conta desativada</span>
+                                @endunless
+                            @else
+                                {{ $equipamento->user_name ?: '—' }}
+                                @if($equipamento->user_name)
+                                    <small class="muted">(sem conta no sistema)</small>
+                                @endif
+                            @endif
+                        </dd>
                     </div>
                     <div>
                         <dt>Patrimônio</dt>
