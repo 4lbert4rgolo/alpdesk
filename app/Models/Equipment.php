@@ -62,7 +62,7 @@ class Equipment extends Model
         return $this->hasMany(Task::class);
     }
 
-    /** Histórico: cadastro, troca de loja, setor, usuário e situação */
+    /** Histórico: cadastro, troca de empresa, setor, usuário e situação */
     public function movimentacoes(): HasMany
     {
         return $this->hasMany(EquipmentMovement::class)->latest()->orderByDesc('id');
@@ -74,8 +74,8 @@ class Equipment extends Model
     }
 
     /**
-     * Filtros da listagem: loja, setor, tipo, situação, pendência e busca livre.
-     * Nos filtros de loja e setor, o valor "sem" traz quem ainda não tem.
+     * Filtros da listagem: empresa, setor, tipo, situação, pendência e busca livre.
+     * Nos filtros de empresa e setor, o valor "sem" traz quem ainda não tem.
      */
     public function scopeFiltrar(Builder $query, array $f): Builder
     {

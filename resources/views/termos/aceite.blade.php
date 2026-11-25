@@ -20,7 +20,7 @@
             <p class="font-medium text-graphite">Em resumo:</p>
             <ul class="mt-2 list-disc space-y-1 ps-5">
                 <li>O AlpDesk é de uso exclusivo para o trabalho, e seu acesso é pessoal.</li>
-                <li>Usamos seu nome, e-mail, setor e loja para liberar o acesso e organizar os chamados.</li>
+                <li>Usamos seu nome, e-mail, setor e empresa para liberar o acesso e organizar os chamados.</li>
                 <li>Chamados, comentários, chat e equipamentos ficam registrados com o seu nome.</li>
                 <li>Registramos acessos (data, hora e IP) para a segurança do sistema.</li>
                 <li>Não registre dados sensíveis nem documentos pessoais sem necessidade.</li>

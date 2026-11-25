@@ -38,8 +38,8 @@
             <label class="check">
                 <input type="checkbox" name="criar_lojas" value="1">
                 <span>
-                    <strong>Criar lojas e setores que ainda não existem</strong>
-                    <small>Sem esta opção, linhas com loja ou setor desconhecido são recusadas (evita criar uma loja por erro de digitação).</small>
+                    <strong>Criar empresas e setores que ainda não existem</strong>
+                    <small>Sem esta opção, linhas com empresa ou setor desconhecido são recusadas (evita criar uma empresa por erro de digitação).</small>
                 </span>
             </label>
             <label class="check">
@@ -76,7 +76,7 @@
                     <li><strong>{{ $relatorio['criados'] }}</strong> equipamentos novos</li>
                     <li><strong>{{ $relatorio['atualizados'] }}</strong> atualizados</li>
                     <li><strong>{{ $relatorio['ignorados'] }}</strong> ignorados (já existem)</li>
-                    <li><strong>{{ $relatorio['lojas_novas'] }}</strong> lojas novas</li>
+                    <li><strong>{{ $relatorio['lojas_novas'] }}</strong> empresas novas</li>
                     <li><strong>{{ $relatorio['setores_novos'] }}</strong> setores novos</li>
                     <li class="{{ count($relatorio['erros']) > 0 ? 'is-bad' : '' }}"><strong>{{ count($relatorio['erros']) }}</strong> problemas</li>
                 </ul>

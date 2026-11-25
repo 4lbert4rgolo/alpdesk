@@ -2,7 +2,7 @@
     // Um campo só: o usuário digita e escolhe na lista; o ID do equipamento vai num campo escondido
     $itens = $equipamentos->map(fn ($equipamento) => [
         'id' => $equipamento->id,
-        'rotulo' => trim(($equipamento->asset_tag ? $equipamento->asset_tag.' · ' : '').$equipamento->name.' ('.$equipamento->type.') — '.($equipamento->store->name ?? 'Sem loja')),
+        'rotulo' => trim(($equipamento->asset_tag ? $equipamento->asset_tag.' · ' : '').$equipamento->name.' ('.$equipamento->type.') — '.($equipamento->store->name ?? 'Sem empresa')),
     ]);
 
     // Se dois equipamentos tiverem o mesmo texto, acrescenta o ID para diferenciar

@@ -57,7 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Valores padrão de uma conta nova. "ativo", "sector_id" e "store_id" não estão
      * em $fillable de propósito: só o painel de usuários muda esses campos (com forceFill),
-     * assim ninguém altera o próprio setor ou loja pela tela de perfil.
+     * assim ninguém altera o próprio setor ou empresa pela tela de perfil.
      */
     protected $attributes = [
         'ativo' => true,
@@ -106,7 +106,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Sector::class);
     }
 
-    /** Loja onde a pessoa trabalha */
+    /** Empresa onde a pessoa trabalha */
     public function store()
     {
         return $this->belongsTo(Store::class);

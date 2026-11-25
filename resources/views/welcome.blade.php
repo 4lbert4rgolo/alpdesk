@@ -45,9 +45,9 @@
     }
     if ($filtros['loja'] !== '') {
         $nome = $filtros['loja'] === 'sem'
-            ? 'sem loja'
+            ? 'sem empresa'
             : ($lojas->firstWhere('id', (int) $filtros['loja'])->name ?? 'loja #'.$filtros['loja']);
-        $ativos[] = ['Loja: '.$nome, ['loja' => null]];
+        $ativos[] = ['Empresa: '.$nome, ['loja' => null]];
     }
     if ($filtros['prioridade']) {
         $ativos[] = ['Prioridade: '.config('tarefas.prioridades')[$filtros['prioridade']][0], ['prioridade' => null]];
@@ -62,14 +62,14 @@
     $filtrando = count($ativos) > 0;
 
     // O setor funciona como "fila" (vem do menu): limpar os filtros mantém o setor escolhido
-    $urlLimpar = $filtros['setor'] ? '/?setor='.$filtros['setor'] : '/';
+    $urlLimpar = $filtros['setor'] ? '/tarefas?setor='.$filtros['setor'] : '/tarefas';
     $painelAberto = $filtros['de'] || $filtros['ate'] || $filtros['responsavel'] !== '' || $filtros['loja'] !== '' || $filtros['modelo'] !== ''
         || $filtros['prioridade'] || $filtros['situacao'] !== 'abertas';
 @endphp
 
 <div id="search-container" class="col-md-12">
     <h1>Busque uma Tarefa</h1>
-    <form action="/" method="GET" role="search" class="search-form" id="form-busca">
+    <form action="/tarefas" method="GET" role="search" class="search-form" id="form-busca">
         <ion-icon name="search-outline"></ion-icon>
         <input type="search" id="search" name="search" value="{{ $filtros['search'] }}" placeholder="Número, título, descrição ou equipamento" aria-label="Procurar tarefa">
         <button type="submit">Buscar</button>
@@ -141,13 +141,13 @@
             </div>
 
             <div class="filter-field">
-                <label class="filter-label" for="loja">Loja</label>
+                <label class="filter-label" for="loja">Empresa</label>
                 <select id="loja" name="loja" form="form-busca">
-                    <option value="">Todas as lojas</option>
+                    <option value="">Todas as empresas</option>
                     @foreach($lojas as $loja)
                         <option value="{{ $loja->id }}" {{ $filtros['loja'] === (string) $loja->id ? 'selected' : '' }}>{{ $loja->name }}</option>
                     @endforeach
-                    <option value="sem" {{ $filtros['loja'] === 'sem' ? 'selected' : '' }}>Sem loja / sem equipamento</option>
+                    <option value="sem" {{ $filtros['loja'] === 'sem' ? 'selected' : '' }}>Sem empresa / sem equipamento</option>
                 </select>
             </div>
 

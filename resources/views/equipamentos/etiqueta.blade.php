@@ -41,7 +41,7 @@
             <div class="marca">{{ config('app.name') }} · TI</div>
             <div class="patrimonio">{{ $equipamento->asset_tag ?: 'Nº '.$equipamento->id }}</div>
             <div class="nome">{{ $equipamento->name }}</div>
-            <div class="loja">{{ $equipamento->store->name ?? 'Sem loja' }}{{ $equipamento->sector ? ' · '.$equipamento->sector->name : '' }}</div>
+            <div class="loja">{{ $equipamento->store->name ?? 'Sem empresa' }}{{ $equipamento->sector ? ' · '.$equipamento->sector->name : '' }}</div>
         </div>
     </div>
 

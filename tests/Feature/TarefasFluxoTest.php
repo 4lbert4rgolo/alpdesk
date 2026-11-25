@@ -144,12 +144,12 @@ class TarefasFluxoTest extends TestCase
         $this->tarefa($tecnico, ['title' => 'Tarefa ainda aberta']);
         $this->tarefa($tecnico, ['title' => 'Tarefa ja resolvida', 'status' => 'concluida']);
 
-        $this->actingAs($tecnico)->get('/')
+        $this->actingAs($tecnico)->get('/tarefas')
             ->assertOk()
             ->assertSee('Tarefa ainda aberta')
             ->assertDontSee('Tarefa ja resolvida');
 
-        $this->actingAs($tecnico)->get('/?situacao=encerradas')
+        $this->actingAs($tecnico)->get('/tarefas?situacao=encerradas')
             ->assertOk()
             ->assertSee('Tarefa ja resolvida')
             ->assertDontSee('Tarefa ainda aberta');
@@ -161,8 +161,8 @@ class TarefasFluxoTest extends TestCase
         $tarefa = $this->tarefa($tecnico, ['title' => 'Problema A', 'description' => 'nobreak apitando']);
         $this->tarefa($tecnico, ['title' => 'Problema B']);
 
-        $this->actingAs($tecnico)->get('/?search=nobreak')->assertSee('Problema A')->assertDontSee('Problema B');
-        $this->actingAs($tecnico)->get('/?search=%23'.$tarefa->id)->assertSee('Problema A');
+        $this->actingAs($tecnico)->get('/tarefas?search=nobreak')->assertSee('Problema A')->assertDontSee('Problema B');
+        $this->actingAs($tecnico)->get('/tarefas?search=%23'.$tarefa->id)->assertSee('Problema A');
     }
 
     public function test_filtro_por_periodo_de_abertura(): void
@@ -175,16 +175,16 @@ class TarefasFluxoTest extends TestCase
         $de = now()->subDays(6)->toDateString();
         $ate = now()->toDateString();
 
-        $this->actingAs($tecnico)->get("/?de={$de}&ate={$ate}")
+        $this->actingAs($tecnico)->get("/tarefas?de={$de}&ate={$ate}")
             ->assertOk()
             ->assertSee('Aberta hoje cedo')
             ->assertDontSee('Aberta mes passado');
 
         // Datas invertidas são corrigidas
-        $this->actingAs($tecnico)->get("/?de={$ate}&ate={$de}")->assertSee('Aberta hoje cedo');
+        $this->actingAs($tecnico)->get("/tarefas?de={$ate}&ate={$de}")->assertSee('Aberta hoje cedo');
 
         // Data inválida é ignorada
-        $this->actingAs($tecnico)->get('/?de=abc')->assertOk()->assertSee('Aberta mes passado');
+        $this->actingAs($tecnico)->get('/tarefas?de=abc')->assertOk()->assertSee('Aberta mes passado');
     }
 
     public function test_filtro_por_responsavel_e_sem_responsavel(): void
@@ -197,12 +197,12 @@ class TarefasFluxoTest extends TestCase
         $dele->users()->attach($outro->id);
         $this->tarefa($tecnico, ['title' => 'Ninguem pegou']);
 
-        $this->actingAs($tecnico)->get('/?responsavel='.$tecnico->id)
+        $this->actingAs($tecnico)->get('/tarefas?responsavel='.$tecnico->id)
             ->assertSee('Atendida pelo tecnico')
             ->assertDontSee('Atendida pelo colega')
             ->assertDontSee('Ninguem pegou');
 
-        $this->actingAs($tecnico)->get('/?responsavel=sem')
+        $this->actingAs($tecnico)->get('/tarefas?responsavel=sem')
             ->assertSee('Ninguem pegou')
             ->assertDontSee('Atendida pelo tecnico');
     }
@@ -218,12 +218,12 @@ class TarefasFluxoTest extends TestCase
         $this->tarefa($tecnico, ['title' => 'Problema na filial', 'equipment_id' => $pcFilial->id]);
         $this->tarefa($tecnico, ['title' => 'Problema sem equipamento']);
 
-        $this->actingAs($tecnico)->get('/?loja='.$matriz->id)
+        $this->actingAs($tecnico)->get('/tarefas?loja='.$matriz->id)
             ->assertSee('Problema na matriz')
             ->assertDontSee('Problema na filial')
             ->assertDontSee('Problema sem equipamento');
 
-        $this->actingAs($tecnico)->get('/?loja=sem')
+        $this->actingAs($tecnico)->get('/tarefas?loja=sem')
             ->assertSee('Problema sem equipamento')
             ->assertDontSee('Problema na matriz');
     }
@@ -235,7 +235,7 @@ class TarefasFluxoTest extends TestCase
         $this->tarefa($outro, ['title' => 'Tarefa reservada']);
         $this->tarefa($eu, ['title' => 'Minha tarefa']);
 
-        $this->actingAs($eu)->get('/?situacao=todas&responsavel=sem')
+        $this->actingAs($eu)->get('/tarefas?situacao=todas&responsavel=sem')
             ->assertSee('Minha tarefa')
             ->assertDontSee('Tarefa reservada');
     }
@@ -260,7 +260,7 @@ class TarefasFluxoTest extends TestCase
 
         // Agora vê, aparece na lista dele e pode autorizar
         $this->actingAs($gerente)->get('/tasks/'.$tarefa->id)->assertOk()->assertSee('Autorizo');
-        $this->actingAs($gerente)->get('/')->assertSee('Troca do monitor do caixa');
+        $this->actingAs($gerente)->get('/tarefas')->assertSee('Troca do monitor do caixa');
         $this->actingAs($gerente)->post('/tasks/'.$tarefa->id.'/comentarios', ['tipo' => 'autorizacao', 'corpo' => 'Pode trocar.'])
             ->assertRedirect();
 

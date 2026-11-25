@@ -22,7 +22,7 @@ class TaskController extends Controller
 
     /**
      * Lista de tarefas com busca e filtros: período de abertura, situação,
-     * responsável, loja e prioridade. Tudo vai na URL, então dá para salvar
+     * responsável, empresa e prioridade. Tudo vai na URL, então dá para salvar
      * ou compartilhar uma consulta.
      */
     public function index(Request $request)
@@ -62,7 +62,7 @@ class TaskController extends Controller
             $query->whereHas('users', fn ($r) => $r->where('users.id', (int) $filtros['responsavel']));
         }
 
-        // Loja (vem do equipamento ligado à tarefa) ou "sem loja"
+        // Empresa (vem do equipamento ligado à tarefa) ou "sem empresa"
         if ($filtros['loja'] === 'sem') {
             $query->where(function ($semLoja) {
                 $semLoja->whereNull('equipment_id')

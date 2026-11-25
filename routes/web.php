@@ -6,9 +6,12 @@ use App\Http\Controllers\Admin\CadastroController;
 use App\Http\Controllers\Admin\TaskTemplateController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AceiteTermosController;
+use App\Http\Controllers\Admin\AjudaGerenciarController;
+use App\Http\Controllers\AjudaController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EquipmentTransferController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PainelController;
 use App\Http\Controllers\TaskAttachmentController;
 use App\Http\Controllers\TaskCommentController;
@@ -16,7 +19,11 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskParticipantController;
 use App\Http\Controllers\TaskStatusController;
 
-Route::get('/',[TaskController::class, 'index'])->middleware(['auth', 'verified']);
+// Início (Home): comunicados, circulares pendentes, resumo das tarefas, atalhos e tutoriais
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+
+// Lista de tarefas (antes ficava em "/")
+Route::get('/tarefas', [TaskController::class, 'index'])->middleware(['auth', 'verified'])->name('tasks.index');
 Route::get('/tasks/create',[TaskController::class, 'create'])->middleware(['auth', 'verified', 'can:tarefas.criar']);
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->middleware(['auth', 'verified']);
 Route::get('/tasks/{id}/imagem', [TaskController::class, 'imagem'])->middleware(['auth', 'verified'])->name('tasks.image');
@@ -132,11 +139,12 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::delete('/modelos/{modelo}', [TaskTemplateController::class, 'destroy'])->name('modelos.destroy');
     });
 
-    // Setores e lojas (usados em usuários e equipamentos)
-    Route::middleware('can:cadastros.gerenciar')->prefix('cadastros/{tipo}')->where(['tipo' => 'setores|lojas'])
+    // Setores e empresas (usados em usuários e equipamentos)
+    Route::middleware('can:cadastros.gerenciar')->prefix('cadastros/{tipo}')->where(['tipo' => 'setores|empresas|lojas'])
         ->name('cadastros.')->group(function () {
             Route::get('/', [CadastroController::class, 'index'])->name('index');
             Route::post('/', [CadastroController::class, 'store'])->name('store');
+            Route::get('/{id}/editar', [CadastroController::class, 'edit'])->whereNumber('id')->name('edit');
             Route::put('/{id}', [CadastroController::class, 'update'])->whereNumber('id')->name('update');
             Route::delete('/{id}', [CadastroController::class, 'destroy'])->whereNumber('id')->name('destroy');
         });
@@ -148,4 +156,25 @@ Route::middleware('auth')->prefix('aceite-dos-termos')->name('termos.')->group(f
     Route::get('/', [AceiteTermosController::class, 'show'])->name('aceite');
     Route::post('/', [AceiteTermosController::class, 'store'])->middleware('throttle:10,1')->name('aceitar');
     Route::post('/recusar', [AceiteTermosController::class, 'recusar'])->name('recusar');
+});
+
+// Central de Ajuda: perguntas frequentes, tutoriais, circulares e documentos.
+// Cada pessoa vê só o que foi publicado para o setor e a empresa dela (regra no model HelpArticle).
+Route::middleware(['auth', 'verified'])->prefix('ajuda')->name('ajuda.')->group(function () {
+    Route::get('/', [AjudaController::class, 'index'])->name('index');
+
+    // Publicação (permissão "faq.gerenciar"). "novo" vem antes de {artigo} para não ser lido como um número.
+    Route::middleware('can:faq.gerenciar')->group(function () {
+        Route::get('/novo', [AjudaGerenciarController::class, 'create'])->name('create');
+        Route::post('/', [AjudaGerenciarController::class, 'store'])->middleware('throttle:30,1')->name('store');
+        Route::get('/{artigo}/editar', [AjudaGerenciarController::class, 'edit'])->whereNumber('artigo')->name('edit');
+        Route::put('/{artigo}', [AjudaGerenciarController::class, 'update'])->whereNumber('artigo')->name('update');
+        Route::delete('/{artigo}', [AjudaGerenciarController::class, 'destroy'])->whereNumber('artigo')->name('destroy');
+        Route::delete('/{artigo}/arquivos/{anexo}', [AjudaGerenciarController::class, 'apagarAnexo'])->whereNumber(['artigo', 'anexo'])->name('anexos.destroy');
+        Route::get('/{artigo}/leituras', [AjudaGerenciarController::class, 'leituras'])->whereNumber('artigo')->name('leituras');
+    });
+
+    Route::get('/{artigo}', [AjudaController::class, 'show'])->whereNumber('artigo')->name('show');
+    Route::post('/{artigo}/ciente', [AjudaController::class, 'ciente'])->whereNumber('artigo')->middleware('throttle:30,1')->name('ciente');
+    Route::get('/{artigo}/arquivos/{anexo}', [AjudaController::class, 'anexo'])->whereNumber(['artigo', 'anexo'])->name('anexo');
 });

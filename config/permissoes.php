@@ -38,13 +38,16 @@ return [
             'equipamentos.importar' => 'Importar equipamentos por planilha',
             'equipamentos.excluir' => 'Excluir e restaurar equipamentos (lixeira) e apagar comentários de outras pessoas',
         ],
+        'Central de Ajuda' => [
+            'faq.gerenciar' => 'Publicar e editar perguntas frequentes, tutoriais, circulares e documentos (e ver quem leu as circulares)',
+        ],
         'Painel' => [
             'painel.ver' => 'Ver o painel de indicadores',
         ],
         'Administração' => [
             'usuarios.gerenciar' => 'Criar e editar usuários',
             'grupos.gerenciar' => 'Criar e editar grupos de acesso',
-            'cadastros.gerenciar' => 'Criar, renomear e excluir setores e lojas',
+            'cadastros.gerenciar' => 'Criar, renomear e excluir setores e empresas',
             'modelos.gerenciar' => 'Criar e editar modelos de tarefa',
             'chat.grupos' => 'Criar grupos no chat e gerenciar qualquer grupo',
         ],

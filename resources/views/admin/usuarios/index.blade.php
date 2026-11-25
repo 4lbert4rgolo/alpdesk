@@ -42,12 +42,12 @@
             @endforeach
             <option value="sem" {{ $filtros['setor'] === 'sem' ? 'selected' : '' }}>Sem setor</option>
         </select>
-        <select name="loja" aria-label="Loja">
-            <option value="">Todas as lojas</option>
+        <select name="loja" aria-label="Empresa">
+            <option value="">Todas as empresas</option>
             @foreach($lojas as $loja)
                 <option value="{{ $loja->id }}" {{ $filtros['loja'] === (string) $loja->id ? 'selected' : '' }}>{{ $loja->name }}</option>
             @endforeach
-            <option value="sem" {{ $filtros['loja'] === 'sem' ? 'selected' : '' }}>Sem loja</option>
+            <option value="sem" {{ $filtros['loja'] === 'sem' ? 'selected' : '' }}>Sem empresa</option>
         </select>
         <button type="submit" class="btn btn-primary">Filtrar</button>
         @if($temFiltro)
@@ -62,7 +62,7 @@
                     <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">E-mail</th>
-                        <th scope="col">Setor / loja</th>
+                        <th scope="col">Setor / empresa</th>
                         <th scope="col">Grupos</th>
                         <th scope="col">Último acesso</th>
                         <th scope="col">Situação</th>
@@ -79,9 +79,9 @@
                                 @endif
                             </td>
                             <td data-label="E-mail">{{ $usuario->email }}</td>
-                            <td data-label="Setor / loja">
+                            <td data-label="Setor / empresa">
                                 {{ $usuario->sector->name ?? 'Sem setor' }}
-                                <small class="muted d-block">{{ $usuario->store->name ?? 'Sem loja' }}</small>
+                                <small class="muted d-block">{{ $usuario->store->name ?? 'Sem empresa' }}</small>
                             </td>
                             <td data-label="Grupos">
                                 @if($usuario->accessGroups->isNotEmpty())

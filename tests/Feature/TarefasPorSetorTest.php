@@ -64,9 +64,9 @@ class TarefasPorSetorTest extends TestCase
         $atendenteFin = $this->usuario('tecnico', 'Financeiro');
         $admin = $this->usuario('administrador');
 
-        $this->actingAs($tecnicoTi)->get('/')->assertSee('Impressora travada')->assertDontSee('Boleto em atraso');
-        $this->actingAs($atendenteFin)->get('/')->assertSee('Boleto em atraso')->assertDontSee('Impressora travada');
-        $this->actingAs($admin)->get('/')->assertSee('Impressora travada')->assertSee('Boleto em atraso');
+        $this->actingAs($tecnicoTi)->get('/tarefas')->assertSee('Impressora travada')->assertDontSee('Boleto em atraso');
+        $this->actingAs($atendenteFin)->get('/tarefas')->assertSee('Boleto em atraso')->assertDontSee('Impressora travada');
+        $this->actingAs($admin)->get('/tarefas')->assertSee('Impressora travada')->assertSee('Boleto em atraso');
     }
 
     public function test_quem_abriu_continua_vendo_a_propria_tarefa_de_outro_setor(): void
@@ -167,7 +167,7 @@ class TarefasPorSetorTest extends TestCase
 
     public function test_menu_tem_uma_entrada_so_de_tarefas(): void
     {
-        $this->actingAs($this->usuario('administrador'))->get('/')
+        $this->actingAs($this->usuario('administrador'))->get('/tarefas')
             ->assertOk()
             ->assertDontSee('Tarefas · TI')
             ->assertDontSee('Tarefas · Financeiro');
@@ -180,7 +180,7 @@ class TarefasPorSetorTest extends TestCase
         $this->tarefa($solicitante, 'Financeiro', 'Fechamento do caixa');
 
         $this->actingAs($this->usuario('administrador'))
-            ->get('/?setor='.$this->setor('Financeiro')->id)
+            ->get('/tarefas?setor='.$this->setor('Financeiro')->id)
             ->assertSee('Fechamento do caixa')
             ->assertDontSee('Rede lenta');
     }

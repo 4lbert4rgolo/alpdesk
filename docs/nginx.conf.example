@@ -13,8 +13,10 @@ server {
     index index.php;
     charset utf-8;
 
-    # Imagens de até 5 MB (o PHP também precisa permitir: upload_max_filesize e post_max_size)
-    client_max_body_size 8m;
+    # Vídeos da Central de Ajuda de até 200 MB (o PHP também precisa permitir: upload_max_filesize
+    # e post_max_size). O limite de cada tela continua sendo conferido pelo Laravel: anexos de
+    # tarefa seguem em 5 MB, documentos da Central de Ajuda em 20 MB.
+    client_max_body_size 260m;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
@@ -26,6 +28,7 @@ server {
     # SOMENTE o index.php é executado. Qualquer outro .php é tratado como arquivo comum.
     location ~ ^/index\.php(/|$) {
         fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+        fastcgi_read_timeout 300;   # envio de vídeos grandes
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
         fastcgi_hide_header X-Powered-By;

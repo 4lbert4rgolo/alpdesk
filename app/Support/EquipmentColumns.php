@@ -17,7 +17,7 @@ class EquipmentColumns
         'nome' => 'Equipamento',
         'tipo' => 'Tipo',
         'situacao' => 'Situação',
-        'loja' => 'Loja',
+        'loja' => 'Empresa',
         'setor' => 'Setor',
         'usuario' => 'Usuário',
         'numero_serie' => 'Número de série',
@@ -38,6 +38,7 @@ class EquipmentColumns
         'situacao' => 'situacao',
         'status' => 'situacao',
         'loja' => 'loja',
+        'empresa' => 'loja', // a coluna "Loja" passou a se chamar "Empresa"; os dois nomes valem
         'setor' => 'setor',
         'usuario' => 'usuario',
         'numerodeserie' => 'numero_serie',
@@ -91,7 +92,7 @@ class EquipmentColumns
     public static function linhaDeExemplo(): array
     {
         return [
-            '', '01234', 'Notebook Dell Latitude 3420', 'Notebook', 'Em uso', 'Nome da loja', 'Nome do setor',
+            '', '01234', 'Notebook Dell Latitude 3420', 'Notebook', 'Em uso', 'Nome da empresa', 'Nome do setor',
             'Nome de quem usa', 'ABC1234', 'NOME-DO-PC', '123456789', 'Core i5, 8 GB de RAM, SSD de 256 GB', 'Observação opcional',
         ];
     }

@@ -97,7 +97,7 @@
         </section>
 
         <section class="dash-card span-6">
-            <h2>Tarefas por loja <small>(pela loja do equipamento)</small></h2>
+            <h2>Tarefas por empresa <small>(pela empresa do equipamento)</small></h2>
             @include('painel._barras', ['itens' => $porLoja, 'vazio' => 'Ainda não há tarefas.'])
         </section>
 
@@ -119,7 +119,7 @@
                                 @else
                                     <strong>{{ $equipamento->name }}</strong>
                                 @endif
-                                <small class="muted d-block">{{ $equipamento->asset_tag ?: 'sem patrimônio' }} · {{ $equipamento->store->name ?? 'Sem loja' }}</small>
+                                <small class="muted d-block">{{ $equipamento->asset_tag ?: 'sem patrimônio' }} · {{ $equipamento->store->name ?? 'Sem empresa' }}</small>
                             </div>
                             <span class="chip">{{ $linha['qtd'] }} {{ $plural($linha['qtd'], 'tarefa', 'tarefas') }}</span>
                         </li>
@@ -137,12 +137,12 @@
 
         @if($inventario)
             <section class="dash-card span-12">
-                <h2>Inventário de equipamentos por loja</h2>
+                <h2>Inventário de equipamentos por empresa</h2>
                 <div class="chips inventory-stats">
                     <span class="chip">{{ $inventario['total'] }} equipamentos</span>
                     <span class="chip">{{ $inventario['informatica'] }} de informática</span>
                     <span class="chip chip-muted">{{ $inventario['sem_patrimonio'] }} sem patrimônio</span>
-                    <span class="chip chip-muted">{{ $inventario['sem_loja'] }} sem loja</span>
+                    <span class="chip chip-muted">{{ $inventario['sem_loja'] }} sem empresa</span>
                 </div>
                 @include('painel._barras', ['itens' => $inventario['lojas'], 'vazio' => 'Nenhum equipamento cadastrado.'])
             </section>

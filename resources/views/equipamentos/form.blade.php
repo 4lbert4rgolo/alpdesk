@@ -57,9 +57,9 @@
 
         <div class="field-grid">
             <div class="field">
-                <label for="store_id">Loja</label>
+                <label for="store_id">Empresa</label>
                 <select id="store_id" name="store_id">
-                    <option value="">Sem loja definida</option>
+                    <option value="">Sem empresa definida</option>
                     @foreach($lojas as $loja)
                         <option value="{{ $loja->id }}" {{ (string) $v('store_id') === (string) $loja->id ? 'selected' : '' }}>{{ $loja->name }}</option>
                     @endforeach
@@ -179,12 +179,12 @@
 </div>
 
 <script>
-    // Ao escolher quem usa: desliga o campo de nome livre e, se a loja ou o setor
-    // ainda estiverem vazios, já preenche com a loja e o setor da pessoa.
+    // Ao escolher quem usa: desliga o campo de nome livre e, se a empresa ou o setor
+    // ainda estiverem vazios, já preenche com a empresa e o setor da pessoa.
     (function () {
         const pessoa = document.getElementById('user_id');
         const nomeLivre = document.getElementById('user_name');
-        const loja = document.getElementById('store_id');
+        const empresa = document.getElementById('store_id');
         const setor = document.getElementById('sector_id');
 
         pessoa.addEventListener('change', function () {
@@ -194,8 +194,8 @@
             if (pessoa.value === '') {
                 return;
             }
-            if (loja.value === '' && opcao.dataset.store) {
-                loja.value = opcao.dataset.store;
+            if (empresa.value === '' && opcao.dataset.store) {
+                empresa.value = opcao.dataset.store;
             }
             if (setor.value === '' && opcao.dataset.sector) {
                 setor.value = opcao.dataset.sector;

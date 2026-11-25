@@ -28,7 +28,7 @@
 @endphp
 
 <div id="task-page" class="col-md-10 offset-md-1">
-    <a href="/" class="task-back">
+    <a href="/tarefas" class="task-back">
         <ion-icon name="arrow-back-outline"></ion-icon> Voltar às tarefas
     </a>
 
@@ -197,7 +197,7 @@
                                         <span class="chip chip-muted">excluído</span>
                                     @endif
                                 @endif
-                                <small class="muted d-block">{{ $task->equipment->asset_tag ? 'Patrimônio '.$task->equipment->asset_tag.' · ' : '' }}{{ $task->equipment->store->name ?? 'Sem loja' }}</small>
+                                <small class="muted d-block">{{ $task->equipment->asset_tag ? 'Patrimônio '.$task->equipment->asset_tag.' · ' : '' }}{{ $task->equipment->store->name ?? 'Sem empresa' }}</small>
                             @else
                                 <span class="muted">Nenhum</span>
                             @endif

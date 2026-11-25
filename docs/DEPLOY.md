@@ -32,8 +32,10 @@ Edite `/etc/php/8.3/fpm/php.ini` e confira estas linhas (depois: `sudo systemctl
 ```
 expose_php = Off
 display_errors = Off
-upload_max_filesize = 6M
-post_max_size = 8M
+upload_max_filesize = 200M
+post_max_size = 256M
+max_input_time = 300
+max_execution_time = 300
 ```
 
 Firewall e acesso:
@@ -216,7 +218,7 @@ No servidor:
 - Backups diários (`scripts/backup.sh`) copiados para fora do servidor.
 - Rode a seção 10 (conferência final) depois de publicar.
 
-### DNS (Skymail)
+### DNS (no provedor do domínio)
 - Criar **apenas** um registro `A` com nome `portal` apontando para o IP do servidor (TTL 300 no início).
 - Não alterar os registros existentes (`@`, `www`, `MX`, `TXT`) nem os servidores DNS do domínio.
 - Se o Certbot reclamar de CAA, acrescentar `CAA 0 issue "letsencrypt.org"`.

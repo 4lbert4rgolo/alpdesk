@@ -63,7 +63,7 @@ return [
     |
     | Nome do setor que já vem escolhido ao abrir uma tarefa, e que recebe as
     | tarefas criadas sem setor. Os setores que recebem tarefas são marcados em
-    | Administração > Setores e lojas.
+    | Administração > Setores e empresas.
     |
     */
 

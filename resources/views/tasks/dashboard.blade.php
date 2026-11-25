@@ -159,7 +159,7 @@
             @can('tarefas.criar')
                 <a href="/tasks/create">Abrir uma tarefa</a>
             @else
-                <a href="/">Ver as tarefas em andamento</a>
+                <a href="/tarefas">Ver as tarefas em andamento</a>
             @endcan
         </div>
     @endif

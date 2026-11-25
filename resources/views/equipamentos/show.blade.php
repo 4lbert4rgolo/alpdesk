@@ -123,8 +123,8 @@
             <div class="task-summary">
                 <dl>
                     <div>
-                        <dt>Loja</dt>
-                        <dd>{{ $equipamento->store->name ?? 'Sem loja definida' }}</dd>
+                        <dt>Empresa</dt>
+                        <dd>{{ $equipamento->store->name ?? 'Sem empresa definida' }}</dd>
                     </div>
                     <div>
                         <dt>Setor</dt>

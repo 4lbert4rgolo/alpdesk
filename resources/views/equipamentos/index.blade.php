@@ -14,7 +14,7 @@
     <div class="admin-header">
         <div>
             <h1>Equipamentos</h1>
-            <p class="subtitle">Inventário de equipamentos, separado por loja.</p>
+            <p class="subtitle">Inventário de equipamentos, separado por empresa.</p>
         </div>
         <div class="admin-actions">
             @can('equipamentos.importar')
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <nav class="store-tabs" aria-label="Lojas">
+    <nav class="store-tabs" aria-label="Empresas">
         <a href="{{ request()->fullUrlWithQuery(['loja' => null, 'page' => null]) }}"
            class="store-tab {{ $lojaAtual ? '' : 'is-active' }}">Todas <span>{{ $total }}</span></a>
 
@@ -46,7 +46,7 @@
 
         @if($semLoja > 0)
             <a href="{{ request()->fullUrlWithQuery(['loja' => 'sem', 'page' => null]) }}"
-               class="store-tab {{ $lojaAtual === 'sem' ? 'is-active' : '' }}">Sem loja <span>{{ $semLoja }}</span></a>
+               class="store-tab {{ $lojaAtual === 'sem' ? 'is-active' : '' }}">Sem empresa <span>{{ $semLoja }}</span></a>
         @endif
     </nav>
 
@@ -112,7 +112,7 @@
                     <tr>
                         <th scope="col">Patrimônio</th>
                         <th scope="col">Equipamento</th>
-                        <th scope="col">Loja</th>
+                        <th scope="col">Empresa</th>
                         <th scope="col">Setor</th>
                         <th scope="col">Usuário</th>
                         <th scope="col"><span class="visually-hidden">Ações</span></th>
@@ -135,7 +135,7 @@
                                     <span class="chip">{{ $equipamento->statusLabel() }}</span>
                                 @endif
                             </td>
-                            <td data-label="Loja">{{ $equipamento->store->name ?? 'Sem loja' }}</td>
+                            <td data-label="Empresa">{{ $equipamento->store->name ?? 'Sem empresa' }}</td>
                             <td data-label="Setor">{{ $equipamento->sector->name ?? '—' }}</td>
                             <td data-label="Usuário">{{ $equipamento->quemUsa() ?? '—' }}</td>
                             <td class="task-action">

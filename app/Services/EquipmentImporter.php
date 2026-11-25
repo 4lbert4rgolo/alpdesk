@@ -246,9 +246,9 @@ class EquipmentImporter
             return;
         }
 
-        // 5) Loja e setor (por último, para não criar cadastros de linhas que falham)
+        // 5) Empresa e setor (por último, para não criar cadastros de linhas que falham)
         if (array_key_exists('loja', $d)) {
-            [$campos['store_id'], $erro] = $this->resolverCadastro(Store::class, $d['loja'], $lojas, $criarLojas, $r, 'lojas_novas', 'Loja');
+            [$campos['store_id'], $erro] = $this->resolverCadastro(Store::class, $d['loja'], $lojas, $criarLojas, $r, 'lojas_novas', 'Empresa');
 
             if ($erro) {
                 $this->erro($r, $numero, $erro);
@@ -323,7 +323,7 @@ class EquipmentImporter
         }
 
         if (! $criar) {
-            return [null, "{$rotulo} \"{$nome}\" não existe. Corrija o nome ou marque a opção de criar lojas e setores novos."];
+            return [null, "{$rotulo} \"{$nome}\" não existe. Corrija o nome ou marque a opção de criar empresas e setores novos."];
         }
 
         $novo = $classe::create(['name' => $nome]);

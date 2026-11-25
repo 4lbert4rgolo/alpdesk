@@ -55,14 +55,14 @@ class PainelController extends Controller
             ];
         }
 
-        // Por loja (a loja vem do equipamento ligado à tarefa); considera todas as tarefas
+        // Por empresa (a empresa vem do equipamento ligado à tarefa); considera todas as tarefas
         $porLoja = $todas
             ->groupBy(function (Task $t) {
                 if (! $t->equipment) {
                     return 'Sem equipamento';
                 }
 
-                return $t->equipment->store->name ?? 'Equipamento sem loja';
+                return $t->equipment->store->name ?? 'Equipamento sem empresa';
             })
             ->map->count()
             ->sortDesc()

@@ -6,8 +6,12 @@
 <div id="admin-page">
     <div class="admin-header">
         <div>
-            <h1>Setores e lojas</h1>
-            <p class="subtitle">Usados no cadastro de usuários e de equipamentos. Cada pessoa tem um setor e uma loja. Marque <strong>Recebe tarefas</strong> nos setores que atendem pedidos (ex.: TI, Financeiro).</p>
+            <h1>Setores e empresas</h1>
+            <p class="subtitle">Usados no cadastro de usuários e de equipamentos. Cada pessoa tem um setor e uma empresa. Marque <strong>Recebe tarefas</strong> nos setores que atendem pedidos (ex.: TI, Financeiro).
+                @if($tipo === 'empresas')
+                    <br>Em cada empresa, clique em <strong>Editar dados</strong> e preencha razão social, CNPJ, endereço e o Encarregado: eles aparecem nos Termos de Uso e na Política de Privacidade de quem trabalha nela.
+                @endif
+            </p>
         </div>
     </div>
 
@@ -23,7 +27,7 @@
 
     <form method="POST" action="{{ route('admin.cadastros.store', $tipo) }}" class="filter-bar">
         @csrf
-        <input type="text" name="name" maxlength="100" required placeholder="Nome" aria-label="{{ $config['novo'] }}">
+        <input type="text" name="name" maxlength="100" required placeholder="{{ $tipo === 'empresas' ? 'Nome fantasia' : 'Nome' }}" aria-label="{{ $config['novo'] }}">
         @if($tipo === 'setores')
             <label class="check-inline"><input type="checkbox" name="recebe_tarefas" value="1"> Recebe tarefas</label>
         @endif
@@ -35,7 +39,7 @@
             <table class="task-table">
                 <thead>
                     <tr>
-                        <th scope="col">Nome</th>
+                        <th scope="col">{{ $tipo === 'empresas' ? 'Nome fantasia' : 'Nome' }}</th>
                         <th scope="col">Pessoas</th>
                         <th scope="col">Equipamentos</th>
                         @if($tipo === 'setores')
@@ -48,17 +52,37 @@
                     @foreach($itens as $item)
                         <tr>
                             <td data-label="Nome">
-                                <form method="POST" action="{{ route('admin.cadastros.update', [$tipo, $item->id]) }}" class="inline-form">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="text" name="name" value="{{ $item->name }}" maxlength="100" required aria-label="Nome de {{ $item->name }}">
-                                    @if($tipo === 'setores')
+                                @if($tipo === 'empresas')
+                                    {{-- Empresas: os dados completos ficam numa tela própria ("Editar dados") --}}
+                                    <a href="{{ route('admin.cadastros.edit', [$tipo, $item->id]) }}" class="empresa-nome">{{ $item->name }}</a>
+                                    @if($item->ehLocal())
+                                        <small class="muted d-block">
+                                            Local · termo LGPD usa {{ $item->empresaResponsavel?->name ?? 'os dados padrão do .env' }}
+                                        </small>
+                                        <span class="chip chip-muted empresa-status">Local (sem CNPJ)</span>
+                                    @else
+                                    <small class="muted d-block">
+                                        {{ $item->razao_social ?: 'Razão social não informada' }}{{ $item->cnpj ? ' · CNPJ '.$item->cnpj : '' }}
+                                    </small>
+                                    @endif
+                                    @if($item->ehLocal())
+                                        {{-- local não precisa de dados próprios --}}
+                                    @elseif($item->dadosLgpdCompletos())
+                                        <span class="chip chip-ok empresa-status">Dados completos</span>
+                                    @else
+                                        <span class="chip chip-warn empresa-status">Faltam dados para o termo LGPD</span>
+                                    @endif
+                                @else
+                                    <form method="POST" action="{{ route('admin.cadastros.update', [$tipo, $item->id]) }}" class="inline-form">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="text" name="name" value="{{ $item->name }}" maxlength="100" required aria-label="Nome de {{ $item->name }}">
                                         <label class="check-inline" title="Aparece como destino ao abrir uma tarefa">
                                             <input type="checkbox" name="recebe_tarefas" value="1" {{ $item->recebe_tarefas ? 'checked' : '' }}> Recebe tarefas
                                         </label>
-                                    @endif
-                                    <button type="submit" class="btn btn-outline-secondary btn-sm">Salvar</button>
-                                </form>
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm">Salvar</button>
+                                    </form>
+                                @endif
                             </td>
                             <td data-label="Pessoas">
                                 <a href="{{ route('admin.usuarios.index', [$config['filtro'] => $item->id]) }}">{{ $item->users_count }}</a>
@@ -72,10 +96,13 @@
                             </td>
                             @if($tipo === 'setores')
                                 <td data-label="Tarefas">
-                                    <a href="/?setor={{ $item->id }}&situacao=todas">{{ $item->tasks_count }}</a>
+                                    <a href="/tarefas?setor={{ $item->id }}&situacao=todas">{{ $item->tasks_count }}</a>
                                 </td>
                             @endif
                             <td class="task-action">
+                                @if($tipo === 'empresas')
+                                    <a href="{{ route('admin.cadastros.edit', [$tipo, $item->id]) }}" class="btn btn-outline-secondary btn-sm">Editar dados</a>
+                                @endif
                                 @php
                                     $vinculos = $item->users_count + $item->equipment_count + ($item->tasks_count ?? 0);
                                     $outros = $itens->where('id', '!=', $item->id);
@@ -98,7 +125,7 @@
                                                 Em uso por {{ $item->users_count }} pessoa(s), {{ $item->equipment_count }} equipamento(s){{ isset($item->tasks_count) ? ' e '.$item->tasks_count.' tarefa(s)' : '' }}. Mover para:
                                             </label>
                                             <select id="mover-{{ $item->id }}" name="mover_para">
-                                                <option value="">Deixar {{ $tipo === 'setores' ? 'sem setor' : 'sem loja' }}</option>
+                                                <option value="">Deixar {{ $tipo === 'setores' ? 'sem setor' : 'sem empresa' }}</option>
                                                 @foreach($outros as $outro)
                                                     <option value="{{ $outro->id }}">{{ $outro->name }}</option>
                                                 @endforeach

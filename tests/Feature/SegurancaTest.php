@@ -51,7 +51,7 @@ class SegurancaTest extends TestCase
 
     public function test_visitante_e_enviado_ao_login(): void
     {
-        foreach (['/', '/tasks/1', '/dashboard', '/equipamentos'] as $url) {
+        foreach (['/', '/tarefas', '/tasks/1', '/dashboard', '/equipamentos'] as $url) {
             $this->get($url)->assertRedirect('/login');
         }
     }
@@ -111,7 +111,7 @@ class SegurancaTest extends TestCase
         $this->criarTarefa($dono, ['title' => 'Impressora do caixa']);
         $this->criarTarefa($outro, ['title' => 'Tarefa reservada de outra pessoa']);
 
-        $this->actingAs($dono)->get('/')
+        $this->actingAs($dono)->get('/tarefas')
             ->assertOk()
             ->assertSee('Impressora do caixa')
             ->assertDontSee('Tarefa reservada de outra pessoa');

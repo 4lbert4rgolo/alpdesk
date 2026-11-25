@@ -78,9 +78,9 @@
             </div>
 
             <div class="field">
-                <label for="store_id">Loja</label>
+                <label for="store_id">Empresa</label>
                 <select id="store_id" name="store_id">
-                    <option value="">Sem loja</option>
+                    <option value="">Sem empresa</option>
                     @foreach($lojas as $loja)
                         <option value="{{ $loja->id }}" {{ (string) old('store_id', $usuario->store_id ?? '') === (string) $loja->id ? 'selected' : '' }}>{{ $loja->name }}</option>
                     @endforeach
@@ -92,7 +92,7 @@
         </div>
         @can('cadastros.gerenciar')
             <p class="field-hint">
-                Não achou o setor ou a loja? <a href="{{ route('admin.cadastros.index', 'setores') }}" target="_blank">Cadastre em Setores e lojas</a> e recarregue esta página.
+                Não achou o setor ou a empresa? <a href="{{ route('admin.cadastros.index', 'setores') }}" target="_blank">Cadastre em Setores e empresas</a> e recarregue esta página.
             </p>
         @endcan
 

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Conversation;
+use App\Models\HelpArticle;
 use App\Models\User;
 use App\Support\Permissoes;
 use Illuminate\Auth\Events\Login;
@@ -44,6 +45,12 @@ class AppServiceProvider extends ServiceProvider
         // Menu lateral: número de mensagens não lidas no chat
         View::composer('layouts.main', function ($view) {
             $view->with('chatNaoLidas', Conversation::naoLidasDe(auth()->user()));
+
+            // Menu lateral: circulares que a pessoa ainda precisa confirmar ("Li e estou ciente")
+            $usuario = auth()->user();
+            $view->with('circularesPendentes', $usuario
+                ? HelpArticle::query()->visivelPara($usuario)->pendentesDeCiencia($usuario)->count()
+                : 0);
         });
 
         // Em produção atrás de um proxy HTTPS, todos os links saem em https

@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'home' => '/dashboard',
+    'home' => '/', // depois do login, a pessoa cai na tela Início
 
     /*
     |--------------------------------------------------------------------------

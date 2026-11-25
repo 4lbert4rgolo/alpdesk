@@ -2,14 +2,14 @@
 
 **Versão de 23/11/2026**
 
-O **AlpDesk** é o sistema interno de chamados e de inventário de equipamentos de tecnologia da **[RAZÃO SOCIAL DA EMPRESA]**, inscrita no CNPJ **[00.000.000/0000-00]** ("Empresa"). Ele é usado pelos colaboradores para abrir, acompanhar e resolver chamados, conversar com a equipe e controlar os equipamentos de cada loja.
+O **AlpDesk** é o sistema interno de chamados e de inventário de equipamentos de tecnologia da **{empresa_fantasia}** (razão social **{empresa_nome}**, CNPJ **{empresa_cnpj}**, "Empresa"). Ele é usado pelos colaboradores para abrir, acompanhar e resolver chamados, conversar com a equipe e controlar os equipamentos de cada empresa.
 
 Ao aceitar estes Termos, você declara que leu e concorda com as regras abaixo e que está ciente da [Política de Privacidade](/privacy-policy), que explica como seus dados pessoais são tratados de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018, "LGPD").
 
 ## 1. Quem pode usar
 
 - O AlpDesk é de uso exclusivo de colaboradores e prestadores de serviço autorizados pela Empresa.
-- Sua conta é criada ou liberada pela equipe de TI e fica vinculada ao seu setor e à sua loja.
+- Sua conta é criada ou liberada pela equipe de TI e fica vinculada ao seu setor e à sua empresa.
 - Quando o seu vínculo com a Empresa terminar, o acesso é desativado.
 
 ## 2. Sua conta e sua senha
@@ -35,7 +35,7 @@ Ao aceitar estes Termos, você declara que leu e concorda com as regras abaixo e
 
 ## 5. Equipamentos
 
-- Os equipamentos da Empresa podem ficar registrados no seu nome no inventário, com patrimônio, setor e loja.
+- Os equipamentos da Empresa podem ficar registrados no seu nome no inventário, com patrimônio, setor e empresa.
 - Informe ao TI quando um equipamento sob sua responsabilidade apresentar defeito, for transferido ou extraviado.
 
 ## 6. Monitoramento e segurança
@@ -56,4 +56,4 @@ Estes Termos podem ser atualizados. Quando houver uma nova versão, o sistema pe
 
 ## 10. Dúvidas
 
-Fale com a equipe de TI ou com o Encarregado pelo Tratamento de Dados Pessoais: **[NOME DO ENCARREGADO]**, **[E-MAIL DO ENCARREGADO]**.
+Fale com a equipe de TI ou com o Encarregado pelo Tratamento de Dados Pessoais: **{encarregado_nome}**, **{encarregado_email}**.

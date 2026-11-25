@@ -4,7 +4,7 @@
 
 @section('content')
 <div id="admin-page" class="admin-narrow">
-    <a href="/" class="task-back">
+    <a href="/tarefas" class="task-back">
         <ion-icon name="arrow-back-outline"></ion-icon> Voltar às tarefas
     </a>
 

@@ -206,7 +206,7 @@ class EquipmentController extends Controller
             'type' => ['Tipo', $texto],
             'asset_tag' => ['Patrimônio', $texto],
             'serial_number' => ['Nº de série', $texto],
-            'store_id' => ['Loja', fn ($id) => $id ? (Store::find($id)?->name ?? '—') : 'Sem loja'],
+            'store_id' => ['Empresa', fn ($id) => $id ? (Store::find($id)?->name ?? '—') : 'Sem empresa'],
             'sector_id' => ['Setor', fn ($id) => $id ? (Sector::find($id)?->name ?? '—') : 'Sem setor'],
             'user_id' => ['Usuário do sistema', fn ($id) => $id ? (User::find($id)?->name ?? '—') : 'Nenhum'],
             'user_name' => ['Usuário (sem login)', $texto],

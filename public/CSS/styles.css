@@ -1526,3 +1526,160 @@ button.store-tab { font-family: inherit; cursor: pointer; }
     .chat-back { display: inline-flex; }
     .chat-msg { max-width: 88%; }
 }
+
+/* ==========================================================================
+   Central de Ajuda (perguntas frequentes, tutoriais, circulares e documentos)
+   ========================================================================== */
+.chip-warn { margin-left: 0; background: #fef3e2; color: #8a4b00; }
+.help-chips { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+.help-chips .chip, .help-chips .chip-muted { margin-left: 0; }
+.help-chips ion-icon { vertical-align: -2px; }
+
+.help-pending ul { margin: 6px 0 0; padding-left: 20px; }
+.help-pending ion-icon { vertical-align: -2px; }
+
+.help-list { display: flex; flex-direction: column; gap: 8px; }
+.help-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px; background: #fff; border: 1px solid #e1e6e5; border-radius: 12px;
+    color: #2d3436; text-decoration: none;
+}
+a.help-item:hover { border-color: #1eb39a; background: #f7fbfa; }
+.help-icon { flex: none; font-size: 22px; color: #0f7a68; margin-top: 2px; }
+.help-item-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.help-item-title { font-weight: 500; font-size: 16px; }
+.help-item-summary { color: #4b5557; font-size: 14px; }
+.help-item-meta { color: #636e72; font-size: 13px; }
+
+/* Pergunta frequente: abre e fecha ali mesmo (<details>) */
+.help-faq { display: block; padding: 0; }
+.help-faq summary { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; list-style: none; }
+.help-faq summary::-webkit-details-marker { display: none; }
+.help-faq[open] summary { border-bottom: 1px solid #e1e6e5; }
+.help-faq .help-content { padding: 14px 16px 4px 50px; }
+
+/* Texto do conteúdo */
+.help-content { line-height: 1.65; font-size: 15px; overflow-wrap: anywhere; }
+.help-content h1, .help-content h2, .help-content h3 { font-size: 18px; font-weight: 700; margin: 20px 0 8px; }
+.help-content p, .help-content ul, .help-content ol { margin: 0 0 12px; }
+.help-content code { background: #eef1f0; padding: 1px 5px; border-radius: 4px; }
+.help-content img { max-width: 100%; height: auto; }
+
+.help-article { background: #fff; border: 1px solid #e1e6e5; border-radius: 12px; padding: 24px; }
+.help-article-header h1 { font-size: 26px; font-weight: 700; margin: 4px 0 6px; }
+.help-article-header { margin-bottom: 16px; }
+.help-article-type { margin: 0; color: #0f7a68; font-weight: 500; font-size: 14px; }
+.help-article-type ion-icon { vertical-align: -2px; }
+
+.help-images { display: grid; gap: 16px; margin: 16px 0; }
+.help-images figure { margin: 0; }
+.help-images img { max-width: 100%; height: auto; border: 1px solid #e1e6e5; border-radius: 8px; }
+.help-images figcaption { font-size: 13px; color: #636e72; margin-top: 4px; }
+
+.help-files { margin-top: 20px; }
+.help-files h2 { font-size: 16px; font-weight: 700; margin: 0 0 8px; }
+.help-files ul, ul.help-files { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.help-files li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #e1e6e5; border-radius: 8px; }
+.help-files li ion-icon { font-size: 20px; color: #0f7a68; }
+.help-files-edit { margin-top: 10px; }
+.help-download { margin-left: auto; font-size: 14px; }
+.help-files-edit .btn { margin-left: auto; }
+
+.help-ciente { margin-top: 24px; padding-top: 16px; border-top: 1px solid #e1e6e5; }
+.help-admin-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+.help-admin-actions form { margin: 0; }
+.help-admin-actions .field-hint { flex-basis: 100%; margin: 0; }
+
+.help-type-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.help-type-option { padding: 8px 12px; border: 1px solid #cfd8d6; border-radius: 8px; }
+.help-type-option:has(input:checked) { border-color: #0f7a68; background: #e6f4f1; }
+.help-audience-label { margin: 10px 0 4px; font-weight: 500; font-size: 14px; }
+.help-audience { max-height: 220px; }
+
+.help-progress { margin: 0 0 16px; }
+.help-progress-numbers { margin-bottom: 6px; }
+.help-progress-bar { height: 10px; background: #eef1f0; border-radius: 999px; overflow: hidden; }
+.help-progress-bar span { display: block; height: 100%; background: #1eb39a; }
+
+@media (max-width: 640px) {
+    .help-item, .help-faq summary { flex-wrap: wrap; }
+    .help-chips { margin-left: 34px; }
+    .help-faq .help-content { padding-left: 16px; }
+    .help-article { padding: 16px; }
+}
+
+/* Central de Ajuda: vídeos */
+.help-videos { display: grid; gap: 16px; margin: 16px 0; }
+.help-videos figure { margin: 0; }
+.help-videos video { display: block; width: 100%; max-height: 70vh; background: #111; border-radius: 10px; }
+.help-videos figcaption { font-size: 13px; color: #636e72; margin-top: 6px; }
+
+/* ==========================================================================
+   Início (Home)
+   ========================================================================== */
+.home-shortcuts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 18px; }
+.home-shortcut {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+    padding: 10px 16px; border-radius: 10px; background: #fff; border: 1px solid #d5dedc;
+    color: #2d3436; font-weight: 500; text-decoration: none;
+}
+.home-shortcut ion-icon { font-size: 20px; color: #0f7a68; }
+.home-shortcut:hover { border-color: #1eb39a; background: #f7fbfa; }
+.home-shortcut.is-primary { background: #0f7a68; border-color: #0f7a68; color: #fff; }
+.home-shortcut.is-primary ion-icon { color: #fff; }
+.home-shortcut.is-primary:hover { background: #0b5f51; }
+
+.home-grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 18px; align-items: start; }
+.home-side { display: flex; flex-direction: column; gap: 18px; }
+.home-card { background: #fff; border: 1px solid #e1e6e5; border-radius: 12px; padding: 18px 20px; }
+.home-card-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.home-card-header h2 { margin: 0; font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.home-card-header h2 ion-icon { color: #0f7a68; font-size: 20px; }
+.home-card-header a { font-size: 14px; }
+
+.home-news-item { padding: 12px 0; border-top: 1px solid #eef1f0; }
+.home-news-item:first-of-type { border-top: 0; padding-top: 0; }
+.home-news-item h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.home-news-item h3 a { color: #2d3436; text-decoration: none; }
+.home-news-item h3 a:hover { color: #0f7a68; text-decoration: underline; }
+.home-news-item .chip ion-icon { vertical-align: -2px; }
+.home-news-text { margin: 0 0 4px; color: #4b5557; font-size: 15px; line-height: 1.5; }
+
+.home-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.home-stat {
+    display: block; padding: 10px 12px; border-radius: 10px; background: #f4f7f6;
+    color: #4b5557; text-decoration: none; font-size: 14px;
+}
+.home-stat strong { display: block; font-size: 24px; color: #2d3436; line-height: 1.2; }
+.home-stat:hover { background: #e6f4f1; }
+.home-stat.is-warn { background: #fef3e2; }
+.home-stat.is-warn strong { color: #8a4b00; }
+.home-stat.is-danger { background: #fdecea; }
+.home-stat.is-danger strong { color: #b3261e; }
+
+.home-sub { margin: 14px 0 6px; font-size: 13px; color: #636e72; }
+.home-tasks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.home-tasks li { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14px; }
+.home-tasks li a { color: #2d3436; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.home-link-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; color: #2d3436; text-decoration: none; border-top: 1px solid #eef1f0; }
+.home-link-item:first-of-type { border-top: 0; }
+.home-link-item ion-icon { color: #0f7a68; font-size: 20px; flex: none; margin-top: 1px; }
+.home-link-item small { display: block; color: #636e72; font-size: 13px; }
+.home-link-item:hover span { color: #0f7a68; text-decoration: underline; }
+.home-empty { margin: 0; color: #636e72; font-size: 14px; }
+
+@media (max-width: 900px) {
+    .home-grid { grid-template-columns: 1fr; }
+}
+
+/* Cadastro de empresas */
+.empresa-nome { font-weight: 600; color: #2d3436; }
+.empresa-nome:hover { color: #0f7a68; }
+.empresa-status { display: inline-block; margin: 6px 0 0; font-size: 12px; }
+.task-action .btn + form, .task-action .btn + details { margin-top: 6px; }
+.form-group-block { display: flex; flex-direction: column; gap: 16px; }
+.form-group-block + .form-group-block { padding-top: 20px; border-top: 1px solid #eef1f0; }
+.form-group-block h2 { margin: 0; font-size: 18px; font-weight: 700; color: #0f7a68; }
+.form-group-block > .field-hint { margin-top: -8px; }
+.admin-form .field-curto input { max-width: 260px; }

@@ -41,7 +41,7 @@ return new class extends Migration
                 ],
             ],
             [
-                'name' => 'Prestação de contas do fundo reserva - PTS',
+                'name' => 'Prestação de contas do fundo reserva',
                 'descricao' => 'Prestação de contas mensal do fundo reserva.',
                 'sector_id' => $financeiro,
                 'prioridade' => 3,
@@ -52,7 +52,7 @@ return new class extends Migration
                 ],
             ],
             [
-                'name' => 'Devolução financeira de veículos - VDC',
+                'name' => 'Devolução financeira de veículos',
                 'descricao' => 'Devolução de valor pago na compra de veículo.',
                 'sector_id' => $financeiro,
                 'prioridade' => 3,

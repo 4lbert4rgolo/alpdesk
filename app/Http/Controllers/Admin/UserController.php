@@ -290,7 +290,7 @@ class UserController extends Controller
         ];
     }
 
-    /** Setor e loja são opcionais (um de cada por pessoa). */
+    /** Setor e empresa são opcionais (um de cada por pessoa). */
     private function regrasSetorLoja(): array
     {
         return [

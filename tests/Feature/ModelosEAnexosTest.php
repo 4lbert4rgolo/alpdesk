@@ -72,7 +72,7 @@ class ModelosEAnexosTest extends TestCase
 
     public function test_lista_de_tarefas_tem_o_botao_nova_tarefa_com_os_modelos(): void
     {
-        $this->actingAs($this->usuario('solicitante'))->get('/')
+        $this->actingAs($this->usuario('solicitante'))->get('/tarefas')
             ->assertOk()
             ->assertSee('Nova tarefa')
             ->assertSee('/tasks/create?modelo='.$this->devolucao()->id, false)
@@ -195,8 +195,8 @@ class ModelosEAnexosTest extends TestCase
     {
         foreach ([
             'Cancelamento de nota fiscal',
-            'Prestação de contas do fundo reserva - PTS',
-            'Devolução financeira de veículos - VDC',
+            'Prestação de contas do fundo reserva',
+            'Devolução financeira de veículos',
             'Transferência de adiantamento de cliente',
             'Lançamento de comprovante +24h',
             'Solicitação de equipamentos de informática',
@@ -245,8 +245,8 @@ class ModelosEAnexosTest extends TestCase
         Task::create(['title' => 'Mouse quebrado', 'description' => 'x', 'deadline' => now()->addDay()->toDateString(), 'priority' => 1, 'user_id' => $solicitante->id]);
 
         $admin = $this->usuario('administrador');
-        $this->actingAs($admin)->get('/?modelo='.$this->devolucao()->id)->assertSee('Devolucao da Maria')->assertDontSee('Mouse quebrado');
-        $this->actingAs($admin)->get('/?modelo=livre')->assertSee('Mouse quebrado')->assertDontSee('Devolucao da Maria');
+        $this->actingAs($admin)->get('/tarefas?modelo='.$this->devolucao()->id)->assertSee('Devolucao da Maria')->assertDontSee('Mouse quebrado');
+        $this->actingAs($admin)->get('/tarefas?modelo=livre')->assertSee('Mouse quebrado')->assertDontSee('Devolucao da Maria');
     }
 
     // ------------------------------------------------------------------ Anexos

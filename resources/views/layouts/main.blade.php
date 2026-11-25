@@ -52,8 +52,11 @@
                 @endcan
 
                 {{-- Tarefas e "Nova tarefa" ficam juntas: o botão de criar está na própria lista --}}
-                <a href="/" class="sidebar-link {{ request()->is('/') || request()->is('tasks*') ? 'active' : '' }}">
-                    <ion-icon name="home-outline"></ion-icon> Tarefas
+                <a href="/" class="sidebar-link {{ request()->is('/') ? 'active' : '' }}">
+                    <ion-icon name="home-outline"></ion-icon> Início
+                </a>
+                <a href="/tarefas" class="sidebar-link {{ request()->is('tarefas') || request()->is('tasks*') ? 'active' : '' }}">
+                    <ion-icon name="clipboard-outline"></ion-icon> Tarefas
                 </a>
                 @auth
                     <a href="/dashboard" class="sidebar-link {{ request()->is('dashboard') ? 'active' : '' }}">
@@ -63,6 +66,16 @@
                         <ion-icon name="chatbubbles-outline"></ion-icon> Chat
                         <span class="chat-badge" id="chat-badge" {{ ($chatNaoLidas ?? 0) > 0 ? '' : 'hidden' }}
                               aria-label="mensagens não lidas">{{ $chatNaoLidas ?? 0 }}</span>
+                    </a>
+                @endauth
+
+                @auth
+                    <a href="{{ route('ajuda.index') }}" class="sidebar-link {{ request()->is('ajuda*') ? 'active' : '' }}">
+                        <ion-icon name="help-buoy-outline"></ion-icon> Central de Ajuda
+                        @if(($circularesPendentes ?? 0) > 0)
+                            <span class="chat-badge" title="Circulares para confirmar a leitura"
+                                  aria-label="{{ $circularesPendentes }} circulares para confirmar">{{ $circularesPendentes }}</span>
+                        @endif
                     </a>
                 @endauth
 
@@ -91,7 +104,7 @@
                     @endcan
                     @can('cadastros.gerenciar')
                         <a href="/admin/cadastros/setores" class="sidebar-link {{ request()->is('admin/cadastros*') ? 'active' : '' }}">
-                            <ion-icon name="business-outline"></ion-icon> Setores e lojas
+                            <ion-icon name="business-outline"></ion-icon> Setores e empresas
                         </a>
                     @endcan
                 @endcanany

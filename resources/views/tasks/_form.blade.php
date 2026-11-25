@@ -305,7 +305,7 @@
 
     <div class="form-actions">
         <button type="submit" class="btn btn-primary" data-loading-text="Enviando…">{{ $editando ? 'Salvar alterações' : 'Criar tarefa' }}</button>
-        <a href="{{ $editando ? '/tasks/'.$task->id : '/' }}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{{ $editando ? '/tasks/'.$task->id : '/tarefas' }}" class="btn btn-outline-secondary">Cancelar</a>
     </div>
 </form>
 

@@ -22,7 +22,7 @@
                     <tr>
                         <th scope="col">Patrimônio</th>
                         <th scope="col">Equipamento</th>
-                        <th scope="col">Loja</th>
+                        <th scope="col">Empresa</th>
                         <th scope="col">Excluído em</th>
                         <th scope="col">Por / motivo</th>
                         <th scope="col"><span class="visually-hidden">Ações</span></th>
@@ -39,7 +39,7 @@
                                     <span class="chip chip-muted">{{ $equipamento->type }}</span>
                                 </div>
                             </td>
-                            <td data-label="Loja">{{ $equipamento->store->name ?? 'Sem loja' }}</td>
+                            <td data-label="Empresa">{{ $equipamento->store->name ?? 'Sem empresa' }}</td>
                             <td data-label="Excluído em">{{ $equipamento->deleted_at->format('d/m/Y H:i') }}</td>
                             <td data-label="Por / motivo">
                                 @if($exclusao)

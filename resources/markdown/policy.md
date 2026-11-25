@@ -6,18 +6,18 @@ Esta Política explica quais dados pessoais o **AlpDesk** trata, para quê, com 
 
 ## 1. Quem é o responsável pelos dados
 
-- **Controladora:** [RAZÃO SOCIAL DA EMPRESA], CNPJ [00.000.000/0000-00], [ENDEREÇO COMPLETO].
-- **Encarregado (DPO):** [NOME DO ENCARREGADO], [E-MAIL DO ENCARREGADO].
+- **Controladora:** {empresa_nome}, CNPJ {empresa_cnpj}, {empresa_endereco}.
+- **Encarregado (DPO):** {encarregado_nome}, {encarregado_email}.
 
 ## 2. Quais dados tratamos
 
 | Tipo | Exemplos |
 |---|---|
-| Identificação e conta | nome, e-mail corporativo, senha (guardada de forma criptografada, que ninguém consegue ler), setor, loja e grupo de acesso |
+| Identificação e conta | nome, e-mail corporativo, senha (guardada de forma criptografada, que ninguém consegue ler), setor, empresa e grupo de acesso |
 | Segurança | verificação em duas etapas, data do último acesso, endereço IP, navegador utilizado e registro de ações no sistema |
 | Chamados | título, descrição, prazo, prioridade, comentários, imagens e anexos, autorizações e quem abriu, assumiu ou participou de cada chamado |
 | Chat interno | mensagens e anexos trocados nas conversas |
-| Equipamentos | equipamentos sob sua responsabilidade (patrimônio, nome na rede, setor e loja) e o histórico de alterações |
+| Equipamentos | equipamentos sob sua responsabilidade (patrimônio, nome na rede, setor e empresa) e o histórico de alterações |
 | Aceite destes documentos | versão aceita, data e hora, endereço IP e navegador |
 
 O AlpDesk **não** foi feito para guardar dados pessoais sensíveis. Pedimos que eles não sejam registrados (veja os Termos de Uso).
@@ -44,9 +44,9 @@ A Empresa **não vende** dados pessoais.
 ## 5. Por quanto tempo guardamos
 
 - **Conta:** enquanto durar o seu vínculo com a Empresa. Depois disso, a conta é **desativada** (não apagada), para que chamados e histórico continuem mostrando quem fez o quê.
-- **Chamados, comentários, histórico de equipamentos e registros de aceite:** por até **[5] anos** após o encerramento do vínculo, ou pelo prazo exigido por lei, o que for maior.
+- **Chamados, comentários, histórico de equipamentos e registros de aceite:** por até **{prazo_guarda_anos} anos** após o encerramento do vínculo, ou pelo prazo exigido por lei, o que for maior.
 - **Registros de acesso (logs):** por **6 meses**.
-- **Cópias de segurança:** substituídas automaticamente a cada **[30] dias**.
+- **Cópias de segurança:** substituídas automaticamente a cada **{backup_dias} dias**.
 
 Encerrados esses prazos, os dados são eliminados ou anonimizados.
 
@@ -58,7 +58,7 @@ Senhas criptografadas, verificação em duas etapas, acesso por grupos e permiss
 
 Pela LGPD (art. 18), você pode pedir: confirmação de que tratamos seus dados; acesso a eles; correção de dados incompletos ou desatualizados; anonimização, bloqueio ou eliminação de dados desnecessários ou excessivos; informação sobre com quem compartilhamos; e revisão de decisões. Alguns dados podem ser mantidos mesmo após o pedido, quando a lei permitir (por exemplo, para cumprir obrigação legal ou defender direitos).
 
-Para exercer seus direitos, fale com o Encarregado: **[E-MAIL DO ENCARREGADO]**. Você também pode atualizar seu nome e e-mail na página **Perfil**.
+Para exercer seus direitos, fale com o Encarregado: **{encarregado_email}**. Você também pode atualizar seu nome e e-mail na página **Perfil**.
 
 ## 8. Cookies
 

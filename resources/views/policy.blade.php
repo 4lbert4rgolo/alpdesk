@@ -4,7 +4,8 @@
             <x-authentication-card-logo />
 
             <article class="prose prose-headings:text-graphite prose-a:text-brand mt-8 w-full max-w-none rounded-2xl bg-white p-6 shadow-md sm:p-10">
-                {!! $policy !!}
+                {{-- Texto com os dados da empresa da pessoa (cadastro) ou, se faltar, do .env --}}
+                {!! \App\Support\TextosEmpresa::html('policy', auth()->user()?->store) !!}
             </article>
         </div>
     </div>

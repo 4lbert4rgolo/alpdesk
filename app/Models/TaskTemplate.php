@@ -23,7 +23,7 @@ class TaskTemplate extends Model
         'valor' => 'Valor em R$',
         'numero' => 'Número',
         'opcoes' => 'Lista de opções',
-        'loja' => 'Loja (lista das lojas cadastradas)',
+        'loja' => 'Empresa (lista das empresas cadastradas)',
         'setor' => 'Setor (lista dos setores cadastrados)',
     ];
 
@@ -101,7 +101,7 @@ class TaskTemplate extends Model
     }
 
     /**
-     * Opções dos campos "Loja" e "Setor": os nomes cadastrados em Setores e lojas.
+     * Opções dos campos "Empresa" e "Setor": os nomes cadastrados em Setores e empresas.
      * Guardamos o nome (e não o número) para a tarefa continuar legível mesmo se o cadastro mudar.
      */
     public static function listaDoTipo(string $tipo): array
